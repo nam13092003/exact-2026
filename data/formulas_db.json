@@ -1,0 +1,270 @@
+{
+  "formulas": [
+    {
+      "id": "energy_capacitor",
+      "target": "E",
+      "inputs": ["C", "U"],
+      "equation": "0.5 * C * (U**2)",
+      "category": "NL"
+    },
+    {
+      "id": "energy_inductor",
+      "target": "W",
+      "inputs": ["L", "I"],
+      "equation": "0.5 * L * (I**2)",
+      "category": "NL"
+    },
+    {
+      "id": "capacitance_from_Q_U",
+      "target": "C",
+      "inputs": ["Q", "U"],
+      "equation": "Q / U",
+      "category": "TD"
+    },
+    {
+      "id": "charge_from_C_U",
+      "target": "Q",
+      "inputs": ["C", "U"],
+      "equation": "C * U",
+      "category": "TD"
+    },
+    {
+      "id": "capacitance_parallel_plate",
+      "target": "C",
+      "inputs": ["S", "d"],
+      "equation": "(8.854e-12 * S) / d",
+      "category": "TD"
+    },
+    {
+      "id": "dielectric_constant",
+      "target": "kappa",
+      "inputs": ["C", "d", "S"],
+      "equation": "(C * d) / (8.854e-12 * S)",
+      "category": "TD"
+    },
+    {
+      "id": "dielectric_U_disconnected",
+      "target": "U_new",
+      "inputs": ["U", "epsilon"],
+      "equation": "U / epsilon",
+      "category": "TD"
+    },
+    {
+      "id": "dielectric_U_connected",
+      "target": "U_new",
+      "inputs": ["U"],
+      "equation": "U",
+      "category": "TD"
+    },
+    {
+      "id": "dielectric_energy_disconnected",
+      "target": "E",
+      "inputs": ["C", "U", "epsilon"],
+      "equation": "0.5 * C * (U**2) / epsilon",
+      "category": "TD"
+    },
+    {
+      "id": "dielectric_energy_connected",
+      "target": "E",
+      "inputs": ["C", "U", "epsilon"],
+      "equation": "0.5 * epsilon * C * (U**2)",
+      "category": "TD"
+    },
+    {
+      "id": "plate_separation_C_halved",
+      "target": "C1",
+      "inputs": ["C"],
+      "equation": "C / 2",
+      "category": "TD"
+    },
+    {
+      "id": "plate_separation_U_doubled",
+      "target": "U1",
+      "inputs": ["U"],
+      "equation": "2 * U",
+      "category": "TD"
+    },
+    {
+      "id": "capacitors_series",
+      "target": "C",
+      "inputs": ["C1", "C2"],
+      "equation": "1 / (1/C1 + 1/C2)",
+      "category": "TD"
+    },
+    {
+      "id": "capacitors_parallel",
+      "target": "C",
+      "inputs": ["C1", "C2"],
+      "equation": "C1 + C2",
+      "category": "TD"
+    },
+    {
+      "id": "magnetic_field_solenoid",
+      "target": "B",
+      "inputs": ["N", "L", "I"],
+      "equation": "(4 * math.pi * 1e-7) * (N / L) * I",
+      "category": "DD"
+    },
+    {
+      "id": "inductance_solenoid",
+      "target": "L_ind",
+      "inputs": ["N", "L", "S"],
+      "equation": "(4 * math.pi * 1e-7) * ((N**2) / L) * S",
+      "category": "DD"
+    },
+    {
+      "id": "turn_density_solenoid",
+      "target": "n",
+      "inputs": ["N", "L"],
+      "equation": "N / L",
+      "category": "DD"
+    },
+    {
+      "id": "angular_frequency",
+      "target": "omega",
+      "inputs": ["f"],
+      "equation": "2 * math.pi * f",
+      "category": "CH"
+    },
+    {
+      "id": "inductive_reactance",
+      "target": "XL",
+      "inputs": ["omega", "L"],
+      "equation": "omega * L",
+      "category": "CH"
+    },
+    {
+      "id": "capacitive_reactance",
+      "target": "XC",
+      "inputs": ["omega", "C"],
+      "equation": "1 / (omega * C)",
+      "category": "CH"
+    },
+    {
+      "id": "rlc_resonance_freq",
+      "target": "f_res",
+      "inputs": ["L", "C"],
+      "equation": "1 / (2 * math.pi * math.sqrt(L * C))",
+      "category": "CH"
+    },
+    {
+      "id": "capacitance_from_resonance",
+      "target": "C",
+      "inputs": ["f", "L"],
+      "equation": "1 / (((2 * math.pi * f)**2) * L)",
+      "category": "CH"
+    },
+    {
+      "id": "impedance_rlc",
+      "target": "Z",
+      "inputs": ["R", "XL", "XC"],
+      "equation": "math.sqrt(R**2 + (XL - XC)**2)",
+      "category": "CH"
+    },
+    {
+      "id": "power_resonant_circuit",
+      "target": "P",
+      "inputs": ["U", "R"],
+      "equation": "(U**2) / R",
+      "category": "CH"
+    },
+    {
+      "id": "power_from_current",
+      "target": "P",
+      "inputs": ["I", "R"],
+      "equation": "(I**2) * R",
+      "category": "CH"
+    },
+    {
+      "id": "ohms_law",
+      "target": "I",
+      "inputs": ["U", "R"],
+      "equation": "U / R",
+      "category": "CH"
+    },
+    {
+      "id": "electric_field_point_charge",
+      "target": "E",
+      "inputs": ["q", "r"],
+      "equation": "(9e9 * abs(q)) / (r**2)",
+      "category": "DT"
+    },
+    {
+      "id": "electric_field_plates",
+      "target": "E",
+      "inputs": ["sigma"],
+      "equation": "sigma / 8.854e-12",
+      "category": "DT"
+    },
+    {
+      "id": "coulomb_find_q_equal",
+      "target": "q",
+      "inputs": ["F", "r"],
+      "equation": "math.sqrt((F * (r**2)) / 9e9)",
+      "category": "LD"
+    },
+    {
+      "id": "coulomb_find_q_with_k",
+      "target": "q",
+      "inputs": ["F", "k", "r"],
+      "equation": "math.sqrt((F * (r**2)) / k)",
+      "category": "LD"
+    },
+    {
+      "id": "resultant_force_same_dir",
+      "target": "F_net",
+      "inputs": ["F1", "F2"],
+      "equation": "F1 + F2",
+      "category": "LD"
+    },
+    {
+      "id": "resultant_force_opp_dir",
+      "target": "F_net",
+      "inputs": ["F1", "F2"],
+      "equation": "abs(F1 - F2)",
+      "category": "LD"
+    },
+    {
+      "id": "resultant_force_perp",
+      "target": "F_net",
+      "inputs": ["F1", "F2"],
+      "equation": "math.sqrt(F1**2 + F2**2)",
+      "category": "LD"
+    },
+    {
+      "id": "resultant_force_angle",
+      "target": "F_net",
+      "inputs": ["F1", "F2", "alpha"],
+      "equation": "math.sqrt(F1**2 + F2**2 + 2*F1*F2*math.cos(math.radians(alpha)))",
+      "category": "LD"
+    },
+    {
+      "id": "angle_from_resultant",
+      "target": "alpha",
+      "inputs": ["F1", "F2", "F_net"],
+      "equation": "math.degrees(math.acos((F_net**2 - F1**2 - F2**2) / (2*F1*F2)))",
+      "category": "LD"
+    },
+    {
+      "id": "absolute_error_diff",
+      "target": "delta_abs",
+      "inputs": ["val_measured", "val_actual"],
+      "equation": "abs(val_measured - val_actual)",
+      "category": "TH"
+    },
+    {
+      "id": "absolute_error_sum",
+      "target": "delta_total",
+      "inputs": ["delta_1", "delta_2"],
+      "equation": "delta_1 + delta_2",
+      "category": "TH"
+    },
+    {
+      "id": "relative_error",
+      "target": "delta_rel",
+      "inputs": ["delta_abs", "val"],
+      "equation": "(delta_abs / val) * 100",
+      "category": "TH"
+    }
+  ]
+}

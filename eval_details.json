@@ -1,0 +1,64 @@
+[
+  {
+    "task": "logic",
+    "total": 4,
+    "correct": 3,
+    "p1": 0.75,
+    "rows": [
+      {
+        "record": 0,
+        "question_index": 0,
+        "pred": "A",
+        "gold": "Unknown",
+        "ok": false
+      },
+      {
+        "record": 0,
+        "question_index": 1,
+        "pred": "yes",
+        "gold": "Yes",
+        "ok": true
+      },
+      {
+        "record": 1,
+        "question_index": 0,
+        "pred": "C",
+        "gold": "C",
+        "ok": true
+      },
+      {
+        "record": 1,
+        "question_index": 1,
+        "pred": "Yes",
+        "gold": "Yes",
+        "ok": true
+      }
+    ]
+  },
+  {
+    "task": "physics",
+    "total": 2,
+    "correct": 0,
+    "p1": 0.0,
+    "rows": [
+      {
+        "record": 0,
+        "id": "TD401",
+        "pred": "45",
+        "pred_unit": "mJ",
+        "gold": "45",
+        "gold_unit": "J",
+        "ok": false
+      },
+      {
+        "record": 1,
+        "id": "TD402",
+        "pred": "100",
+        "pred_unit": "μF",
+        "gold": "100",
+        "gold_unit": "\\u03bcF",
+        "ok": false
+      }
+    ]
+  }
+]

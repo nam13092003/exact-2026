@@ -60,10 +60,12 @@ def parse_float_like(s: Any) -> Optional[float]:
     text = str(s).strip()
     if not text:
         return None
-    text = text.replace("×", "*").replace("x", "*").replace("^", "**")
-    text = text.replace("\\times", "*")
+    # Replace double-escaped and standard unicode characters
+    text = text.replace("\\u00d7", "*").replace("\\times", "*").replace("×", "*").replace("x", "*")
+    text = text.replace("\\u2212", "-").replace("\\u207b", "-").replace("−", "-").replace("–", "-")
+    text = text.replace("\\u00b9", "1").replace("\\u00b2", "2").replace("\\u00b3", "3")
+    text = text.replace("^", "**").replace("√", "sqrt")
     text = re.sub(r"\\sqrt\{([^}]+)\}", r"sqrt(\1)", text)
-    text = text.replace("√", "sqrt")
     text = text.replace(",", "")
     # Extract a leading expression such as 24.45 * 10**-3
     m = re.search(r"[-+]?\d+(?:\.\d+)?(?:\s*\*\s*10\s*\*\*\s*[-+]?\d+)?", text)

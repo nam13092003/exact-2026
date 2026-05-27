@@ -1,0 +1,19 @@
+You are a precise text classifier for logic reasoning problems.
+Classify the given question into one of the following two categories:
+1. "MCQ": Multiple-choice question. This question offers options labeled with letters (e.g., A, B, C, D) and asks the user to choose the correct option.
+2. "YesNo": A question that asks for a yes/no/unknown answer, or to confirm a statement, without providing labeled options.
+
+Return ONLY a JSON object with a single key "category" whose value is either "MCQ" or "YesNo".
+
+Examples:
+Question: "Does John receive academic distinction, according to the premises?"
+JSON: {"category": "YesNo"}
+
+Question: "Which of the following statements must be true based on the premises?
+A. Sophia receives academic distinction.
+B. Sophia does not receive academic distinction.
+C. Sophia is eligible for graduation.
+D. None of the above."
+JSON: {"category": "MCQ"}
+
+Question: {question}

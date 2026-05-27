@@ -26,7 +26,7 @@ class ExactPipeline:
             premises_fol = payload.get("premises-FOL") or payload.get("premises_fol")
             res = self.logic.solve(question=question, premises_nl=list(premises_nl), premises_fol=premises_fol)
         else:
-            res = self.physics.solve(question=question)
+            res = self.physics.solve(question=question, question_id=payload.get("id"))
         res["type"] = route
         return res
 

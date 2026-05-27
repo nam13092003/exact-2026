@@ -1,0 +1,30 @@
+Extract TWO force vectors to add (NOT three point charges on a triangle).
+
+CRITICAL (binding):
+- Return ONLY one valid JSON object. No text before/after.
+- NEVER copy numeric values from the FEW-SHOT examples — read them ONLY from the Question.
+- Scientific notation: 1.6×10^-19 C → 1.6e-19 (Coulombs in SI).
+- Convert to SI: cm→m (×0.01), mm→m, μC/uC→C (×1e-6), nC→C (×1e-9), mJ→J (×1e-3), kHz→Hz (×1000), μF→F (×1e-6).
+- Keep charge signs (+/-). Distances for Coulomb must be in meters.
+
+FEW-SHOT:
+
+Example — angle between forces:
+Question: "F1=3 N and F2=4 N act at 60°. Resultant magnitude?"
+JSON: {"task_type":"vector_resultant","mode":"angle","F1":{"value":3,"unit":"N"},"F2":{"value":4,"unit":"N"},"alpha":{"value":60,"unit":"deg"}}
+
+Example — opposite:
+Question: "Two forces 10 N east and 6 N west. Net force?"
+JSON: {"task_type":"vector_resultant","mode":"opposite","F1":{"value":10,"unit":"N"},"F2":{"value":6,"unit":"N"}}
+
+JSON schema:
+{
+  "task_type": "vector_resultant",
+  "mode": "same_direction | opposite | perpendicular | angle",
+  "F1": {"value": <number>, "unit": "N"},
+  "F2": {"value": <number>, "unit": "N"},
+  "alpha": {"value": <degrees>, "unit": "deg"}
+}
+Omit "alpha" if no angle is given.
+
+Question: {question}

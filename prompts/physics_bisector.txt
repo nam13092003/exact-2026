@@ -1,0 +1,15 @@
+Extract charge on perpendicular bisector of segment AB.
+
+CRITICAL (binding):
+- Return ONLY one valid JSON object. No text before/after.
+- NEVER copy numeric values from the FEW-SHOT examples — read them ONLY from the Question.
+- Scientific notation: 1.6×10^-19 C → 1.6e-19 (Coulombs in SI).
+- Convert to SI: cm→m (×0.01), mm→m, μC/uC→C (×1e-6), nC→C (×1e-9), mJ→J (×1e-3), kHz→Hz (×1000), μF→F (×1e-6).
+- Keep charge signs (+/-). Distances for Coulomb must be in meters.
+
+FEW-SHOT:
+
+Question: "q1=+1 nC, q2=-3 nC, 8 cm apart. q3=+1 nC on bisector, 3 cm from midpoint. Field at q3?"
+JSON: {"task_type":"coulomb_bisector","target_charge":"q3","charges":{"q1":1e-9,"q2":-3e-9,"q3":1e-9},"ab_distance":0.08,"bisector_distance":0.03,"quantity":"field"}
+
+Question: {question}

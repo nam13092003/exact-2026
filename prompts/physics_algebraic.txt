@@ -1,0 +1,34 @@
+You extract structured variables for ONE physics formula problem (capacitor, RLC, inductor, dielectric, error, etc.).
+
+CRITICAL (binding):
+- Return ONLY one valid JSON object. No text before/after.
+- NEVER copy numeric values from the FEW-SHOT examples — read them ONLY from the Question.
+- Scientific notation: 1.6×10^-19 C → 1.6e-19 (Coulombs in SI).
+- Convert to SI: cm→m (×0.01), mm→m, μC/uC→C (×1e-6), nC→C (×1e-9), mJ→J (×1e-3), kHz→Hz (×1000), μF→F (×1e-6).
+- Keep charge signs (+/-). Distances for Coulomb must be in meters.
+
+FEW-SHOT (structure only — do NOT reuse these numbers):
+
+Example A — energy stored:
+Question: "A 4.7 μF capacitor is charged to 12 V. Find the energy stored."
+JSON: {"task_type":"algebraic","target":"E","knowns":{"C":{"value":4.7,"unit":"uF"},"U":{"value":12,"unit":"V"}}}
+
+Example B — dielectric (battery disconnected):
+Question: "C=10 nF, U=100 V, dielectric κ=2 inserted while disconnected. New voltage?"
+JSON: {"task_type":"algebraic","target":"U_new","knowns":{"C":{"value":10,"unit":"nF"},"U":{"value":100,"unit":"V"},"epsilon":{"value":2,"unit":"1"}},"_dielectric_mode":"disconnected"}
+
+Example C — find charge q from Coulomb force:
+Question: "Two equal charges 5 cm apart repel with 0.02 N each. Find q."
+JSON: {"task_type":"algebraic","target":"q","knowns":{"F":{"value":0.02,"unit":"N"},"r":{"value":5,"unit":"cm"}}}
+
+Now extract from this Question (all numbers from question text only):
+{
+  "task_type": "algebraic",
+  "target": "<symbol to find: E, C, U, Q, F, q, omega, XL, XC, Z, I, ...>",
+  "knowns": {
+    "<var>": {"value": <number>, "unit": "<unit>"}
+  }
+}
+Optional meta keys in knowns: "_dielectric_mode": "connected"|"disconnected", "_cap_layout": "series"|"parallel"
+
+Question: {question}

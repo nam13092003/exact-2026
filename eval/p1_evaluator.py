@@ -11,21 +11,81 @@ from agents.pipeline import ExactPipeline
 
 def unit_norm(u: Any) -> str:
     u = str(u or "").strip().lower()
-    u = u.replace("µ", "μ")
-    aliases = {"degree": "độ", "degrees": "độ", "ohms": "ω", "ohm": "ω"}
+    # Unescape double-escaped unicode sequences like '\\u0110\\u1ed9' using regex decode
+    def _unescape_unicode(s: str) -> str:
+        return re.sub(
+            r"\\u([0-9a-fA-F]{4})",
+            lambda m: chr(int(m.group(1), 16)),
+            s,
+        )
+    u = _unescape_unicode(u)
+    # Also handle literal escape sequences
+    u = u.replace("\\u03bc", "μ").replace("\\u00b0", "độ").replace("\\u2126", "ω")
+    # Normalize Greek/Latin micro to 'u'
+    u = u.replace("μ", "u").replace("µ", "u")
+    aliases = {
+        "degree": "độ", "degrees": "độ", "deg": "độ", "°": "độ",
+        "ohms": "ω", "ohm": "ω", "w": "ω", "omega": "ω",
+        "v/m": "v/m", "v": "v", "a": "a", "hz": "hz",
+        "fa": "f", "f": "f", "uf": "uf", "pf": "pf", "nf": "nf", "mf": "mf",
+    }
     return aliases.get(u, u)
+
+
+def to_si(value: float, unit: str) -> Tuple[float, str]:
+    u = unit_norm(unit)
+    
+    # Prefix scales
+    prefix_scales = {
+        "p": 1e-12,
+        "n": 1e-9,
+        "u": 1e-6,
+        "m": 1e-3,
+        "k": 1e3,
+    }
+    
+    # Identify base unit and prefix
+    # Distinguish between milli and Mega: if base unit is hz, 'm' prefix is Mega (1e6)
+    for base in ("hz", "v/m", "m2", "m", "f", "c", "j", "v", "h", "a", "n", "độ", "ω"):
+        if u.endswith(base):
+            prefix = u[:-len(base)]
+            scale = 1.0
+            if prefix:
+                if base == "hz" and prefix == "m":
+                    scale = 1e6  # MegaHz
+                elif prefix in prefix_scales:
+                    scale = prefix_scales[prefix]
+            return value * scale, base
+            
+    return value, u
 
 
 def answer_match(pred: Any, gold: Any, pred_unit: Any = "", gold_unit: Any = "", numeric_tol: float = 1e-2) -> bool:
     pg = normalize_answer(pred)
     gg = normalize_answer(gold)
+    
+    # Case-insensitive match on normalized strings
     if pg == gg:
-        # for physics also check unit when gold unit exists
-        return not gold_unit or unit_norm(pred_unit) == unit_norm(gold_unit)
+        # Check normalized units if gold unit is present
+        if not gold_unit:
+            return True
+        return unit_norm(pred_unit) == unit_norm(gold_unit)
+        
+    # Attempt numeric/physics-aware comparison
     pv, gv = parse_float_like(pred), parse_float_like(gold)
     if pv is not None and gv is not None:
-        tol = max(numeric_tol, abs(gv) * 1e-3)
-        return abs(pv - gv) <= tol and (not gold_unit or unit_norm(pred_unit) == unit_norm(gold_unit))
+        if gold_unit:
+            # Physics-aware comparison
+            p_si_val, p_si_unit = to_si(pv, pred_unit)
+            g_si_val, g_si_unit = to_si(gv, gold_unit)
+            if p_si_unit == g_si_unit:
+                tol = max(numeric_tol, abs(g_si_val) * 1e-3)
+                return abs(p_si_val - g_si_val) <= tol
+        else:
+            # No unit expected, pure numeric check
+            tol = max(numeric_tol, abs(gv) * 1e-3)
+            return abs(pv - gv) <= tol
+            
     return False
 
 

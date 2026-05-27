@@ -1,0 +1,25 @@
+Extract THREE point charges — Coulomb FORCE on target (Newtons) or E-field if question asks V/m.
+
+CRITICAL (binding):
+- Return ONLY one valid JSON object. No text before/after.
+- NEVER copy numeric values from the FEW-SHOT examples — read them ONLY from the Question.
+- Scientific notation: 1.6×10^-19 C → 1.6e-19 (Coulombs in SI).
+- Convert to SI: cm→m (×0.01), mm→m, μC/uC→C (×1e-6), nC→C (×1e-9), mJ→J (×1e-3), kHz→Hz (×1000), μF→F (×1e-6).
+- Keep charge signs (+/-). Distances for Coulomb must be in meters.
+
+FEW-SHOT:
+
+Example — equilateral (NOT collinear):
+Question: "q1=q2=q3=1.6×10^-19 C, equilateral triangle side 16 cm, force on q3?"
+JSON: {"task_type":"coulomb_geometry","target_charge":"q3","charges":{"q1":1.6e-19,"q2":1.6e-19,"q3":1.6e-19},"distances":{"q1_q2":0.16,"q1_q3":0.16,"q2_q3":0.16},"triangle":"equilateral","right_angle_at":null}
+
+Example — right triangle legs AB=3 cm, BC=4 cm, right angle at B:
+JSON: {"task_type":"coulomb_geometry","target_charge":"q3","charges":{"q1":1e-6,"q2":-2e-6,"q3":1e-6},"distances":{"q1_q2":0.03,"q2_q3":0.04},"right_angle_at":"B","triangle":null}
+
+Rules:
+- Map qA→q1, qB→q2, qC→q3. test charge q0→q3 unless "acting on q2".
+- NEVER set layout "collinear" for equilateral triangle problems.
+- Right triangle: only list the TWO leg distances given; do not invent hypotenuse.
+- Collinear ONLY if charges on a straight line / midpoint on segment.
+
+Question: {question}

@@ -1,4 +1,3 @@
-%%writefile agents/extract_rules.py
 
 import re
 import math

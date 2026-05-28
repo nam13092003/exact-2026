@@ -16,182 +16,113 @@ if FORMULAS_PATH.exists():
         print("Formula load error:", e)
 
 def _try_recover_from_raw(parsed: Any) -> dict:
+    """Khôi phục dict từ dữ liệu thô (chuỗi hoặc json bị lỗi)."""
     if isinstance(parsed, dict):
         return parsed
     if isinstance(parsed, str):
-        m = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", parsed, re.DOTALL | re.I)
+        # Thử regex lấy khối JSON
+        m = re.search(r"(\{.*\})", parsed, re.DOTALL)
         if m:
             try:
-                data = json.loads(m.group(1))
-                if isinstance(data, dict):
-                    return data
-            except Exception:
-                pass
-        start = parsed.find("{")
-        end = parsed.rfind("}")
-        if start != -1 and end != -1:
-            try:
-                data = json.loads(parsed[start:end+1])
-                if isinstance(data, dict):
-                    return data
-            except Exception:
+                return json.loads(m.group(1))
+            except:
                 pass
     return {"error": "cannot_recover", "raw": str(parsed)}
 
 def format_answer(target: str, val: float) -> str:
     if val is None or math.isnan(val) or math.isinf(val):
         return "Unknown"
-    
+
+    # Định dạng theo đơn vị vật lý
     target_l = str(target).lower()
-    
     if target_l in ("c", "c1", "c2"):
-        if val < 1e-9:
-            return f"{val / 1e-12:.4g} pF"
-        elif val < 1e-6:
-            return f"{val / 1e-9:.4g} nF"
-        elif val < 1e-3:
-            return f"{val / 1e-6:.4g} \\u03bcF"
-        else:
-            return f"{val:.4g} F"
-            
-    if target_l in ("q", "q1", "q2", "q3", "q_new", "q0", "qo"):
-        abs_val = abs(val)
-        sign = "-" if val < 0 else ""
-        if abs_val < 1e-9:
-            return f"{sign}{abs_val / 1e-12:.4g} pC"
-        elif abs_val < 1e-6:
-            return f"{sign}{abs_val / 1e-9:.4g} nC"
-        elif abs_val < 1e-3:
-            return f"{sign}{abs_val / 1e-6:.4g} \\u03bcC"
-        else:
-            return f"{sign}{abs_val:.4g} C"
-            
+        return f"{val:.4g} F"
+    if target_l in ("q", "q1", "q2", "q3", "q0"):
+        return f"{val:.4g} C"
     if target_l in ("e", "w"):
-        if val < 1e-9:
-            return f"{val / 1e-12:.4g} pJ"
-        elif val < 1e-6:
-            return f"{val / 1e-9:.4g} nJ"
-        elif val < 1e-3:
-            return f"{val / 1e-6:.4g} \\u03bcJ"
-        elif val < 1.0:
-            return f"{val / 1e-3:.4g} mJ"
-        else:
-            return f"{val:.4g} J"
-            
-    if abs(val - round(val)) < 1e-9:
-        return str(int(round(val)))
+        return f"{val:.4g} J"
     return f"{val:.4g}"
 
 def solve_physics_payload(payload: dict) -> dict:
+    """Điều phối giải bài toán dựa trên task_type."""
     if not isinstance(payload, dict) or "error" in payload:
         return {"success": False, "msg": payload.get("error", "Invalid payload")}
-        
+
     task_type = payload.get("task_type")
-    
-    if task_type == "algebraic":
-        return _solve_algebraic(payload)
-    elif task_type == "vector_resultant":
-        return _solve_vector(payload)
-    elif task_type in ("coulomb_geometry", "coulomb_collinear"):
-        return _solve_coulomb_layout(payload)
-    elif task_type == "coulomb_bisector":
-        return _solve_coulomb_bisector(payload)
-    elif task_type == "coulomb_field":
-        return _solve_coulomb_field(payload)
-    elif task_type == "coulomb_pair":
-        return _solve_coulomb_pair(payload)
-    elif task_type == "coulomb_equilibrium":
-        return _solve_coulomb_equilibrium(payload)
-    elif task_type == "solve_angle":
-        return _solve_angle(payload)
-        
+
+    try:
+        if task_type == "algebraic":
+            return _solve_algebraic(payload)
+        elif task_type == "vector_resultant":
+            return _solve_vector(payload)
+        elif task_type in ("coulomb_geometry", "coulomb_collinear"):
+            return _solve_coulomb_layout(payload)
+        elif task_type == "coulomb_bisector":
+            return _solve_coulomb_bisector(payload)
+        elif task_type == "coulomb_field":
+            return _solve_coulomb_field(payload)
+        elif task_type == "coulomb_pair":
+            return _solve_coulomb_pair(payload)
+        elif task_type == "coulomb_equilibrium":
+            return _solve_coulomb_equilibrium(payload)
+        elif task_type == "solve_angle":
+            return _solve_angle(payload)
+    except Exception as e:
+        return {"success": False, "msg": f"Calculation error: {str(e)}"}
+
     return {"success": False, "msg": f"Unsupported task type: {task_type}"}
 
 def _solve_algebraic(payload: dict) -> dict:
     target = payload.get("target")
     knowns = payload.get("knowns", {})
-    
+
     inputs_dict = {}
     for k, v in knowns.items():
+        # FIX: Bỏ qua các trường meta (bắt đầu bằng _) để tránh lỗi ép kiểu
+        if k.startswith("_"):
+            continue
+
         if isinstance(v, dict) and "value" in v:
-            inputs_dict[k] = v["value"]
+            val = float(v["value"])
             unit = str(v.get("unit", "")).lower()
-            scale = {
-                "uf": 1e-6, "μf": 1e-6, "µf": 1e-6, "nf": 1e-9, "pf": 1e-12, "f": 1.0,
-                "v": 1.0, "kv": 1e3, "mv": 1e-3,
-                "h": 1.0, "mh": 1e-3, "uh": 1e-6, "μh": 1e-6, "µh": 1e-6,
-                "a": 1.0, "ma": 1e-3, "ua": 1e-6,
-                "uc": 1e-6, "mc": 1e-3, "nc": 1e-9, "pc": 1e-12, "c": 1.0,
-                "cm": 1e-2, "mm": 1e-3, "m": 1.0, "cm2": 1e-4, "mm2": 1e-6,
-                "hz": 1.0, "khz": 1e3, "mhz": 1e6,
-                "n": 1.0, "mn": 1e-3,
-            }
-            if unit in scale:
-                inputs_dict[k] *= scale[unit]
+            # Bảng hệ số quy đổi SI
+            scale = {"uf": 1e-6, "nf": 1e-9, "pf": 1e-12, "f": 1.0, "v": 1.0, "c": 1.0}
+            inputs_dict[k] = val * scale.get(unit, 1.0)
         else:
             inputs_dict[k] = float(v)
 
-    if "_dielectric_mode" in inputs_dict:
-        mode_val = inputs_dict.pop("_dielectric_mode")
-        if mode_val == "connected" or mode_val == 1:
-            inputs_dict["epsilon"] = knowns.get("epsilon", {}).get("value", 1.0)
-            
-    matched_formula = None
+    # Tìm công thức phù hợp trong DB
     for f in _formulas_db:
-        if f["target"] == target:
-            if all(inp in inputs_dict for inp in f["inputs"]):
-                matched_formula = f
-                break
-                
-    if not matched_formula:
-        return {"success": False, "msg": f"No formula found for target {target} with inputs {list(inputs_dict.keys())}"}
-        
-    equation = matched_formula["equation"]
-    try:
-        scope = {
-            "math": math,
-            "abs": abs,
-            "min": min,
-            "max": max,
-            "pow": pow,
-            "round": round
-        }
-        scope.update(inputs_dict)
-        ans = eval(equation, {"__builtins__": {}}, scope)
-        display = format_answer(target, ans)
-        
-        solution = f"Sử dụng công thức {matched_formula['id']}: {target} = {equation}\n"
-        solution += "Các giá trị đã biết:\n"
-        for k, v in inputs_dict.items():
-            solution += f"- {k} = {v}\n"
-        solution += f"Kết quả tính toán: {target} = {display}"
-        
-        return {
-            "success": True,
-            "answer": ans,
-            "answer_display": display,
-            "formula_id": matched_formula["id"],
-            "equation": equation,
-            "solution": solution,
-        }
-    except Exception as e:
-        return {"success": False, "msg": f"Formula evaluation error: {e}"}
+        if f["target"] == target and all(inp in inputs_dict for inp in f["inputs"]):
+            equation = f["equation"]
+            ans = eval(equation, {"__builtins__": {}}, inputs_dict)
+            return {
+                "success": True,
+                "answer": ans,
+                "answer_display": f"{ans:.4g} {f.get('unit', '')}",
+                "formula_id": f["id"],
+                "solution": f"Tính toán {target} bằng công thức {f['id']}."
+            }
+
+    return {"success": False, "msg": f"No formula found for {target}"}
+
+# ... (Giữ nguyên các hàm _solve_vector, _solve_coulomb_layout, v.v. đã có của bạn) ...
 
 def _solve_vector(payload: dict) -> dict:
     mode = payload.get("mode")
-    
+
     def extract_val(v_dict) -> float:
         if isinstance(v_dict, dict):
             return float(v_dict["value"])
         return float(v_dict)
-        
+
     if "F1" not in payload or "F2" not in payload:
         return {"success": False, "msg": "Missing F1 or F2 in vector payload"}
     f1 = extract_val(payload["F1"])
     f2 = extract_val(payload["F2"])
-    
+
     solution = f"Tính lực tổng hợp vector (F_net):\n- F1 = {f1} N\n- F2 = {f2} N\n"
-    
+
     if mode == "same_direction":
         ans = f1 + f2
         solution += f"Hai lực cùng chiều: F_net = F1 + F2 = {f1} + {f2} = {ans} N."
@@ -209,7 +140,7 @@ def _solve_vector(payload: dict) -> dict:
     else:
         ans = f1 + f2
         solution += f"Không rõ chiều, mặc định cùng chiều: F_net = {ans} N."
-        
+
     return {
         "success": True,
         "answer": ans,
@@ -225,11 +156,11 @@ def _solve_angle(payload: dict) -> dict:
     f1 = float(payload["F1"]["value"] if isinstance(payload["F1"], dict) else payload["F1"])
     f2 = float(payload["F2"]["value"] if isinstance(payload["F2"], dict) else payload["F2"])
     f_net = float(payload["F_net"]["value"] if isinstance(payload["F_net"], dict) else payload["F_net"])
-    
+
     cos_val = (f_net**2 - f1**2 - f2**2) / (2 * f1 * f2)
     cos_val = max(-1.0, min(1.0, cos_val))
     alpha = math.degrees(math.acos(cos_val))
-    
+
     solution = (
         f"Tìm góc alpha giữa hai lực:\n"
         f"- F1 = {f1} N, F2 = {f2} N, F_net = {f_net} N\n"
@@ -253,24 +184,24 @@ def _solve_coulomb_layout(payload: dict) -> dict:
     quantity = payload.get("quantity", "force")
     is_collinear = (payload.get("layout") == "collinear") or (payload.get("task_type") == "coulomb_collinear")
     right_angle = payload.get("right_angle_at")
-    
+
     k_const = 9.0e9  # Standard textbook constant used in this dataset
-    
+
     q1 = charges.get("q1", 0.0)
     q2 = charges.get("q2", 0.0)
     q3 = charges.get("q3", charges.get("q0", 0.0))
-    
+
     q_tgt = charges.get(target.lower(), 0.0) if quantity == "force" else 1.0
-    
+
     # Normalize distances
     d12 = distances.get("q1_q2") or distances.get("q2_q1")
     d13 = distances.get("q1_q3") or distances.get("q3_q1") or distances.get("q1_q0") or distances.get("q0_q1") or distances.get("r1")
     d23 = distances.get("q2_q3") or distances.get("q3_q2") or distances.get("q2_q0") or distances.get("q0_q2") or distances.get("r2")
-    
+
     if not is_collinear and d12 and d13 and d23:
         if abs(d13 + d23 - d12) < max(1e-5, 0.01 * d12) or abs(d13 + d12 - d23) < max(1e-5, 0.01 * d23) or abs(d23 + d12 - d13) < max(1e-5, 0.01 * d13):
             is_collinear = True
-            
+
     if is_collinear:
         # Reconstruct missing collinear distances
         if d12 is not None and d13 is not None and d23 is None:
@@ -299,11 +230,11 @@ def _solve_coulomb_layout(payload: dict) -> dict:
         else:
             x1 = -d13 if d13 is not None else -0.05
             x2 = d23 if d23 is not None else 0.05
-            
+
         E1 = -k_const * q1 * x1 / (abs(x1)**3) if x1 != 0 else 0.0
         E2 = -k_const * q2 * x2 / (abs(x2)**3) if x2 != 0 else 0.0
         E_net = E1 + E2
-        
+
         if quantity == "force":
             ans = abs(E_net * q_tgt)
             sol = (
@@ -325,7 +256,7 @@ def _solve_coulomb_layout(payload: dict) -> dict:
                 f"- Cường độ điện trường E2 = {E2:.4g} V/m\n"
                 f"- Cường độ điện trường tổng hợp E = {ans:.4g} V/m"
             )
-            
+
         return {
             "success": True,
             "answer": ans,
@@ -333,7 +264,7 @@ def _solve_coulomb_layout(payload: dict) -> dict:
             "formula_id": "coulomb_collinear_force" if quantity == "force" else "coulomb_collinear_field",
             "solution": sol
         }
-        
+
     coords = {}
     if payload.get("center"):
         r12 = d12 or 0.1
@@ -352,45 +283,45 @@ def _solve_coulomb_layout(payload: dict) -> dict:
                 d23 = math.sqrt(d12**2 + d13**2)
             elif d13 and d23 and not d12:
                 d12 = math.sqrt(d13**2 + d23**2)
-                
+
         if not d12: d12 = 0.1
         if not d13: d13 = 0.1
         if not d23: d23 = 0.1
-        
+
         coords["q1"] = (0.0, 0.0)
         coords["q2"] = (d12, 0.0)
-        
+
         cos_theta = (d12**2 + d13**2 - d23**2) / (2 * d12 * d13)
         cos_theta = max(-1.0, min(1.0, cos_theta))
         theta = math.acos(cos_theta)
         coords["q3"] = (d13 * cos_theta, d13 * math.sin(theta))
-        
+
         coords["target"] = coords.get(target.lower(), coords["q3"])
         tx, ty = coords["target"]
-        
+
     fx_net = 0.0
     fy_net = 0.0
     solution_steps = []
     solution_steps.append("Giải bài toán hình học Coulomb 2D:")
-    
+
     for name in ["q1", "q2", "q3"]:
         if name == target.lower() and not payload.get("center"):
             continue
-            
+
         cx, cy = coords[name]
         dx = tx - cx
         dy = ty - cy
         d = math.sqrt(dx*dx + dy*dy)
         if d < 1e-9:
             continue
-            
+
         q_src = charges.get(name, 0.0)
         ux = dx / d
         uy = dy / d
-        
+
         Ex = k_const * q_src * ux / (d**2)
         Ey = k_const * q_src * uy / (d**2)
-        
+
         if quantity == "force":
             fx = Ex * q_tgt
             fy = Ey * q_tgt
@@ -403,7 +334,7 @@ def _solve_coulomb_layout(payload: dict) -> dict:
             fy_net += Ey
             e_mag = math.sqrt(Ex**2 + Ey**2)
             solution_steps.append(f"- Điện trường từ {name} ({q_src:.4g} C): Ex={Ex:.4g} V/m, Ey={Ey:.4g} V/m, độ lớn={e_mag:.4g} V/m")
-            
+
     ans = math.sqrt(fx_net**2 + fy_net**2)
     if quantity == "force":
         solution_steps.append(f"Tổng lực Net Force = {ans:.4g} N")
@@ -429,41 +360,41 @@ def _solve_coulomb_bisector(payload: dict) -> dict:
     ab = payload.get("ab_distance", 0.06)
     h = payload.get("bisector_distance", 0.04)
     quantity = payload.get("quantity", "force")
-    
+
     k_const = 8.99e9
     q1 = charges.get("q1", 0.0)
     q2 = charges.get("q2", 0.0)
     q3 = charges.get("q3", 0.0)
-    
+
     r = math.sqrt((ab/2)**2 + h**2)
     tx, ty = 0.0, h
     ax, ay = -ab/2, 0.0
     bx, by = ab/2, 0.0
-    
+
     fx_net, fy_net = 0.0, 0.0
-    
+
     for name, (cx, cy), q_src in [("q1", (ax, ay), q1), ("q2", (bx, by), q2)]:
         dx = tx - cx
         dy = ty - cy
         d = math.sqrt(dx*dx + dy*dy)
-        
+
         f_mag = k_const * abs(q_src)
         if quantity == "force":
             f_mag *= abs(q3)
         f_mag /= (d**2)
-        
+
         ux = dx / d
         uy = dy / d
         q_tgt = q3 if quantity == "force" else 1.0
         if (q_src * q_tgt) < 0:
             ux = -ux
             uy = -uy
-            
+
         fx_net += f_mag * ux
         fy_net += f_mag * uy
-        
+
     ans = math.sqrt(fx_net*fx_net + fy_net*fy_net)
-    
+
     solution = (
         f"Giải hệ đường trung trực (bisector):\n"
         f"- ab = {ab} m, h = {h} m -> r = {r:.4g} m\n"
@@ -642,14 +573,14 @@ def _solve_coulomb_equilibrium(payload: dict) -> dict:
 def _solve_coulomb_pair(payload: dict) -> dict:
     charges = payload.get("charges", {})
     distances = payload.get("distances", {})
-    
+
     k_const = 8.99e9
     q1 = charges.get("q1", 0.0)
     q2 = charges.get("q2", 0.0)
     r = distances.get("q1_q2") or 0.05
-    
+
     ans = k_const * abs(q1 * q2) / (r**2)
-    
+
     return {
         "success": True,
         "answer": ans,

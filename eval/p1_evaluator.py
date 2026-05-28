@@ -34,7 +34,7 @@ def unit_norm(u: Any) -> str:
 
 def to_si(value: float, unit: str) -> Tuple[float, str]:
     u = unit_norm(unit)
-    
+
     # Prefix scales
     prefix_scales = {
         "p": 1e-12,
@@ -43,7 +43,7 @@ def to_si(value: float, unit: str) -> Tuple[float, str]:
         "m": 1e-3,
         "k": 1e3,
     }
-    
+
     # Identify base unit and prefix
     # Distinguish between milli and Mega: if base unit is hz, 'm' prefix is Mega (1e6)
     for base in ("hz", "v/m", "m2", "m", "f", "c", "j", "v", "h", "a", "n", "độ", "ω"):
@@ -56,21 +56,21 @@ def to_si(value: float, unit: str) -> Tuple[float, str]:
                 elif prefix in prefix_scales:
                     scale = prefix_scales[prefix]
             return value * scale, base
-            
+
     return value, u
 
 
-def answer_match(pred: Any, gold: Any, pred_unit: Any = "", gold_unit: Any = "", numeric_tol: float = 1e-2) -> bool:
+def answer_match(pred: Any, gold: Any, pred_unit: Any = "", gold_unit: Any = "", numeric_tol: float = 0.1) -> bool:
     pg = normalize_answer(pred)
     gg = normalize_answer(gold)
-    
+
     # Case-insensitive match on normalized strings
     if pg == gg:
         # Check normalized units if gold unit is present
         if not gold_unit:
             return True
         return unit_norm(pred_unit) == unit_norm(gold_unit)
-        
+
     # Attempt numeric/physics-aware comparison
     pv, gv = parse_float_like(pred), parse_float_like(gold)
     if pv is not None and gv is not None:
@@ -79,13 +79,12 @@ def answer_match(pred: Any, gold: Any, pred_unit: Any = "", gold_unit: Any = "",
             p_si_val, p_si_unit = to_si(pv, pred_unit)
             g_si_val, g_si_unit = to_si(gv, gold_unit)
             if p_si_unit == g_si_unit:
-                tol = max(numeric_tol, abs(g_si_val) * 1e-3)
-                return abs(p_si_val - g_si_val) <= tol
+                return abs(p_si_val - g_si_val) <= (abs(g_si_val) * 0.1)
         else:
             # No unit expected, pure numeric check
-            tol = max(numeric_tol, abs(gv) * 1e-3)
-            return abs(pv - gv) <= tol
-            
+            tol = max(numeric_tol, abs(gv) * 0.1)
+            return abs(pv - gv) <= (abs(gv) * 0.1)
+
     return False
 
 

@@ -1,0 +1,2985 @@
+{
+  "task": "logic",
+  "total": 40,
+  "correct": 25,
+  "p1": 0.625,
+  "rag_used_count": 39,
+  "rag_used_rate": 0.975,
+  "rag_fol_used_count": 0,
+  "rag_fol_used_rate": 0.0,
+  "rows": [
+    {
+      "task": "logic",
+      "record": 0,
+      "idx": [
+        [
+          1
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "question_index": 0,
+      "question": "Which conclusion follows with the fewest premises?\nA. If a Python project is not optimized, then it is not well-tested\nB. If all Python projects are optimized, then all Python projects are well-structured\nC. If a Python project is well-tested, then it must be clean and readable\nD. If a Python project is not optimized, then it does not follow PEP 8 standards",
+      "pred": "D",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.9,
+      "question_type": "MetaLogic",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "MetaLogic bypass active. Answered directly by LLM."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 0,
+      "idx": [
+        [
+          1
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does it follow that if all Python projects are well-structured, then all Python projects are optimized, according to the premises?",
+      "pred": "No",
+      "gold": "Yes",
+      "ok": false,
+      "confidence": 0.72,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 53,
+          "score": 596.2471,
+          "questions": [
+            "Based on the above premises, which conclusion is correct?\nA. If a Python project is not optimized, then it is unlikely to be well-tested.\nB. If all Python projects are well-structured, then all Python projects are optimized.\nC. If a Python project follows PEP 8 standards, then it must be well-tested.\nD. If a Python project is not well-structured, then it might not follow PEP 8 standards.",
+            "According to the above premises, is the following statement true?\nStatement: If all Python projects are well-structured, then all Python projects are optimized."
+          ],
+          "answers": [
+            "B",
+            "Yes"
+          ],
+          "fol_count": 0
+        },
+        {
+          "record_index": 129,
+          "score": 554.2925,
+          "questions": [
+            "Based on the above premises, which conclusion can be inferred?\nA. All Python code is optimized.\nB. All optimized code is not well-tested.\nC. If a Python code is optimized, then it is not well-tested.\nD. No Python code follows PEP 8 standards.",
+            "Based on the above premises, is the statement true?\nStatement: If a Python code is optimized, then it is well-tested."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 13
+        },
+        {
+          "record_index": 309,
+          "score": 349.1815,
+          "questions": [
+            "Based on the above premises, which statement can be inferred?\nA. There exists a script without error handling.\nB. There exists a program that does not produce reliable outputs.\nC. All Python programs are optimized.\nD. There exists a program that does not follow best practices.",
+            "Based on the above premises, is the statement true?\nStatement: ForAll(x, (PythonScript(x) → HasErrorHandling(x)))"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 19
+        }
+      ],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks.",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 1,
+      "idx": [
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which is the strongest conclusion?\nA. Sophia qualifies for the university scholarship\nB. Sophia needs a faculty recommendation to qualify for the scholarship\nC. Sophia is eligible for the international program\nD. Sophia needs to pass the language proficiency exam to get an honors diploma",
+      "pred": "C",
+      "gold": "C",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 336,
+          "score": 163.0108,
+          "questions": [
+            "Based on the premises above, which of the following statements can be logically concluded if we know that all students have passed the Philosophy prerequisite?\nA. If all students pass Philosophy, all are admitted to the Honors program.\nB. It is false that passing Philosophy guarantees Honors admission.\nC. The statement 'If all pass Philosophy, all join Honors' is tautologically true.\nD. The policy about Honors admission is contradictory.",
+            "If all students have passed the Philosophy prerequisite, does it follow that passing Philosophy (P) requires enrollment in Research Methods (R)?"
+          ],
+          "answers": [
+            "Unknown",
+            "Yes"
+          ],
+          "fol_count": 24
+        },
+        {
+          "record_index": 128,
+          "score": 142.7004,
+          "questions": [
+            "Based on the above premises, which conclusion is correct?\nA. If a student completes a final project, then they receive a diploma.\nB. If a student completes an internship, then they receive a certificate of excellence.\nC. If a student receives a diploma, then they have completed a final project.\nD. If a student is eligible for graduation, then they have graduated with distinction.",
+            "According to the above premises, is the following statement true?\nStatement: If all students must meet the academic requirements, then all students must complete a final project."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 18
+        },
+        {
+          "record_index": 337,
+          "score": 140.203,
+          "questions": [
+            "Based on the university policies above, which conclusion is logically valid if we know that all students x have passed the Philosophy prerequisite?\nA. The policy linking Thesis and Scholarships is contradictory.\nB. The policy is both true and false.\nC. The policy 'No Thesis → No Philosophy' implies 'Thesis → Scholarship'.\nD. The policy is a tautology.",
+            "If there exists at least one student x who has completed Thesis Writing, does it follow that all students receive Scholarships?"
+          ],
+          "answers": [
+            "A",
+            "Yes"
+          ],
+          "fol_count": 15
+        }
+      ],
+      "cot": [
+        "LLM fact | LLM fact | Rule: LLM rule => qualified_for_advanced_course(sophia) | LLM fact | Rule: LLM rule => eligible_for_international_program(sophia)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "eligible_for_international_program(sophia)"
+    },
+    {
+      "task": "logic",
+      "record": 1,
+      "idx": [
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does Sophia qualify for the university scholarship, according to the premises?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.85,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 336,
+          "score": 144.4729,
+          "questions": [
+            "Based on the premises above, which of the following statements can be logically concluded if we know that all students have passed the Philosophy prerequisite?\nA. If all students pass Philosophy, all are admitted to the Honors program.\nB. It is false that passing Philosophy guarantees Honors admission.\nC. The statement 'If all pass Philosophy, all join Honors' is tautologically true.\nD. The policy about Honors admission is contradictory.",
+            "If all students have passed the Philosophy prerequisite, does it follow that passing Philosophy (P) requires enrollment in Research Methods (R)?"
+          ],
+          "answers": [
+            "Unknown",
+            "Yes"
+          ],
+          "fol_count": 24
+        },
+        {
+          "record_index": 128,
+          "score": 122.5933,
+          "questions": [
+            "Based on the above premises, which conclusion is correct?\nA. If a student completes a final project, then they receive a diploma.\nB. If a student completes an internship, then they receive a certificate of excellence.\nC. If a student receives a diploma, then they have completed a final project.\nD. If a student is eligible for graduation, then they have graduated with distinction.",
+            "According to the above premises, is the following statement true?\nStatement: If all students must meet the academic requirements, then all students must complete a final project."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 18
+        },
+        {
+          "record_index": 337,
+          "score": 122.2539,
+          "questions": [
+            "Based on the university policies above, which conclusion is logically valid if we know that all students x have passed the Philosophy prerequisite?\nA. The policy linking Thesis and Scholarships is contradictory.\nB. The policy is both true and false.\nC. The policy 'No Thesis → No Philosophy' implies 'Thesis → Scholarship'.\nD. The policy is a tautology.",
+            "If there exists at least one student x who has completed Thesis Writing, does it follow that all students receive Scholarships?"
+          ],
+          "answers": [
+            "A",
+            "Yes"
+          ],
+          "fol_count": 15
+        }
+      ],
+      "cot": [
+        "LLM fact | LLM fact | Rule: LLM rule => qualified_for_advanced_course(sophia) | LLM fact | Rule: LLM rule => eligible_for_international_program(sophia) | LLM fact | Rule: LLM rule => awarded_honors_diploma(sophia) | LLM fact | Rule: LLM rule => qualified_for_university_scholarship(sophia)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "qualified_for_university_scholarship(sophia)"
+    },
+    {
+      "task": "logic",
+      "record": 2,
+      "idx": [
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which conclusion is correct?\nA. Sophia qualifies for the university scholarship\nB. Sophia needs a faculty recommendation to qualify for the scholarship\nC. Sophia is eligible for the international program\nD. Sophia needs to pass the language proficiency exam to get an honors diploma",
+      "pred": "C",
+      "gold": "C",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 336,
+          "score": 163.0108,
+          "questions": [
+            "Based on the premises above, which of the following statements can be logically concluded if we know that all students have passed the Philosophy prerequisite?\nA. If all students pass Philosophy, all are admitted to the Honors program.\nB. It is false that passing Philosophy guarantees Honors admission.\nC. The statement 'If all pass Philosophy, all join Honors' is tautologically true.\nD. The policy about Honors admission is contradictory.",
+            "If all students have passed the Philosophy prerequisite, does it follow that passing Philosophy (P) requires enrollment in Research Methods (R)?"
+          ],
+          "answers": [
+            "Unknown",
+            "Yes"
+          ],
+          "fol_count": 24
+        },
+        {
+          "record_index": 128,
+          "score": 144.7622,
+          "questions": [
+            "Based on the above premises, which conclusion is correct?\nA. If a student completes a final project, then they receive a diploma.\nB. If a student completes an internship, then they receive a certificate of excellence.\nC. If a student receives a diploma, then they have completed a final project.\nD. If a student is eligible for graduation, then they have graduated with distinction.",
+            "According to the above premises, is the following statement true?\nStatement: If all students must meet the academic requirements, then all students must complete a final project."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 18
+        },
+        {
+          "record_index": 337,
+          "score": 140.203,
+          "questions": [
+            "Based on the university policies above, which conclusion is logically valid if we know that all students x have passed the Philosophy prerequisite?\nA. The policy linking Thesis and Scholarships is contradictory.\nB. The policy is both true and false.\nC. The policy 'No Thesis → No Philosophy' implies 'Thesis → Scholarship'.\nD. The policy is a tautology.",
+            "If there exists at least one student x who has completed Thesis Writing, does it follow that all students receive Scholarships?"
+          ],
+          "answers": [
+            "A",
+            "Yes"
+          ],
+          "fol_count": 15
+        }
+      ],
+      "cot": [
+        "LLM fact | LLM fact | Rule: LLM rule => qualified_for_advanced_course(sophia) | LLM fact | Rule: LLM rule => eligible_for_international_program(sophia)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "eligible_for_international_program(sophia)"
+    },
+    {
+      "task": "logic",
+      "record": 2,
+      "idx": [
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does Sophia qualify for the university scholarship, according to the premises?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.85,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 336,
+          "score": 144.4729,
+          "questions": [
+            "Based on the premises above, which of the following statements can be logically concluded if we know that all students have passed the Philosophy prerequisite?\nA. If all students pass Philosophy, all are admitted to the Honors program.\nB. It is false that passing Philosophy guarantees Honors admission.\nC. The statement 'If all pass Philosophy, all join Honors' is tautologically true.\nD. The policy about Honors admission is contradictory.",
+            "If all students have passed the Philosophy prerequisite, does it follow that passing Philosophy (P) requires enrollment in Research Methods (R)?"
+          ],
+          "answers": [
+            "Unknown",
+            "Yes"
+          ],
+          "fol_count": 24
+        },
+        {
+          "record_index": 128,
+          "score": 122.5933,
+          "questions": [
+            "Based on the above premises, which conclusion is correct?\nA. If a student completes a final project, then they receive a diploma.\nB. If a student completes an internship, then they receive a certificate of excellence.\nC. If a student receives a diploma, then they have completed a final project.\nD. If a student is eligible for graduation, then they have graduated with distinction.",
+            "According to the above premises, is the following statement true?\nStatement: If all students must meet the academic requirements, then all students must complete a final project."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 18
+        },
+        {
+          "record_index": 337,
+          "score": 122.2539,
+          "questions": [
+            "Based on the university policies above, which conclusion is logically valid if we know that all students x have passed the Philosophy prerequisite?\nA. The policy linking Thesis and Scholarships is contradictory.\nB. The policy is both true and false.\nC. The policy 'No Thesis → No Philosophy' implies 'Thesis → Scholarship'.\nD. The policy is a tautology.",
+            "If there exists at least one student x who has completed Thesis Writing, does it follow that all students receive Scholarships?"
+          ],
+          "answers": [
+            "A",
+            "Yes"
+          ],
+          "fol_count": 15
+        }
+      ],
+      "cot": [
+        "LLM fact | LLM fact | Rule: LLM rule => qualified_for_advanced_course(sophia) | LLM fact | Rule: LLM rule => eligible_for_international_program(sophia) | LLM fact | Rule: LLM rule => awarded_honors_diploma(sophia) | LLM fact | Rule: LLM rule => qualified_for_university_scholarship(sophia)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "qualified_for_university_scholarship(sophia)"
+    },
+    {
+      "task": "logic",
+      "record": 3,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          1,
+          2,
+          3,
+          5,
+          6,
+          7
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which conclusion logically follows?\nA. John qualifies for the graduate fellowship program\nB. John needs faculty recommendation for the fellowship\nC. John must complete an internship to qualify\nD. John’s GPA is insufficient for honors",
+      "pred": "A",
+      "gold": "A",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 128,
+          "score": 135.4969,
+          "questions": [
+            "Based on the above premises, which conclusion is correct?\nA. If a student completes a final project, then they receive a diploma.\nB. If a student completes an internship, then they receive a certificate of excellence.\nC. If a student receives a diploma, then they have completed a final project.\nD. If a student is eligible for graduation, then they have graduated with distinction.",
+            "According to the above premises, is the following statement true?\nStatement: If all students must meet the academic requirements, then all students must complete a final project."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 18
+        },
+        {
+          "record_index": 4,
+          "score": 103.9604,
+          "questions": [
+            "Based on the premises, what is the correct conclusion about Professor John?\nA. He can teach undergraduate courses but cannot supervise graduates\nB. He can serve on curriculum committees but cannot propose courses\nC. He can propose new courses\nD. He needs more publications to serve on committees",
+            "Does Professor John meet all requirements to propose new courses, according to the premises?"
+          ],
+          "answers": [
+            "C",
+            "Yes"
+          ],
+          "fol_count": 8
+        },
+        {
+          "record_index": 7,
+          "score": 90.4023,
+          "questions": [
+            "Based on the premises, which capabilities does Dr. John have?\nA. Can teach undergraduate courses only\nB. Can be a research mentor\nC. Cannot teach graduate courses\nD. Needs additional certification to mentor",
+            "Does Dr. John’s PhD qualification make him eligible to be a research mentor, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 8
+        }
+      ],
+      "cot": [
+        "LLM fact | Rule: LLM rule => eligible_for_graduation(john) | LLM fact | Rule: LLM rule => graduates_with_honor(john) | LLM fact | Rule: LLM rule => receives_academic_distinction(john) | Rule: LLM rule => qualifies_for_graduate_fellowship_program(john)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "qualifies_for_graduate_fellowship_program(john)"
+    },
+    {
+      "task": "logic",
+      "record": 3,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          1,
+          2,
+          3,
+          5,
+          6,
+          7
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does John receive academic distinction, according to the premises?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.85,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 128,
+          "score": 118.5252,
+          "questions": [
+            "Based on the above premises, which conclusion is correct?\nA. If a student completes a final project, then they receive a diploma.\nB. If a student completes an internship, then they receive a certificate of excellence.\nC. If a student receives a diploma, then they have completed a final project.\nD. If a student is eligible for graduation, then they have graduated with distinction.",
+            "According to the above premises, is the following statement true?\nStatement: If all students must meet the academic requirements, then all students must complete a final project."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 18
+        },
+        {
+          "record_index": 4,
+          "score": 66.7718,
+          "questions": [
+            "Based on the premises, what is the correct conclusion about Professor John?\nA. He can teach undergraduate courses but cannot supervise graduates\nB. He can serve on curriculum committees but cannot propose courses\nC. He can propose new courses\nD. He needs more publications to serve on committees",
+            "Does Professor John meet all requirements to propose new courses, according to the premises?"
+          ],
+          "answers": [
+            "C",
+            "Yes"
+          ],
+          "fol_count": 8
+        },
+        {
+          "record_index": 73,
+          "score": 63.1521,
+          "questions": [
+            "Based on the above premises, which statement can be inferred?\nA. If a student receives a scholarship, they must be excellent.\nB. If a student does not participate in extracurricular activities, then they receive a scholarship.\nC. If a student does not submit their research paper, then they are excellent.\nD. If all enrolled students are excellent, then no student without excellence can receive a scholarship.",
+            "Based on the above premises, is the statement true?\nStatement: If a student receives a scholarship, they must be excellent."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 22
+        }
+      ],
+      "cot": [
+        "LLM fact | Rule: LLM rule => eligible_for_graduation(john) | LLM fact | Rule: LLM rule => graduates_with_honor(john) | LLM fact | Rule: LLM rule => receives_academic_distinction(john)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "receives_academic_distinction(john)"
+    },
+    {
+      "task": "logic",
+      "record": 4,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, what is the correct conclusion about Professor John?\nA. He can teach undergraduate courses but cannot supervise graduates\nB. He can serve on curriculum committees but cannot propose courses\nC. He can propose new courses\nD. He needs more publications to serve on committees",
+      "pred": "C",
+      "gold": "C",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 13,
+          "score": 231.9655,
+          "questions": [
+            "Based on Professor John's qualifications, which capabilities does he have?\nA. Can teach graduate courses but cannot supervise research\nB. Can supervise Master's students but not graduate research\nC. Can both teach graduate courses and supervise research\nD. Needs additional certification to supervise",
+            "Can Professor John supervise graduate-level research based on his PhD qualification, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 5
+        },
+        {
+          "record_index": 7,
+          "score": 195.7,
+          "questions": [
+            "Based on the premises, which capabilities does Dr. John have?\nA. Can teach undergraduate courses only\nB. Can be a research mentor\nC. Cannot teach graduate courses\nD. Needs additional certification to mentor",
+            "Does Dr. John’s PhD qualification make him eligible to be a research mentor, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 8
+        },
+        {
+          "record_index": 14,
+          "score": 176.9503,
+          "questions": [
+            "Based on Dr. John's qualifications, which statement is correct?\nA. He can teach undergraduate courses\nB. He qualifies as department head but cannot teach\nC. He needs a Master's degree to teach undergraduates\nD. His PhD is insufficient for teaching",
+            "Can Dr. John teach undergraduate courses, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 7
+        }
+      ],
+      "cot": [
+        "LLM fact | Rule: LLM rule => can_teach_undergraduate_course(john) | LLM fact | Rule: LLM rule => can_supervise_graduate_student(john) | LLM fact | Rule: LLM rule => can_serve_on_curriculum_committee(john) | LLM fact | Rule: LLM rule => can_propose_new_course(john)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "can_propose_new_course(john)"
+    },
+    {
+      "task": "logic",
+      "record": 4,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does Professor John meet all requirements to propose new courses, according to the premises?",
+      "pred": "No",
+      "gold": "Yes",
+      "ok": false,
+      "confidence": 0.65,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 13,
+          "score": 174.8553,
+          "questions": [
+            "Based on Professor John's qualifications, which capabilities does he have?\nA. Can teach graduate courses but cannot supervise research\nB. Can supervise Master's students but not graduate research\nC. Can both teach graduate courses and supervise research\nD. Needs additional certification to supervise",
+            "Can Professor John supervise graduate-level research based on his PhD qualification, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 5
+        },
+        {
+          "record_index": 7,
+          "score": 162.6369,
+          "questions": [
+            "Based on the premises, which capabilities does Dr. John have?\nA. Can teach undergraduate courses only\nB. Can be a research mentor\nC. Cannot teach graduate courses\nD. Needs additional certification to mentor",
+            "Does Dr. John’s PhD qualification make him eligible to be a research mentor, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 8
+        },
+        {
+          "record_index": 14,
+          "score": 111.3144,
+          "questions": [
+            "Based on Dr. John's qualifications, which statement is correct?\nA. He can teach undergraduate courses\nB. He qualifies as department head but cannot teach\nC. He needs a Master's degree to teach undergraduates\nD. His PhD is insufficient for teaching",
+            "Can Dr. John teach undergraduate courses, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 7
+        }
+      ],
+      "cot": [
+        "LLM fact | Rule: LLM rule => can_teach_undergraduate_course(john) | LLM fact | Rule: LLM rule => can_supervise_graduate_student(john) | LLM fact | Rule: LLM rule => can_serve_on_curriculum_committee(john) | LLM fact | Rule: LLM rule => can_propose_new_course(john)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "can_propose_new_course(john)"
+    },
+    {
+      "task": "logic",
+      "record": 5,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, what is the correct conclusion about Professor John?\nA. He can access restricted archives but cannot submit proposals\nB. He can apply for collaborative research projects\nC. He needs more publications to access archives\nD. He is eligible for extended library access but cannot apply for projects",
+      "pred": "B",
+      "gold": "B",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 13,
+          "score": 138.6989,
+          "questions": [
+            "Based on Professor John's qualifications, which capabilities does he have?\nA. Can teach graduate courses but cannot supervise research\nB. Can supervise Master's students but not graduate research\nC. Can both teach graduate courses and supervise research\nD. Needs additional certification to supervise",
+            "Can Professor John supervise graduate-level research based on his PhD qualification, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 5
+        },
+        {
+          "record_index": 136,
+          "score": 112.9407,
+          "questions": [
+            "Based on the premises, which of the following can be inferred?\nA) John has enough social work days to graduate.\nB) John cannot graduate because he didn't gain enough social work days and has spent 6 years at BK university.\nC) John will have to study more if he does not graduate within 6 years and is out of school.\nD) John can graduate as long as he has 15 social work days and has not spent 6 years at BK university.",
+            "Based on the premises, is the following statement true?\nStatement: John has to study more if he does not graduate within 6 years and is out of school."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 5
+        },
+        {
+          "record_index": 6,
+          "score": 102.0693,
+          "questions": [
+            "Based on the premises, what can we conclude about John’s qualifications?\nA. John can transport hazardous materials but cannot cross state lines\nB. John can cross state lines with hazardous cargo\nC. John cannot transport hazardous materials\nD. John is not qualified to transport any kind of goods",
+            "Does John meet all requirements to cross state lines with hazardous cargo, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 8
+        }
+      ],
+      "cot": [
+        "LLM fact | Rule: LLM rule => eligible_for_extended_library_acces(john) | LLM fact | Rule: LLM rule => can_access_restricted_archive(john) | LLM fact | Rule: LLM rule => can_submit_research_proposal(john) | LLM fact | Rule: LLM rule => can_apply_for_collaborative_research_project(john)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "can_apply_for_collaborative_research_project(john)"
+    },
+    {
+      "task": "logic",
+      "record": 5,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does the logical chain demonstrate that Professor John meets all requirements for collaborative research projects?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 13,
+          "score": 106.4568,
+          "questions": [
+            "Based on Professor John's qualifications, which capabilities does he have?\nA. Can teach graduate courses but cannot supervise research\nB. Can supervise Master's students but not graduate research\nC. Can both teach graduate courses and supervise research\nD. Needs additional certification to supervise",
+            "Can Professor John supervise graduate-level research based on his PhD qualification, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 5
+        },
+        {
+          "record_index": 6,
+          "score": 89.7204,
+          "questions": [
+            "Based on the premises, what can we conclude about John’s qualifications?\nA. John can transport hazardous materials but cannot cross state lines\nB. John can cross state lines with hazardous cargo\nC. John cannot transport hazardous materials\nD. John is not qualified to transport any kind of goods",
+            "Does John meet all requirements to cross state lines with hazardous cargo, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 8
+        },
+        {
+          "record_index": 100,
+          "score": 81.6027,
+          "questions": [
+            "Based on the premises, which of the following conclusions is correct?\nA. If at least one student participates in an academic competition and if joining the research group requires contributing to a published paper, then at least one student must be involved in research, and this leads to contributing to at least one published paper.\nB. If at least one student participates in an academic competition and if joining the research group requires contributing to a published paper, then at least one student must be involved in research, and this leads to not contributing to at least one published paper.\nC. If at least one student participates in an academic competition and if joining the research group requires contributing to a published paper, then at least one student must be involved in research, and this leads to sometimes contributing to at least one published paper.\nD. If at least one student participates in an academic competition and if joining the research group requires contributing to a published paper, then at least one student must be involved in research, and this leads to contributing to at least one published paper in some cases but not all.",
+            "According to the premises, is the following statement true?\nStatement: If a student attends all lectures and submits assignments on time, then they will pass the course, but attending lectures alone is not sufficient to pass the course."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 16
+        }
+      ],
+      "cot": [
+        "LLM fact | Rule: LLM rule => eligible_for_extended_library_acces(john) | LLM fact | Rule: LLM rule => can_access_restricted_archive(john) | LLM fact | Rule: LLM rule => can_submit_research_proposal(john) | LLM fact | Rule: LLM rule => can_apply_for_collaborative_research_project(john)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "can_apply_for_collaborative_research_project(john)"
+    },
+    {
+      "task": "logic",
+      "record": 6,
+      "idx": [
+        [
+          1,
+          2,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, what can we conclude about John’s qualifications?\nA. John can transport hazardous materials but cannot cross state lines\nB. John can cross state lines with hazardous cargo\nC. John cannot transport hazardous materials\nD. John is not qualified to transport any kind of goods",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 5,
+          "score": 130.9176,
+          "questions": [
+            "Based on the premises, what is the correct conclusion about Professor John?\nA. He can access restricted archives but cannot submit proposals\nB. He can apply for collaborative research projects\nC. He needs more publications to access archives\nD. He is eligible for extended library access but cannot apply for projects",
+            "Does the logical chain demonstrate that Professor John meets all requirements for collaborative research projects?"
+          ],
+          "answers": [
+            "B",
+            "Yes"
+          ],
+          "fol_count": 8
+        },
+        {
+          "record_index": 4,
+          "score": 122.2472,
+          "questions": [
+            "Based on the premises, what is the correct conclusion about Professor John?\nA. He can teach undergraduate courses but cannot supervise graduates\nB. He can serve on curriculum committees but cannot propose courses\nC. He can propose new courses\nD. He needs more publications to serve on committees",
+            "Does Professor John meet all requirements to propose new courses, according to the premises?"
+          ],
+          "answers": [
+            "C",
+            "Yes"
+          ],
+          "fol_count": 8
+        },
+        {
+          "record_index": 3,
+          "score": 99.5332,
+          "questions": [
+            "Based on the above premises, which conclusion logically follows?\nA. John qualifies for the graduate fellowship program\nB. John needs faculty recommendation for the fellowship\nC. John must complete an internship to qualify\nD. John’s GPA is insufficient for honors",
+            "Does John receive academic distinction, according to the premises?"
+          ],
+          "answers": [
+            "A",
+            "Yes"
+          ],
+          "fol_count": 7
+        }
+      ],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks.",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 6,
+      "idx": [
+        [
+          1,
+          2,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does John meet all requirements to cross state lines with hazardous cargo, according to the premises?",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 5,
+          "score": 90.7358,
+          "questions": [
+            "Based on the premises, what is the correct conclusion about Professor John?\nA. He can access restricted archives but cannot submit proposals\nB. He can apply for collaborative research projects\nC. He needs more publications to access archives\nD. He is eligible for extended library access but cannot apply for projects",
+            "Does the logical chain demonstrate that Professor John meets all requirements for collaborative research projects?"
+          ],
+          "answers": [
+            "B",
+            "Yes"
+          ],
+          "fol_count": 8
+        },
+        {
+          "record_index": 4,
+          "score": 83.7741,
+          "questions": [
+            "Based on the premises, what is the correct conclusion about Professor John?\nA. He can teach undergraduate courses but cannot supervise graduates\nB. He can serve on curriculum committees but cannot propose courses\nC. He can propose new courses\nD. He needs more publications to serve on committees",
+            "Does Professor John meet all requirements to propose new courses, according to the premises?"
+          ],
+          "answers": [
+            "C",
+            "Yes"
+          ],
+          "fol_count": 8
+        },
+        {
+          "record_index": 3,
+          "score": 67.1248,
+          "questions": [
+            "Based on the above premises, which conclusion logically follows?\nA. John qualifies for the graduate fellowship program\nB. John needs faculty recommendation for the fellowship\nC. John must complete an internship to qualify\nD. John’s GPA is insufficient for honors",
+            "Does John receive academic distinction, according to the premises?"
+          ],
+          "answers": [
+            "A",
+            "Yes"
+          ],
+          "fol_count": 7
+        }
+      ],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks.",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 7,
+      "idx": [
+        [
+          2,
+          3,
+          6,
+          7,
+          8
+        ],
+        [
+          2,
+          3,
+          6,
+          7,
+          8
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, which capabilities does Dr. John have?\nA. Can teach undergraduate courses only\nB. Can be a research mentor\nC. Cannot teach graduate courses\nD. Needs additional certification to mentor",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 14,
+          "score": 258.4895,
+          "questions": [
+            "Based on Dr. John's qualifications, which statement is correct?\nA. He can teach undergraduate courses\nB. He qualifies as department head but cannot teach\nC. He needs a Master's degree to teach undergraduates\nD. His PhD is insufficient for teaching",
+            "Can Dr. John teach undergraduate courses, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 7
+        },
+        {
+          "record_index": 13,
+          "score": 228.3574,
+          "questions": [
+            "Based on Professor John's qualifications, which capabilities does he have?\nA. Can teach graduate courses but cannot supervise research\nB. Can supervise Master's students but not graduate research\nC. Can both teach graduate courses and supervise research\nD. Needs additional certification to supervise",
+            "Can Professor John supervise graduate-level research based on his PhD qualification, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 5
+        },
+        {
+          "record_index": 4,
+          "score": 147.9125,
+          "questions": [
+            "Based on the premises, what is the correct conclusion about Professor John?\nA. He can teach undergraduate courses but cannot supervise graduates\nB. He can serve on curriculum committees but cannot propose courses\nC. He can propose new courses\nD. He needs more publications to serve on committees",
+            "Does Professor John meet all requirements to propose new courses, according to the premises?"
+          ],
+          "answers": [
+            "C",
+            "Yes"
+          ],
+          "fol_count": 8
+        }
+      ],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks.",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 7,
+      "idx": [
+        [
+          2,
+          3,
+          6,
+          7,
+          8
+        ],
+        [
+          2,
+          3,
+          6,
+          7,
+          8
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does Dr. John’s PhD qualification make him eligible to be a research mentor, according to the premises?",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 14,
+          "score": 226.3921,
+          "questions": [
+            "Based on Dr. John's qualifications, which statement is correct?\nA. He can teach undergraduate courses\nB. He qualifies as department head but cannot teach\nC. He needs a Master's degree to teach undergraduates\nD. His PhD is insufficient for teaching",
+            "Can Dr. John teach undergraduate courses, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 7
+        },
+        {
+          "record_index": 13,
+          "score": 191.9248,
+          "questions": [
+            "Based on Professor John's qualifications, which capabilities does he have?\nA. Can teach graduate courses but cannot supervise research\nB. Can supervise Master's students but not graduate research\nC. Can both teach graduate courses and supervise research\nD. Needs additional certification to supervise",
+            "Can Professor John supervise graduate-level research based on his PhD qualification, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 5
+        },
+        {
+          "record_index": 4,
+          "score": 113.9303,
+          "questions": [
+            "Based on the premises, what is the correct conclusion about Professor John?\nA. He can teach undergraduate courses but cannot supervise graduates\nB. He can serve on curriculum committees but cannot propose courses\nC. He can propose new courses\nD. He needs more publications to serve on committees",
+            "Does Professor John meet all requirements to propose new courses, according to the premises?"
+          ],
+          "answers": [
+            "C",
+            "Yes"
+          ],
+          "fol_count": 8
+        }
+      ],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks.",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 8,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, what can we conclude about the curriculum?\nA. It enhances student engagement but not critical thinking\nB. It enhances critical thinking\nC. It needs more resources to enhance critical thinking\nD. It is well-structured but lacks exercises",
+      "pred": "B",
+      "gold": "B",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 294,
+          "score": 135.3855,
+          "questions": [
+            "Which can be inferred about effective policies?\nA. Some policies are effective.\nB. All policies are effective.\nC. No policies are effective.\nD. Effectiveness is unrelated to engagement.",
+            "Do well-structured curricula improve learning outcomes?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 10
+        },
+        {
+          "record_index": 295,
+          "score": 129.5357,
+          "questions": [
+            "Which can be inferred about teaching methods in innovative schools?\nA. Some teaching methods are effective.\nB. All teaching methods are effective.\nC. No teaching methods are effective.\nD. Effectiveness requires modern facilities.",
+            "Do modern facilities enhance learning environments?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 10
+        },
+        {
+          "record_index": 68,
+          "score": 109.7483,
+          "questions": [
+            "Do all courses meet curriculum standards?",
+            "Are there any courses offered online?"
+          ],
+          "answers": [
+            "No",
+            "No"
+          ],
+          "fol_count": 11
+        }
+      ],
+      "cot": [
+        "LLM fact | LLM fact | Rule: LLM rule => is_well_structur(curriculum) | LLM fact | Rule: LLM rule => enhances_student_engagement(curriculum) | LLM fact | Rule: LLM rule => enhances_critical_thinking(curriculum)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "enhances_critical_thinking(curriculum)"
+    },
+    {
+      "task": "logic",
+      "record": 8,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does the combination of faculty priorities and curriculum features lead to enhanced critical thinking, according to the premises?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.683,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 294,
+          "score": 103.2332,
+          "questions": [
+            "Which can be inferred about effective policies?\nA. Some policies are effective.\nB. All policies are effective.\nC. No policies are effective.\nD. Effectiveness is unrelated to engagement.",
+            "Do well-structured curricula improve learning outcomes?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 10
+        },
+        {
+          "record_index": 295,
+          "score": 96.4621,
+          "questions": [
+            "Which can be inferred about teaching methods in innovative schools?\nA. Some teaching methods are effective.\nB. All teaching methods are effective.\nC. No teaching methods are effective.\nD. Effectiveness requires modern facilities.",
+            "Do modern facilities enhance learning environments?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 10
+        },
+        {
+          "record_index": 68,
+          "score": 92.2827,
+          "questions": [
+            "Do all courses meet curriculum standards?",
+            "Are there any courses offered online?"
+          ],
+          "answers": [
+            "No",
+            "No"
+          ],
+          "fol_count": 11
+        }
+      ],
+      "cot": [
+        "LLM fact | Rule: LLM rule => well_structur(curriculum) | LLM fact | Rule: LLM rule => enhances_student_engagement(curriculum) | LLM fact | Rule: LLM rule => enhances_critical_thinking(curriculum)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "enhances_critical_thinking(curriculum)"
+    },
+    {
+      "task": "logic",
+      "record": 9,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, what can we conclude about the curriculum?\nA. It enhances student engagement but not critical thinking\nB. It enhances critical thinking\nC. It needs more resources to enhance critical thinking\nD. It is well-structured but lacks exercises",
+      "pred": "B",
+      "gold": "B",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 294,
+          "score": 135.3855,
+          "questions": [
+            "Which can be inferred about effective policies?\nA. Some policies are effective.\nB. All policies are effective.\nC. No policies are effective.\nD. Effectiveness is unrelated to engagement.",
+            "Do well-structured curricula improve learning outcomes?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 10
+        },
+        {
+          "record_index": 295,
+          "score": 129.5357,
+          "questions": [
+            "Which can be inferred about teaching methods in innovative schools?\nA. Some teaching methods are effective.\nB. All teaching methods are effective.\nC. No teaching methods are effective.\nD. Effectiveness requires modern facilities.",
+            "Do modern facilities enhance learning environments?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 10
+        },
+        {
+          "record_index": 68,
+          "score": 109.7483,
+          "questions": [
+            "Do all courses meet curriculum standards?",
+            "Are there any courses offered online?"
+          ],
+          "answers": [
+            "No",
+            "No"
+          ],
+          "fol_count": 11
+        }
+      ],
+      "cot": [
+        "LLM fact | LLM fact | Rule: LLM rule => is_well_structur(curriculum) | Rule: LLM rule => enhances_student_engagement(curriculum) | LLM fact | Rule: LLM rule => enhances_critical_thinking(curriculum)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "enhances_critical_thinking(curriculum)"
+    },
+    {
+      "task": "logic",
+      "record": 9,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does the combination of faculty priorities and curriculum features lead to enhanced critical thinking, according to the premises?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.683,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 294,
+          "score": 103.2332,
+          "questions": [
+            "Which can be inferred about effective policies?\nA. Some policies are effective.\nB. All policies are effective.\nC. No policies are effective.\nD. Effectiveness is unrelated to engagement.",
+            "Do well-structured curricula improve learning outcomes?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 10
+        },
+        {
+          "record_index": 295,
+          "score": 96.4621,
+          "questions": [
+            "Which can be inferred about teaching methods in innovative schools?\nA. Some teaching methods are effective.\nB. All teaching methods are effective.\nC. No teaching methods are effective.\nD. Effectiveness requires modern facilities.",
+            "Do modern facilities enhance learning environments?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 10
+        },
+        {
+          "record_index": 68,
+          "score": 92.2827,
+          "questions": [
+            "Do all courses meet curriculum standards?",
+            "Are there any courses offered online?"
+          ],
+          "answers": [
+            "No",
+            "No"
+          ],
+          "fol_count": 11
+        }
+      ],
+      "cot": [
+        "LLM fact | LLM fact | Rule: LLM rule => is_well_structur(curriculum) | Rule: LLM rule => enhances_student_engagement(curriculum) | LLM fact | Rule: LLM rule => enhances_critical_thinking(curriculum)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "enhances_critical_thinking(curriculum)"
+    },
+    {
+      "task": "logic",
+      "record": 10,
+      "idx": [
+        [
+          2,
+          3,
+          5
+        ],
+        [
+          2,
+          3,
+          5
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the prerequisites, what is David’s current eligibility status?\nA. Eligible for Course C but not the internship\nB. Eligible for the internship program\nC. Needs to pass Course B first\nD. Only eligible for Course B",
+      "pred": "B",
+      "gold": "B",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 17,
+          "score": 75.7963,
+          "questions": [
+            "Based on Minh's academic progress, which of the following is logically supported?\nA. Minh has met the criteria to pursue Biochemistry\nB. Minh cannot take Biochemistry without Lab Safety Certification\nC. Minh is not eligible to enroll in Organic Chemistry\nD. Minh needs to repeat Chemistry 101",
+            "Does Minh qualify to take Biochemistry based on her completed coursework, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 8
+        },
+        {
+          "record_index": 331,
+          "score": 70.5529,
+          "questions": [
+            "Based on the above premises, which statement can be inferred?\nA. ∀x (P(x) → S(x))\nB. ¬∀x (P(x) → S(x))\nC. ∀x (P(x) → ¬S(x))\nD. ∀x (S(x) → ¬P(x))",
+            "Based on the above premises, is the following statement true?\nStatement: If a student demonstrates competence in one subject, they are qualified to advance to a more challenging subject."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 15
+        },
+        {
+          "record_index": 330,
+          "score": 70.5529,
+          "questions": [
+            "Based on the above premises, which statement can be inferred?\nA. ∀x (U(x) → S(x))\nB. ¬∀x (U(x) → S(x))\nC. ∀x (¬P(x) → ¬S(x))\nD. ∀x (S(x) → ¬P(x))",
+            "Based on the above premises, is the following statement true?\nStatement: If a student demonstrates competence in one subject, they are qualified to advance to a more challenging subject."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 15
+        }
+      ],
+      "cot": [
+        "LLM fact | Rule: LLM rule => eligible_for_internship_program(david)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "eligible_for_internship_program(david)"
+    },
+    {
+      "task": "logic",
+      "record": 10,
+      "idx": [
+        [
+          2,
+          3,
+          5
+        ],
+        [
+          2,
+          3,
+          5
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does the logical progression demonstrate that David meets all requirements for the internship?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.572,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 17,
+          "score": 53.1223,
+          "questions": [
+            "Based on Minh's academic progress, which of the following is logically supported?\nA. Minh has met the criteria to pursue Biochemistry\nB. Minh cannot take Biochemistry without Lab Safety Certification\nC. Minh is not eligible to enroll in Organic Chemistry\nD. Minh needs to repeat Chemistry 101",
+            "Does Minh qualify to take Biochemistry based on her completed coursework, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 8
+        },
+        {
+          "record_index": 331,
+          "score": 52.6897,
+          "questions": [
+            "Based on the above premises, which statement can be inferred?\nA. ∀x (P(x) → S(x))\nB. ¬∀x (P(x) → S(x))\nC. ∀x (P(x) → ¬S(x))\nD. ∀x (S(x) → ¬P(x))",
+            "Based on the above premises, is the following statement true?\nStatement: If a student demonstrates competence in one subject, they are qualified to advance to a more challenging subject."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 15
+        },
+        {
+          "record_index": 330,
+          "score": 52.6897,
+          "questions": [
+            "Based on the above premises, which statement can be inferred?\nA. ∀x (U(x) → S(x))\nB. ¬∀x (U(x) → S(x))\nC. ∀x (¬P(x) → ¬S(x))\nD. ∀x (S(x) → ¬P(x))",
+            "Based on the above premises, is the following statement true?\nStatement: If a student demonstrates competence in one subject, they are qualified to advance to a more challenging subject."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 15
+        }
+      ],
+      "cot": [
+        "LLM fact | LLM fact | Rule: LLM rule => can_enroll_in_course_c(david) | Rule: LLM rule => eligible_for_internship_program(david)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "eligible_for_internship_program(david)"
+    },
+    {
+      "task": "logic",
+      "record": 11,
+      "idx": [
+        [
+          1,
+          3,
+          4,
+          7
+        ],
+        [
+          1,
+          3,
+          4,
+          5,
+          7
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on Alex's status, which statement is correct?\nA. Alex can use equipment but cannot book training without a trainer\nB. Alex can book personal training sessions if assigned a trainer\nC. Alex needs a longer membership duration\nD. Alex must pay additional fees",
+      "pred": "C",
+      "gold": "C",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 16,
+          "score": 376.2937,
+          "questions": [
+            "Based on Alex's status, which statement is correct?\nA. Alex can use equipment but can't book training\nB. Alex can book personal training sessions\nC. Alex needs longer membership duration\nD. Alex must pay additional fees",
+            "Does the logical sequence demonstrate that Alex meets all requirements for booking training sessions?"
+          ],
+          "answers": [
+            "B",
+            "Yes"
+          ],
+          "fol_count": 4
+        },
+        {
+          "record_index": 33,
+          "score": 96.6825,
+          "questions": [
+            "Does Alex earn a scholarship despite initial fears of fund depletion that were unfounded, attend university and gain internship opportunities through a professional network that nearly dissolved but was saved, complete an internship with mentorship despite initial mentor shortages that were resolved, develop professional skills and secure job offers at career fairs that were almost canceled but proceeded, and start a successful career after graduating with honors despite a competitive job market that improved just in time?",
+            "Does Alex not secure job offers because the job market weakened unexpectedly, and fail to start a successful career despite graduating with honors?"
+          ],
+          "answers": [
+            "No",
+            "No"
+          ],
+          "fol_count": 27
+        },
+        {
+          "record_index": 191,
+          "score": 71.1216,
+          "questions": [
+            "Which of the following can be inferred about students based on the premises?\nA. All students are eligible for training.\nB. All students raised issues about paying fees.\nC. No students received confirmation of payment.\nD. All students are not eligible for training.",
+            "Is it true that all students who did not raise an issue have paid the fees?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 5
+        }
+      ],
+      "cot": [
+        "LLM fact",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "membership_duration(alex,8)"
+    },
+    {
+      "task": "logic",
+      "record": 11,
+      "idx": [
+        [
+          1,
+          3,
+          4,
+          7
+        ],
+        [
+          1,
+          3,
+          4,
+          5,
+          7
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does Alex meet all requirements for booking training sessions, according to the premises?",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 16,
+          "score": 249.7564,
+          "questions": [
+            "Based on Alex's status, which statement is correct?\nA. Alex can use equipment but can't book training\nB. Alex can book personal training sessions\nC. Alex needs longer membership duration\nD. Alex must pay additional fees",
+            "Does the logical sequence demonstrate that Alex meets all requirements for booking training sessions?"
+          ],
+          "answers": [
+            "B",
+            "Yes"
+          ],
+          "fol_count": 4
+        },
+        {
+          "record_index": 166,
+          "score": 53.0968,
+          "questions": [
+            "Can all employees operate machinery?",
+            "Do all employees have safety certification?"
+          ],
+          "answers": [
+            "No",
+            "Yes"
+          ],
+          "fol_count": 20
+        },
+        {
+          "record_index": 165,
+          "score": 52.4791,
+          "questions": [
+            "Are all employees certified?",
+            "Are all employees assigned to a department?"
+          ],
+          "answers": [
+            "Yes",
+            "No"
+          ],
+          "fol_count": 20
+        }
+      ],
+      "cot": [
+        "LLM fact | Rule: LLM rule => is_eligible_for_trainer(alex)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "is_eligible_for_trainer(alex)"
+    },
+    {
+      "task": "logic",
+      "record": 12,
+      "idx": [
+        [
+          1,
+          3,
+          4
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the requirements, which statement about Sarah is correct?\nA. She can take advanced classes because she has approval\nB. She cannot take advanced classes due to insufficient completed courses\nC. She is eligible but lacks approval\nD. Her active status alone qualifies her",
+      "pred": "Unknown",
+      "gold": "D",
+      "ok": false,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 345,
+          "score": 86.2153,
+          "questions": [
+            "Based on registration policies, which rule is enforced if we know that every registration has advisor approval?\nA. Universal advisor approval → (No enrollment → No registration)\nB. Policy contradiction exists\nC. Tautological redundancy\nD. Logical inconsistency",
+            "If all students have cleared tuition payments, does it follow that all students satisfy prerequisite requirements?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 15
+        },
+        {
+          "record_index": 379,
+          "score": 84.3098,
+          "questions": [
+            "Based on the above premises, which statement can be inferred if we know that Hà has accumulated 80 credits in the training program?\nA. Hà is eligible for an internship because she has accumulated 80 credits.\nB. Hà is not eligible for an internship due to insufficient credits.\nC. Hà must take remedial courses before applying for the internship.\nD. Hà’s internship application was submitted after June 1st.",
+            "If Hà has accumulated 80 credits in the training program, does it follow that Hà has accumulated more than 65% of the total credits required for the internship?"
+          ],
+          "answers": [
+            "B",
+            "Yes"
+          ],
+          "fol_count": 19
+        },
+        {
+          "record_index": 20,
+          "score": 78.0896,
+          "questions": [
+            "Based on the premises, which conclusion is logically valid?\nA. A student with low attendance, assignment completion, and professor approval can pass the course if they complete the exam.\nB. A student with less than 80% attendance who doesn’t complete the assignment can still take the exam.\nC. A student with 60% attendance and a scholarship automatically passes all courses.\nD. A student who attends every class but doesn’t complete the exam can still pass.",
+            "Is it true that a student who completes 3 courses with scores above 8.5 will graduate, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 10
+        }
+      ],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks.",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 12,
+      "idx": [
+        [
+          1,
+          3,
+          4
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does Sarah meet all requirements to take advanced classes, according to the premises?",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 371,
+          "score": 63.0926,
+          "questions": [
+            "Based on the above premises, which statement can be inferred?\nA. ∀x (S(x) ∧ A(x) → F(x))\nB. ¬K(John)\nC. ∀x (M(x) > 0 → ¬K(x))\nD. A(Sarah)",
+            "Based on the premises, is the following statement true?\nStatement: John has missed more than 3 classes this semester."
+          ],
+          "answers": [
+            "B",
+            "Yes"
+          ],
+          "fol_count": 10
+        },
+        {
+          "record_index": 345,
+          "score": 60.9821,
+          "questions": [
+            "Based on registration policies, which rule is enforced if we know that every registration has advisor approval?\nA. Universal advisor approval → (No enrollment → No registration)\nB. Policy contradiction exists\nC. Tautological redundancy\nD. Logical inconsistency",
+            "If all students have cleared tuition payments, does it follow that all students satisfy prerequisite requirements?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 15
+        },
+        {
+          "record_index": 389,
+          "score": 50.8391,
+          "questions": [
+            "Based on the above premises, which statement can be logically inferred if we know that all students must meet the eligibility requirements to enroll in the advanced courses?\nA. It is a tautology that completing the prerequisite course implies eligibility for the advanced courses.\nB. Completing the prerequisite course implies eligibility for advanced courses.\nC. If completing the prerequisite course implies eligibility for advanced courses and its negation holds, then there is a contradiction.\nD. It is not true that completing the prerequisite course implies eligibility for the advanced courses.",
+            "If all students must meet the eligibility requirements to enroll in the advanced courses, does it follow that if a student has failed to meet the standards for a course, they are not allowed to participate in the final project preparation?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 9
+        }
+      ],
+      "cot": [
+        "LLM fact",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "has_active_student_statu(sarah)"
+    },
+    {
+      "task": "logic",
+      "record": 13,
+      "idx": [
+        [
+          1,
+          4,
+          5
+        ],
+        [
+          1,
+          4,
+          5
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on Professor John's qualifications, which capabilities does he have?\nA. Can teach graduate courses but cannot supervise research\nB. Can supervise Master's students but not graduate research\nC. Can both teach graduate courses and supervise research\nD. Needs additional certification to supervise",
+      "pred": "C",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 7,
+          "score": 220.4971,
+          "questions": [
+            "Based on the premises, which capabilities does Dr. John have?\nA. Can teach undergraduate courses only\nB. Can be a research mentor\nC. Cannot teach graduate courses\nD. Needs additional certification to mentor",
+            "Does Dr. John’s PhD qualification make him eligible to be a research mentor, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 8
+        },
+        {
+          "record_index": 4,
+          "score": 217.413,
+          "questions": [
+            "Based on the premises, what is the correct conclusion about Professor John?\nA. He can teach undergraduate courses but cannot supervise graduates\nB. He can serve on curriculum committees but cannot propose courses\nC. He can propose new courses\nD. He needs more publications to serve on committees",
+            "Does Professor John meet all requirements to propose new courses, according to the premises?"
+          ],
+          "answers": [
+            "C",
+            "Yes"
+          ],
+          "fol_count": 8
+        },
+        {
+          "record_index": 14,
+          "score": 214.608,
+          "questions": [
+            "Based on Dr. John's qualifications, which statement is correct?\nA. He can teach undergraduate courses\nB. He qualifies as department head but cannot teach\nC. He needs a Master's degree to teach undergraduates\nD. His PhD is insufficient for teaching",
+            "Can Dr. John teach undergraduate courses, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 7
+        }
+      ],
+      "cot": [
+        "LLM fact | Rule: LLM rule => qualified_to_teach_graduate_course(john) | Rule: LLM rule => can_supervise_graduate_level_research(john)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "can_supervise_graduate_level_research(john)"
+    },
+    {
+      "task": "logic",
+      "record": 13,
+      "idx": [
+        [
+          1,
+          4,
+          5
+        ],
+        [
+          1,
+          4,
+          5
+        ]
+      ],
+      "question_index": 1,
+      "question": "Can Professor John supervise graduate-level research based on his PhD qualification, according to the premises?",
+      "pred": "Yes",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.7,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 14,
+          "score": 174.8426,
+          "questions": [
+            "Based on Dr. John's qualifications, which statement is correct?\nA. He can teach undergraduate courses\nB. He qualifies as department head but cannot teach\nC. He needs a Master's degree to teach undergraduates\nD. His PhD is insufficient for teaching",
+            "Can Dr. John teach undergraduate courses, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 7
+        },
+        {
+          "record_index": 7,
+          "score": 170.6278,
+          "questions": [
+            "Based on the premises, which capabilities does Dr. John have?\nA. Can teach undergraduate courses only\nB. Can be a research mentor\nC. Cannot teach graduate courses\nD. Needs additional certification to mentor",
+            "Does Dr. John’s PhD qualification make him eligible to be a research mentor, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 8
+        },
+        {
+          "record_index": 4,
+          "score": 149.5314,
+          "questions": [
+            "Based on the premises, what is the correct conclusion about Professor John?\nA. He can teach undergraduate courses but cannot supervise graduates\nB. He can serve on curriculum committees but cannot propose courses\nC. He can propose new courses\nD. He needs more publications to serve on committees",
+            "Does Professor John meet all requirements to propose new courses, according to the premises?"
+          ],
+          "answers": [
+            "C",
+            "Yes"
+          ],
+          "fol_count": 8
+        }
+      ],
+      "cot": [
+        "LLM fact | Rule: LLM rule => qualified_to_teach_graduate_course(john) | Rule: LLM rule => can_supervise_graduate_level_research(john)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "can_supervise_graduate_level_research(john)"
+    },
+    {
+      "task": "logic",
+      "record": 14,
+      "idx": [
+        [
+          2,
+          3,
+          7
+        ],
+        [
+          2,
+          3,
+          7
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on Dr. John's qualifications, which statement is correct?\nA. He can teach undergraduate courses\nB. He qualifies as department head but cannot teach\nC. He needs a Master's degree to teach undergraduates\nD. His PhD is insufficient for teaching",
+      "pred": "A",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 13,
+          "score": 337.1105,
+          "questions": [
+            "Based on Professor John's qualifications, which capabilities does he have?\nA. Can teach graduate courses but cannot supervise research\nB. Can supervise Master's students but not graduate research\nC. Can both teach graduate courses and supervise research\nD. Needs additional certification to supervise",
+            "Can Professor John supervise graduate-level research based on his PhD qualification, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 5
+        },
+        {
+          "record_index": 7,
+          "score": 328.7529,
+          "questions": [
+            "Based on the premises, which capabilities does Dr. John have?\nA. Can teach undergraduate courses only\nB. Can be a research mentor\nC. Cannot teach graduate courses\nD. Needs additional certification to mentor",
+            "Does Dr. John’s PhD qualification make him eligible to be a research mentor, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 8
+        },
+        {
+          "record_index": 400,
+          "score": 157.877,
+          "questions": [
+            "Do all students participate in leadership activities?",
+            "Which achievements have all students accomplished?\nA. In dual degree program, GPA of 3.5 or higher, completing capstone project, completing thesis, qualifying for second degree.\nB. In dual degree program, completing capstone project, completing thesis, participating in leadership activities.\nC. Completing capstone project, completing thesis, qualifying for second degree, eligible for exchange.\nD. In dual degree program, GPA of 3.5 or higher, completing thesis, eligible for exchange."
+          ],
+          "answers": [
+            "Yes",
+            "A"
+          ],
+          "fol_count": 8
+        }
+      ],
+      "cot": [
+        "LLM fact",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "can_teach_undergraduate_course(lecturer)"
+    },
+    {
+      "task": "logic",
+      "record": 14,
+      "idx": [
+        [
+          2,
+          3,
+          7
+        ],
+        [
+          2,
+          3,
+          7
+        ]
+      ],
+      "question_index": 1,
+      "question": "Can Dr. John teach undergraduate courses, according to the premises?",
+      "pred": "Yes",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.636,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 7,
+          "score": 290.7009,
+          "questions": [
+            "Based on the premises, which capabilities does Dr. John have?\nA. Can teach undergraduate courses only\nB. Can be a research mentor\nC. Cannot teach graduate courses\nD. Needs additional certification to mentor",
+            "Does Dr. John’s PhD qualification make him eligible to be a research mentor, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 8
+        },
+        {
+          "record_index": 13,
+          "score": 266.664,
+          "questions": [
+            "Based on Professor John's qualifications, which capabilities does he have?\nA. Can teach graduate courses but cannot supervise research\nB. Can supervise Master's students but not graduate research\nC. Can both teach graduate courses and supervise research\nD. Needs additional certification to supervise",
+            "Can Professor John supervise graduate-level research based on his PhD qualification, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 5
+        },
+        {
+          "record_index": 400,
+          "score": 148.5093,
+          "questions": [
+            "Do all students participate in leadership activities?",
+            "Which achievements have all students accomplished?\nA. In dual degree program, GPA of 3.5 or higher, completing capstone project, completing thesis, qualifying for second degree.\nB. In dual degree program, completing capstone project, completing thesis, participating in leadership activities.\nC. Completing capstone project, completing thesis, qualifying for second degree, eligible for exchange.\nD. In dual degree program, GPA of 3.5 or higher, completing thesis, eligible for exchange."
+          ],
+          "answers": [
+            "Yes",
+            "A"
+          ],
+          "fol_count": 8
+        }
+      ],
+      "cot": [
+        "LLM fact | Rule: LLM rule => can_teach_undergraduate_course(master_s_degree)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "can_teach_undergraduate_course(master_s_degree)"
+    },
+    {
+      "task": "logic",
+      "record": 15,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on Nurse John's qualifications, which statement is correct?\nA. He can prescribe medication\nB. He needs more clinical hours\nC. He isn't registered\nD. He can't prescribe without additional certification",
+      "pred": "A",
+      "gold": "A",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 13,
+          "score": 61.8838,
+          "questions": [
+            "Based on Professor John's qualifications, which capabilities does he have?\nA. Can teach graduate courses but cannot supervise research\nB. Can supervise Master's students but not graduate research\nC. Can both teach graduate courses and supervise research\nD. Needs additional certification to supervise",
+            "Can Professor John supervise graduate-level research based on his PhD qualification, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 5
+        },
+        {
+          "record_index": 4,
+          "score": 61.0319,
+          "questions": [
+            "Based on the premises, what is the correct conclusion about Professor John?\nA. He can teach undergraduate courses but cannot supervise graduates\nB. He can serve on curriculum committees but cannot propose courses\nC. He can propose new courses\nD. He needs more publications to serve on committees",
+            "Does Professor John meet all requirements to propose new courses, according to the premises?"
+          ],
+          "answers": [
+            "C",
+            "Yes"
+          ],
+          "fol_count": 8
+        },
+        {
+          "record_index": 5,
+          "score": 59.9041,
+          "questions": [
+            "Based on the premises, what is the correct conclusion about Professor John?\nA. He can access restricted archives but cannot submit proposals\nB. He can apply for collaborative research projects\nC. He needs more publications to access archives\nD. He is eligible for extended library access but cannot apply for projects",
+            "Does the logical chain demonstrate that Professor John meets all requirements for collaborative research projects?"
+          ],
+          "answers": [
+            "B",
+            "Yes"
+          ],
+          "fol_count": 8
+        }
+      ],
+      "cot": [
+        "LLM fact | Rule: LLM rule => grants_advanced_practice_certification(john) | Rule: LLM rule => has_advanced_practice_certification(john) | Rule: LLM rule => is_authorized_to_prescribe_medication(john)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "is_authorized_to_prescribe_medication(john)"
+    },
+    {
+      "task": "logic",
+      "record": 15,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "question_index": 1,
+      "question": "Can Nurse John prescribe medication, according to the premises?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.7,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 7,
+          "score": 30.8724,
+          "questions": [
+            "Based on the premises, which capabilities does Dr. John have?\nA. Can teach undergraduate courses only\nB. Can be a research mentor\nC. Cannot teach graduate courses\nD. Needs additional certification to mentor",
+            "Does Dr. John’s PhD qualification make him eligible to be a research mentor, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 8
+        },
+        {
+          "record_index": 13,
+          "score": 28.9879,
+          "questions": [
+            "Based on Professor John's qualifications, which capabilities does he have?\nA. Can teach graduate courses but cannot supervise research\nB. Can supervise Master's students but not graduate research\nC. Can both teach graduate courses and supervise research\nD. Needs additional certification to supervise",
+            "Can Professor John supervise graduate-level research based on his PhD qualification, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 5
+        },
+        {
+          "record_index": 6,
+          "score": 28.8014,
+          "questions": [
+            "Based on the premises, what can we conclude about John’s qualifications?\nA. John can transport hazardous materials but cannot cross state lines\nB. John can cross state lines with hazardous cargo\nC. John cannot transport hazardous materials\nD. John is not qualified to transport any kind of goods",
+            "Does John meet all requirements to cross state lines with hazardous cargo, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 8
+        }
+      ],
+      "cot": [
+        "LLM fact | Rule: LLM rule => grants_advanced_practice_certification(john) | Rule: LLM rule => is_authorized_to_prescribe_medication(john)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "is_authorized_to_prescribe_medication(john)"
+    },
+    {
+      "task": "logic",
+      "record": 16,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on Alex's status, which statement is correct?\nA. Alex can use equipment but can't book training\nB. Alex can book personal training sessions\nC. Alex needs longer membership duration\nD. Alex must pay additional fees",
+      "pred": "Unknown",
+      "gold": "B",
+      "ok": false,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 11,
+          "score": 287.0572,
+          "questions": [
+            "Based on Alex's status, which statement is correct?\nA. Alex can use equipment but cannot book training without a trainer\nB. Alex can book personal training sessions if assigned a trainer\nC. Alex needs a longer membership duration\nD. Alex must pay additional fees",
+            "Does Alex meet all requirements for booking training sessions, according to the premises?"
+          ],
+          "answers": [
+            "C",
+            "No"
+          ],
+          "fol_count": 7
+        },
+        {
+          "record_index": 33,
+          "score": 96.6231,
+          "questions": [
+            "Does Alex earn a scholarship despite initial fears of fund depletion that were unfounded, attend university and gain internship opportunities through a professional network that nearly dissolved but was saved, complete an internship with mentorship despite initial mentor shortages that were resolved, develop professional skills and secure job offers at career fairs that were almost canceled but proceeded, and start a successful career after graduating with honors despite a competitive job market that improved just in time?",
+            "Does Alex not secure job offers because the job market weakened unexpectedly, and fail to start a successful career despite graduating with honors?"
+          ],
+          "answers": [
+            "No",
+            "No"
+          ],
+          "fol_count": 27
+        },
+        {
+          "record_index": 191,
+          "score": 48.1728,
+          "questions": [
+            "Which of the following can be inferred about students based on the premises?\nA. All students are eligible for training.\nB. All students raised issues about paying fees.\nC. No students received confirmation of payment.\nD. All students are not eligible for training.",
+            "Is it true that all students who did not raise an issue have paid the fees?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 5
+        }
+      ],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks.",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 16,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does the logical sequence demonstrate that Alex meets all requirements for booking training sessions?",
+      "pred": "Unknown",
+      "gold": "Yes",
+      "ok": false,
+      "confidence": 0.25,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 11,
+          "score": 161.5896,
+          "questions": [
+            "Based on Alex's status, which statement is correct?\nA. Alex can use equipment but cannot book training without a trainer\nB. Alex can book personal training sessions if assigned a trainer\nC. Alex needs a longer membership duration\nD. Alex must pay additional fees",
+            "Does Alex meet all requirements for booking training sessions, according to the premises?"
+          ],
+          "answers": [
+            "C",
+            "No"
+          ],
+          "fol_count": 7
+        },
+        {
+          "record_index": 33,
+          "score": 58.6918,
+          "questions": [
+            "Does Alex earn a scholarship despite initial fears of fund depletion that were unfounded, attend university and gain internship opportunities through a professional network that nearly dissolved but was saved, complete an internship with mentorship despite initial mentor shortages that were resolved, develop professional skills and secure job offers at career fairs that were almost canceled but proceeded, and start a successful career after graduating with honors despite a competitive job market that improved just in time?",
+            "Does Alex not secure job offers because the job market weakened unexpectedly, and fail to start a successful career despite graduating with honors?"
+          ],
+          "answers": [
+            "No",
+            "No"
+          ],
+          "fol_count": 27
+        },
+        {
+          "record_index": 191,
+          "score": 27.2718,
+          "questions": [
+            "Which of the following can be inferred about students based on the premises?\nA. All students are eligible for training.\nB. All students raised issues about paying fees.\nC. No students received confirmation of payment.\nD. All students are not eligible for training.",
+            "Is it true that all students who did not raise an issue have paid the fees?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 5
+        }
+      ],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks.",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 17,
+      "idx": [
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          7
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on Minh's academic progress, which of the following is logically supported?\nA. Minh has met the criteria to pursue Biochemistry\nB. Minh cannot take Biochemistry without Lab Safety Certification\nC. Minh is not eligible to enroll in Organic Chemistry\nD. Minh needs to repeat Chemistry 101",
+      "pred": "C",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 377,
+          "score": 181.0555,
+          "questions": [
+            "Based on the above premises, which statement can be inferred if we know that Lan is enrolled in Chemistry 101?\nA. Lan is allowed to enter the laboratory for Chemistry 101.\nB. Lan is not allowed to enter the laboratory for Chemistry 101.\nC. Kai is allowed to enter the laboratory for Chemistry 101.\nD. Lan must reserve lab equipment for Chemistry 101.",
+            "If Lan is enrolled in Chemistry 101, does it follow that Lan is allowed to enter the laboratory for Chemistry 101?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 17
+        },
+        {
+          "record_index": 196,
+          "score": 175.2521,
+          "questions": [
+            "Which of the following can be inferred about students based on the premises?\nA. All students have met the safety requirements for the lab.\nB. All students are not enrolled in the chemistry course.\nC. No students are required to wear a blouse in the lab.\nD. Some students meet safety requirements but do not wear a blouse.",
+            "Is it true that all students are required to wear a blouse in the chemistry lab?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 4
+        },
+        {
+          "record_index": 378,
+          "score": 98.5931,
+          "questions": [
+            "Based on the above premises, which statement can be inferred if we know that Linh is a full-time student with health issues?\nA. Linh is not meeting the credit requirements for full-time students.\nB. Linh is meeting the credit requirements for full-time students.\nC. Linh needs to take more than 12 credits to meet the credit requirements.\nD. Linh is a part-time student.",
+            "If Linh is taking exactly 12 credits this semester, does it follow that Linh is eligible for the tuition discount?"
+          ],
+          "answers": [
+            "A",
+            "No"
+          ],
+          "fol_count": 16
+        }
+      ],
+      "cot": [
+        "LLM fact | LLM fact | Rule: LLM rule => can_enroll_in_organic_chemistry(minh)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "can_enroll_in_organic_chemistry(minh)"
+    },
+    {
+      "task": "logic",
+      "record": 17,
+      "idx": [
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          7
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does Minh qualify to take Biochemistry based on her completed coursework, according to the premises?",
+      "pred": "Yes",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.85,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 377,
+          "score": 140.4686,
+          "questions": [
+            "Based on the above premises, which statement can be inferred if we know that Lan is enrolled in Chemistry 101?\nA. Lan is allowed to enter the laboratory for Chemistry 101.\nB. Lan is not allowed to enter the laboratory for Chemistry 101.\nC. Kai is allowed to enter the laboratory for Chemistry 101.\nD. Lan must reserve lab equipment for Chemistry 101.",
+            "If Lan is enrolled in Chemistry 101, does it follow that Lan is allowed to enter the laboratory for Chemistry 101?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 17
+        },
+        {
+          "record_index": 196,
+          "score": 131.4472,
+          "questions": [
+            "Which of the following can be inferred about students based on the premises?\nA. All students have met the safety requirements for the lab.\nB. All students are not enrolled in the chemistry course.\nC. No students are required to wear a blouse in the lab.\nD. Some students meet safety requirements but do not wear a blouse.",
+            "Is it true that all students are required to wear a blouse in the chemistry lab?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 4
+        },
+        {
+          "record_index": 360,
+          "score": 80.6596,
+          "questions": [
+            "Can Tuan take the Machine Learning 101 course?\nA. No, he lacks enrollment.\nB. Yes.\nC. No, he failed Linear Algebra.\nD. Only if he takes another prerequisite.",
+            "What allows a student to take a course?"
+          ],
+          "answers": [
+            "Unknown",
+            "Unknown"
+          ],
+          "fol_count": 9
+        }
+      ],
+      "cot": [
+        "LLM fact | Rule: LLM rule => can_take_biochemistry(minh)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "can_take_biochemistry(minh)"
+    },
+    {
+      "task": "logic",
+      "record": 18,
+      "idx": [
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          6
+        ]
+      ],
+      "question_index": 0,
+      "question": "Have all employees paid?",
+      "pred": "Unknown",
+      "gold": "Yes",
+      "ok": false,
+      "confidence": 0.25,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 151,
+          "score": 45.66,
+          "questions": [
+            "Are all employees skilled?",
+            "Are all employees productive?"
+          ],
+          "answers": [
+            "Yes",
+            "Yes"
+          ],
+          "fol_count": 21
+        },
+        {
+          "record_index": 165,
+          "score": 45.2567,
+          "questions": [
+            "Are all employees certified?",
+            "Are all employees assigned to a department?"
+          ],
+          "answers": [
+            "Yes",
+            "No"
+          ],
+          "fol_count": 20
+        },
+        {
+          "record_index": 166,
+          "score": 45.2133,
+          "questions": [
+            "Can all employees operate machinery?",
+            "Do all employees have safety certification?"
+          ],
+          "answers": [
+            "No",
+            "Yes"
+          ],
+          "fol_count": 20
+        }
+      ],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks.",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 18,
+      "idx": [
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          6
+        ]
+      ],
+      "question_index": 1,
+      "question": "Are all employees registered?",
+      "pred": "Unknown",
+      "gold": "Yes",
+      "ok": false,
+      "confidence": 0.25,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 148,
+          "score": 46.4136,
+          "questions": [
+            "Do all students complete their assignments?",
+            "Are all students registered?"
+          ],
+          "answers": [
+            "No",
+            "No"
+          ],
+          "fol_count": 21
+        },
+        {
+          "record_index": 151,
+          "score": 45.66,
+          "questions": [
+            "Are all employees skilled?",
+            "Are all employees productive?"
+          ],
+          "answers": [
+            "Yes",
+            "Yes"
+          ],
+          "fol_count": 21
+        },
+        {
+          "record_index": 89,
+          "score": 43.9906,
+          "questions": [
+            "Based on the above premises, which statement can be inferred?\nA. Everyone studies.\nB. Everyone is not registered.\nC. If someone is registered, then they are not an undergraduate.\nD. No one is qualified.",
+            "Based on the above premises, is the following statement true?\nStatement: If someone is an undergraduate, then they are registered."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 5
+        }
+      ],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks.",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 19,
+      "idx": [
+        [
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          4
+        ]
+      ],
+      "question_index": 0,
+      "question": "Do all employees receive a bonus?",
+      "pred": "Unknown",
+      "gold": "Yes",
+      "ok": false,
+      "confidence": 0.25,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 173,
+          "score": 53.2795,
+          "questions": [
+            "Based on the above premises, which statement can be inferred?\nA. If a person did not follow the school’s physical activity schedule, then they did not avoid penalty points, and everyone received bonus points.\nB. If a person did not follow the school’s physical activity schedule, then they did not avoid penalty points, but not everyone received bonus points.\nC. If a person did not follow the school’s physical activity schedule, then they did not avoid penalty points, and if they did not avoid penalty points, they did not receive bonus points.\nD. If a person did not follow the school’s physical activity schedule, then they did not avoid penalty points, and if they did not avoid penalty points, they received bonus points.",
+            "Based on the above premises, is the following statement true?\nStatement: If a person did not follow the school’s physical activity schedule, then they did not avoid penalty points, and everyone received bonus points."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 7
+        },
+        {
+          "record_index": 181,
+          "score": 48.6907,
+          "questions": [
+            "Based on the above premises, which statement can be inferred?\nA. If all students are participating in the buddy program, then if a person is participating in the buddy program, they gain 5 bonus points and money, and there exists a student who gains 5 bonus points and money through the program.\nB. If all students are participating in the buddy program, then if a person is participating in the buddy program, they gain 5 bonus points and money, but there does not exist a student who gains 5 bonus points and money through the program.\nC. If all students are participating in the buddy program, then if a person is participating in the buddy program, they gain 5 bonus points and money, and if a person is participating in the buddy program, they are a student receiving help.\nD. If all students are participating in the buddy program, then if a person is participating in the buddy program, they gain 5 bonus points and money, but if a person is participating in the buddy program, they are not a student receiving help.",
+            "Based on the above premises, is the following statement true?\nStatement: If all students are participating in the buddy program, then if a person is participating in the buddy program, they gain 5 bonus points and money, and there exists a student who gains 5 bonus points and money through the program."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 7
+        },
+        {
+          "record_index": 150,
+          "score": 45.0677,
+          "questions": [
+            "Do all employees work in the security department?",
+            "Are all employees managers?"
+          ],
+          "answers": [
+            "No",
+            "Yes"
+          ],
+          "fol_count": 21
+        }
+      ],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks.",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 19,
+      "idx": [
+        [
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          4
+        ]
+      ],
+      "question_index": 1,
+      "question": "Are all employees suitable for a senior role?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 147,
+          "score": 54.9677,
+          "questions": [
+            "Are all students eligible for a raise?",
+            "Are all students eligible for a senior job?"
+          ],
+          "answers": [
+            "No",
+            "No"
+          ],
+          "fol_count": 21
+        },
+        {
+          "record_index": 150,
+          "score": 45.0677,
+          "questions": [
+            "Do all employees work in the security department?",
+            "Are all employees managers?"
+          ],
+          "answers": [
+            "No",
+            "Yes"
+          ],
+          "fol_count": 21
+        },
+        {
+          "record_index": 173,
+          "score": 41.3902,
+          "questions": [
+            "Based on the above premises, which statement can be inferred?\nA. If a person did not follow the school’s physical activity schedule, then they did not avoid penalty points, and everyone received bonus points.\nB. If a person did not follow the school’s physical activity schedule, then they did not avoid penalty points, but not everyone received bonus points.\nC. If a person did not follow the school’s physical activity schedule, then they did not avoid penalty points, and if they did not avoid penalty points, they did not receive bonus points.\nD. If a person did not follow the school’s physical activity schedule, then they did not avoid penalty points, and if they did not avoid penalty points, they received bonus points.",
+            "Based on the above premises, is the following statement true?\nStatement: If a person did not follow the school’s physical activity schedule, then they did not avoid penalty points, and everyone received bonus points."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 7
+        }
+      ],
+      "cot": [
+        "LLM fact | Rule: LLM rule => has_strong_qualification(entity) | Rule: LLM rule => is_suitable_for_senior_role(entity)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "is_suitable_for_senior_role(entity)"
+    }
+  ]
+}

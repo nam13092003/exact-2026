@@ -1,0 +1,806 @@
+{
+  "task": "logic",
+  "total": 10,
+  "correct": 5,
+  "p1": 0.5,
+  "rag_used_count": 10,
+  "rag_used_rate": 1.0,
+  "rag_fol_used_count": 0,
+  "rag_fol_used_rate": 0.0,
+  "rows": [
+    {
+      "task": "logic",
+      "record": 0,
+      "idx": [
+        [
+          1
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "question_index": 0,
+      "question": "Which conclusion follows with the fewest premises?\nA. If a Python project is not optimized, then it is not well-tested\nB. If all Python projects are optimized, then all Python projects are well-structured\nC. If a Python project is well-tested, then it must be clean and readable\nD. If a Python project is not optimized, then it does not follow PEP 8 standards",
+      "pred": "B",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 53,
+          "score": 722.5303,
+          "questions": [
+            "Based on the above premises, which conclusion is correct?\nA. If a Python project is not optimized, then it is unlikely to be well-tested.\nB. If all Python projects are well-structured, then all Python projects are optimized.\nC. If a Python project follows PEP 8 standards, then it must be well-tested.\nD. If a Python project is not well-structured, then it might not follow PEP 8 standards.",
+            "According to the above premises, is the following statement true?\nStatement: If all Python projects are well-structured, then all Python projects are optimized."
+          ],
+          "answers": [
+            "B",
+            "Yes"
+          ],
+          "fol_count": 0
+        },
+        {
+          "record_index": 129,
+          "score": 676.076,
+          "questions": [
+            "Based on the above premises, which conclusion can be inferred?\nA. All Python code is optimized.\nB. All optimized code is not well-tested.\nC. If a Python code is optimized, then it is not well-tested.\nD. No Python code follows PEP 8 standards.",
+            "Based on the above premises, is the statement true?\nStatement: If a Python code is optimized, then it is well-tested."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 13
+        },
+        {
+          "record_index": 309,
+          "score": 421.2303,
+          "questions": [
+            "Based on the above premises, which statement can be inferred?\nA. There exists a script without error handling.\nB. There exists a program that does not produce reliable outputs.\nC. All Python programs are optimized.\nD. There exists a program that does not follow best practices.",
+            "Based on the above premises, is the statement true?\nStatement: ForAll(x, (PythonScript(x) → HasErrorHandling(x)))"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 19
+        }
+      ],
+      "cot": [
+        "LLM fact",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "well_structured(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 0,
+      "idx": [
+        [
+          1
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does it follow that if all Python projects are well-structured, then all Python projects are optimized, according to the premises?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.683,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 53,
+          "score": 596.2471,
+          "questions": [
+            "Based on the above premises, which conclusion is correct?\nA. If a Python project is not optimized, then it is unlikely to be well-tested.\nB. If all Python projects are well-structured, then all Python projects are optimized.\nC. If a Python project follows PEP 8 standards, then it must be well-tested.\nD. If a Python project is not well-structured, then it might not follow PEP 8 standards.",
+            "According to the above premises, is the following statement true?\nStatement: If all Python projects are well-structured, then all Python projects are optimized."
+          ],
+          "answers": [
+            "B",
+            "Yes"
+          ],
+          "fol_count": 0
+        },
+        {
+          "record_index": 129,
+          "score": 554.2925,
+          "questions": [
+            "Based on the above premises, which conclusion can be inferred?\nA. All Python code is optimized.\nB. All optimized code is not well-tested.\nC. If a Python code is optimized, then it is not well-tested.\nD. No Python code follows PEP 8 standards.",
+            "Based on the above premises, is the statement true?\nStatement: If a Python code is optimized, then it is well-tested."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 13
+        },
+        {
+          "record_index": 309,
+          "score": 349.1815,
+          "questions": [
+            "Based on the above premises, which statement can be inferred?\nA. There exists a script without error handling.\nB. There exists a program that does not produce reliable outputs.\nC. All Python programs are optimized.\nD. There exists a program that does not follow best practices.",
+            "Based on the above premises, is the statement true?\nStatement: ForAll(x, (PythonScript(x) → HasErrorHandling(x)))"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 19
+        }
+      ],
+      "cot": [
+        "LLM fact",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "well_structured(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 1,
+      "idx": [
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which is the strongest conclusion?\nA. Sophia qualifies for the university scholarship\nB. Sophia needs a faculty recommendation to qualify for the scholarship\nC. Sophia is eligible for the international program\nD. Sophia needs to pass the language proficiency exam to get an honors diploma",
+      "pred": "Unknown",
+      "gold": "C",
+      "ok": false,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 336,
+          "score": 163.0108,
+          "questions": [
+            "Based on the premises above, which of the following statements can be logically concluded if we know that all students have passed the Philosophy prerequisite?\nA. If all students pass Philosophy, all are admitted to the Honors program.\nB. It is false that passing Philosophy guarantees Honors admission.\nC. The statement 'If all pass Philosophy, all join Honors' is tautologically true.\nD. The policy about Honors admission is contradictory.",
+            "If all students have passed the Philosophy prerequisite, does it follow that passing Philosophy (P) requires enrollment in Research Methods (R)?"
+          ],
+          "answers": [
+            "Unknown",
+            "Yes"
+          ],
+          "fol_count": 24
+        },
+        {
+          "record_index": 128,
+          "score": 142.7004,
+          "questions": [
+            "Based on the above premises, which conclusion is correct?\nA. If a student completes a final project, then they receive a diploma.\nB. If a student completes an internship, then they receive a certificate of excellence.\nC. If a student receives a diploma, then they have completed a final project.\nD. If a student is eligible for graduation, then they have graduated with distinction.",
+            "According to the above premises, is the following statement true?\nStatement: If all students must meet the academic requirements, then all students must complete a final project."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 18
+        },
+        {
+          "record_index": 337,
+          "score": 140.203,
+          "questions": [
+            "Based on the university policies above, which conclusion is logically valid if we know that all students x have passed the Philosophy prerequisite?\nA. The policy linking Thesis and Scholarships is contradictory.\nB. The policy is both true and false.\nC. The policy 'No Thesis → No Philosophy' implies 'Thesis → Scholarship'.\nD. The policy is a tautology.",
+            "If there exists at least one student x who has completed Thesis Writing, does it follow that all students receive Scholarships?"
+          ],
+          "answers": [
+            "A",
+            "Yes"
+          ],
+          "fol_count": 15
+        }
+      ],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks.",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 1,
+      "idx": [
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does Sophia qualify for the university scholarship, according to the premises?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.517,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 336,
+          "score": 144.4729,
+          "questions": [
+            "Based on the premises above, which of the following statements can be logically concluded if we know that all students have passed the Philosophy prerequisite?\nA. If all students pass Philosophy, all are admitted to the Honors program.\nB. It is false that passing Philosophy guarantees Honors admission.\nC. The statement 'If all pass Philosophy, all join Honors' is tautologically true.\nD. The policy about Honors admission is contradictory.",
+            "If all students have passed the Philosophy prerequisite, does it follow that passing Philosophy (P) requires enrollment in Research Methods (R)?"
+          ],
+          "answers": [
+            "Unknown",
+            "Yes"
+          ],
+          "fol_count": 24
+        },
+        {
+          "record_index": 128,
+          "score": 122.5933,
+          "questions": [
+            "Based on the above premises, which conclusion is correct?\nA. If a student completes a final project, then they receive a diploma.\nB. If a student completes an internship, then they receive a certificate of excellence.\nC. If a student receives a diploma, then they have completed a final project.\nD. If a student is eligible for graduation, then they have graduated with distinction.",
+            "According to the above premises, is the following statement true?\nStatement: If all students must meet the academic requirements, then all students must complete a final project."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 18
+        },
+        {
+          "record_index": 337,
+          "score": 122.2539,
+          "questions": [
+            "Based on the university policies above, which conclusion is logically valid if we know that all students x have passed the Philosophy prerequisite?\nA. The policy linking Thesis and Scholarships is contradictory.\nB. The policy is both true and false.\nC. The policy 'No Thesis → No Philosophy' implies 'Thesis → Scholarship'.\nD. The policy is a tautology.",
+            "If there exists at least one student x who has completed Thesis Writing, does it follow that all students receive Scholarships?"
+          ],
+          "answers": [
+            "A",
+            "Yes"
+          ],
+          "fol_count": 15
+        }
+      ],
+      "cot": [
+        "LLM fact",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "completed_capstone_project(sophia)"
+    },
+    {
+      "task": "logic",
+      "record": 2,
+      "idx": [
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which conclusion is correct?\nA. Sophia qualifies for the university scholarship\nB. Sophia needs a faculty recommendation to qualify for the scholarship\nC. Sophia is eligible for the international program\nD. Sophia needs to pass the language proficiency exam to get an honors diploma",
+      "pred": "Unknown",
+      "gold": "C",
+      "ok": false,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 336,
+          "score": 163.0108,
+          "questions": [
+            "Based on the premises above, which of the following statements can be logically concluded if we know that all students have passed the Philosophy prerequisite?\nA. If all students pass Philosophy, all are admitted to the Honors program.\nB. It is false that passing Philosophy guarantees Honors admission.\nC. The statement 'If all pass Philosophy, all join Honors' is tautologically true.\nD. The policy about Honors admission is contradictory.",
+            "If all students have passed the Philosophy prerequisite, does it follow that passing Philosophy (P) requires enrollment in Research Methods (R)?"
+          ],
+          "answers": [
+            "Unknown",
+            "Yes"
+          ],
+          "fol_count": 24
+        },
+        {
+          "record_index": 128,
+          "score": 144.7622,
+          "questions": [
+            "Based on the above premises, which conclusion is correct?\nA. If a student completes a final project, then they receive a diploma.\nB. If a student completes an internship, then they receive a certificate of excellence.\nC. If a student receives a diploma, then they have completed a final project.\nD. If a student is eligible for graduation, then they have graduated with distinction.",
+            "According to the above premises, is the following statement true?\nStatement: If all students must meet the academic requirements, then all students must complete a final project."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 18
+        },
+        {
+          "record_index": 337,
+          "score": 140.203,
+          "questions": [
+            "Based on the university policies above, which conclusion is logically valid if we know that all students x have passed the Philosophy prerequisite?\nA. The policy linking Thesis and Scholarships is contradictory.\nB. The policy is both true and false.\nC. The policy 'No Thesis → No Philosophy' implies 'Thesis → Scholarship'.\nD. The policy is a tautology.",
+            "If there exists at least one student x who has completed Thesis Writing, does it follow that all students receive Scholarships?"
+          ],
+          "answers": [
+            "A",
+            "Yes"
+          ],
+          "fol_count": 15
+        }
+      ],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks.",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 2,
+      "idx": [
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does Sophia qualify for the university scholarship, according to the premises?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.517,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 336,
+          "score": 144.4729,
+          "questions": [
+            "Based on the premises above, which of the following statements can be logically concluded if we know that all students have passed the Philosophy prerequisite?\nA. If all students pass Philosophy, all are admitted to the Honors program.\nB. It is false that passing Philosophy guarantees Honors admission.\nC. The statement 'If all pass Philosophy, all join Honors' is tautologically true.\nD. The policy about Honors admission is contradictory.",
+            "If all students have passed the Philosophy prerequisite, does it follow that passing Philosophy (P) requires enrollment in Research Methods (R)?"
+          ],
+          "answers": [
+            "Unknown",
+            "Yes"
+          ],
+          "fol_count": 24
+        },
+        {
+          "record_index": 128,
+          "score": 122.5933,
+          "questions": [
+            "Based on the above premises, which conclusion is correct?\nA. If a student completes a final project, then they receive a diploma.\nB. If a student completes an internship, then they receive a certificate of excellence.\nC. If a student receives a diploma, then they have completed a final project.\nD. If a student is eligible for graduation, then they have graduated with distinction.",
+            "According to the above premises, is the following statement true?\nStatement: If all students must meet the academic requirements, then all students must complete a final project."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 18
+        },
+        {
+          "record_index": 337,
+          "score": 122.2539,
+          "questions": [
+            "Based on the university policies above, which conclusion is logically valid if we know that all students x have passed the Philosophy prerequisite?\nA. The policy linking Thesis and Scholarships is contradictory.\nB. The policy is both true and false.\nC. The policy 'No Thesis → No Philosophy' implies 'Thesis → Scholarship'.\nD. The policy is a tautology.",
+            "If there exists at least one student x who has completed Thesis Writing, does it follow that all students receive Scholarships?"
+          ],
+          "answers": [
+            "A",
+            "Yes"
+          ],
+          "fol_count": 15
+        }
+      ],
+      "cot": [
+        "LLM fact",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "completed_capstone_project(sophia)"
+    },
+    {
+      "task": "logic",
+      "record": 3,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          1,
+          2,
+          3,
+          5,
+          6,
+          7
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which conclusion logically follows?\nA. John qualifies for the graduate fellowship program\nB. John needs faculty recommendation for the fellowship\nC. John must complete an internship to qualify\nD. John’s GPA is insufficient for honors",
+      "pred": "Unknown",
+      "gold": "A",
+      "ok": false,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 128,
+          "score": 135.4969,
+          "questions": [
+            "Based on the above premises, which conclusion is correct?\nA. If a student completes a final project, then they receive a diploma.\nB. If a student completes an internship, then they receive a certificate of excellence.\nC. If a student receives a diploma, then they have completed a final project.\nD. If a student is eligible for graduation, then they have graduated with distinction.",
+            "According to the above premises, is the following statement true?\nStatement: If all students must meet the academic requirements, then all students must complete a final project."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 18
+        },
+        {
+          "record_index": 4,
+          "score": 103.9604,
+          "questions": [
+            "Based on the premises, what is the correct conclusion about Professor John?\nA. He can teach undergraduate courses but cannot supervise graduates\nB. He can serve on curriculum committees but cannot propose courses\nC. He can propose new courses\nD. He needs more publications to serve on committees",
+            "Does Professor John meet all requirements to propose new courses, according to the premises?"
+          ],
+          "answers": [
+            "C",
+            "Yes"
+          ],
+          "fol_count": 8
+        },
+        {
+          "record_index": 7,
+          "score": 90.4023,
+          "questions": [
+            "Based on the premises, which capabilities does Dr. John have?\nA. Can teach undergraduate courses only\nB. Can be a research mentor\nC. Cannot teach graduate courses\nD. Needs additional certification to mentor",
+            "Does Dr. John’s PhD qualification make him eligible to be a research mentor, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 8
+        }
+      ],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks.",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 3,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          1,
+          2,
+          3,
+          5,
+          6,
+          7
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does John receive academic distinction, according to the premises?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.55,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 128,
+          "score": 118.5252,
+          "questions": [
+            "Based on the above premises, which conclusion is correct?\nA. If a student completes a final project, then they receive a diploma.\nB. If a student completes an internship, then they receive a certificate of excellence.\nC. If a student receives a diploma, then they have completed a final project.\nD. If a student is eligible for graduation, then they have graduated with distinction.",
+            "According to the above premises, is the following statement true?\nStatement: If all students must meet the academic requirements, then all students must complete a final project."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 18
+        },
+        {
+          "record_index": 4,
+          "score": 66.7718,
+          "questions": [
+            "Based on the premises, what is the correct conclusion about Professor John?\nA. He can teach undergraduate courses but cannot supervise graduates\nB. He can serve on curriculum committees but cannot propose courses\nC. He can propose new courses\nD. He needs more publications to serve on committees",
+            "Does Professor John meet all requirements to propose new courses, according to the premises?"
+          ],
+          "answers": [
+            "C",
+            "Yes"
+          ],
+          "fol_count": 8
+        },
+        {
+          "record_index": 73,
+          "score": 63.1521,
+          "questions": [
+            "Based on the above premises, which statement can be inferred?\nA. If a student receives a scholarship, they must be excellent.\nB. If a student does not participate in extracurricular activities, then they receive a scholarship.\nC. If a student does not submit their research paper, then they are excellent.\nD. If all enrolled students are excellent, then no student without excellence can receive a scholarship.",
+            "Based on the above premises, is the statement true?\nStatement: If a student receives a scholarship, they must be excellent."
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 22
+        }
+      ],
+      "cot": [
+        "LLM fact",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "gpa(john)"
+    },
+    {
+      "task": "logic",
+      "record": 4,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, what is the correct conclusion about Professor John?\nA. He can teach undergraduate courses but cannot supervise graduates\nB. He can serve on curriculum committees but cannot propose courses\nC. He can propose new courses\nD. He needs more publications to serve on committees",
+      "pred": "Unknown",
+      "gold": "C",
+      "ok": false,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 13,
+          "score": 231.9655,
+          "questions": [
+            "Based on Professor John's qualifications, which capabilities does he have?\nA. Can teach graduate courses but cannot supervise research\nB. Can supervise Master's students but not graduate research\nC. Can both teach graduate courses and supervise research\nD. Needs additional certification to supervise",
+            "Can Professor John supervise graduate-level research based on his PhD qualification, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 5
+        },
+        {
+          "record_index": 7,
+          "score": 195.7,
+          "questions": [
+            "Based on the premises, which capabilities does Dr. John have?\nA. Can teach undergraduate courses only\nB. Can be a research mentor\nC. Cannot teach graduate courses\nD. Needs additional certification to mentor",
+            "Does Dr. John’s PhD qualification make him eligible to be a research mentor, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 8
+        },
+        {
+          "record_index": 14,
+          "score": 176.9503,
+          "questions": [
+            "Based on Dr. John's qualifications, which statement is correct?\nA. He can teach undergraduate courses\nB. He qualifies as department head but cannot teach\nC. He needs a Master's degree to teach undergraduates\nD. His PhD is insufficient for teaching",
+            "Can Dr. John teach undergraduate courses, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 7
+        }
+      ],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks.",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 4,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does Professor John meet all requirements to propose new courses, according to the premises?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.461,
+      "question_type": "YesNo",
+      "rag_used": true,
+      "rag_fol_used": false,
+      "rag_context": [
+        {
+          "record_index": 13,
+          "score": 174.8553,
+          "questions": [
+            "Based on Professor John's qualifications, which capabilities does he have?\nA. Can teach graduate courses but cannot supervise research\nB. Can supervise Master's students but not graduate research\nC. Can both teach graduate courses and supervise research\nD. Needs additional certification to supervise",
+            "Can Professor John supervise graduate-level research based on his PhD qualification, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 5
+        },
+        {
+          "record_index": 7,
+          "score": 162.6369,
+          "questions": [
+            "Based on the premises, which capabilities does Dr. John have?\nA. Can teach undergraduate courses only\nB. Can be a research mentor\nC. Cannot teach graduate courses\nD. Needs additional certification to mentor",
+            "Does Dr. John’s PhD qualification make him eligible to be a research mentor, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 8
+        },
+        {
+          "record_index": 14,
+          "score": 111.3144,
+          "questions": [
+            "Based on Dr. John's qualifications, which statement is correct?\nA. He can teach undergraduate courses\nB. He qualifies as department head but cannot teach\nC. He needs a Master's degree to teach undergraduates\nD. His PhD is insufficient for teaching",
+            "Can Dr. John teach undergraduate courses, according to the premises?"
+          ],
+          "answers": [
+            "Unknown",
+            "No"
+          ],
+          "fol_count": 7
+        }
+      ],
+      "cot": [
+        "LLM fact",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
+      ],
+      "fol": "completed_training(john)"
+    }
+  ]
+}

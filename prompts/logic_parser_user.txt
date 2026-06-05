@@ -1,0 +1,4 @@
+PREMISES TO PARSE:
+{premises_text}
+
+Convert these premises to JSON facts and rules according to the rules and format exactly.

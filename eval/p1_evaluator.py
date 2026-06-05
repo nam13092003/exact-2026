@@ -1,180 +1,22 @@
-"""P1 answer-correctness evaluator for EXACT 2026 outputs.
-
-P1 is the challenge's correctness-of-answers criterion. The evaluator returns
-an automatic answer-level score:
-
-    P1 accuracy = correct answers / total answers
-
-Logic answers are compared after light text normalization. Numeric physics
-answers are compared with configurable tolerance and common SI-prefix unit
-conversion when units are available.
-"""
-
 from __future__ import annotations
 
-import math
-import re
-from typing import Any
+import json
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+from agents.formatter import normalize_answer, parse_float_like
+from agents.pipeline import ExactPipeline
 
 
-<<<<<<< HEAD
 def unit_norm(u: Any) -> str:
     u = str(u or "").strip().lower()
-    # Unescape double-escaped unicode sequences like '\\u0110\\u1ed9' using regex decode
-    def _unescape_unicode(s: str) -> str:
-        return re.sub(
-            r"\\u([0-9a-fA-F]{4})",
-            lambda m: chr(int(m.group(1), 16)),
-            s,
-        )
-    u = _unescape_unicode(u)
-    # Also handle literal escape sequences
-    u = u.replace("\\u03bc", "μ").replace("\\u00b0", "độ").replace("\\u2126", "ω")
-    # Normalize Greek/Latin micro to 'u'
-    u = u.replace("μ", "u").replace("µ", "u")
+    u = u.replace("µ", "μ")
+
     aliases = {
-        "degree": "độ", "degrees": "độ", "deg": "độ", "°": "độ",
-        "ohms": "ω", "ohm": "ω", "w": "ω", "omega": "ω",
-        "v/m": "v/m", "v": "v", "a": "a", "hz": "hz",
-        "fa": "f", "f": "f", "uf": "uf", "pf": "pf", "nf": "nf", "mf": "mf",
-    }
-    return aliases.get(u, u)
-
-
-def to_si(value: float, unit: str) -> Tuple[float, str]:
-    u = unit_norm(unit)
-
-    # Prefix scales
-    prefix_scales = {
-        "p": 1e-12,
-        "n": 1e-9,
-        "u": 1e-6,
-        "m": 1e-3,
-        "k": 1e3,
-    }
-
-    # Identify base unit and prefix
-    # Distinguish between milli and Mega: if base unit is hz, 'm' prefix is Mega (1e6)
-    for base in ("hz", "v/m", "m2", "m", "f", "c", "j", "v", "h", "a", "n", "độ", "ω"):
-        if u.endswith(base):
-            prefix = u[:-len(base)]
-            scale = 1.0
-            if prefix:
-                if base == "hz" and prefix == "m":
-                    scale = 1e6  # MegaHz
-                elif prefix in prefix_scales:
-                    scale = prefix_scales[prefix]
-            return value * scale, base
-
-    return value, u
-
-
-def answer_match(pred: Any, gold: Any, pred_unit: Any = "", gold_unit: Any = "", numeric_tol: float = 0.1) -> bool:
-    pg = normalize_answer(pred)
-    gg = normalize_answer(gold)
-
-    # Case-insensitive match on normalized strings
-    if pg == gg:
-        # Check normalized units if gold unit is present
-        if not gold_unit:
-            return True
-        return unit_norm(pred_unit) == unit_norm(gold_unit)
-
-    # Attempt numeric/physics-aware comparison
-    pv, gv = parse_float_like(pred), parse_float_like(gold)
-    if pv is not None and gv is not None:
-        if gold_unit:
-            # Physics-aware comparison
-            p_si_val, p_si_unit = to_si(pv, pred_unit)
-            g_si_val, g_si_unit = to_si(gv, gold_unit)
-            if p_si_unit == g_si_unit:
-                return abs(p_si_val - g_si_val) <= (abs(g_si_val) * 0.1)
-        else:
-            # No unit expected, pure numeric check
-            tol = max(numeric_tol, abs(gv) * 0.1)
-            return abs(pv - gv) <= (abs(gv) * 0.1)
-
-    return False
-=======
-DEFAULT_RTOL = 1e-3
-DEFAULT_ATOL = 1e-2
-
-NUMBER_RE = re.compile(r"[-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?")
-
-UNIT_FACTORS: dict[str, tuple[str, float]] = {
-    "j": ("energy", 1.0),
-    "mj": ("energy", 1e-3),
-    "uj": ("energy", 1e-6),
-    "nj": ("energy", 1e-9),
-    "v": ("voltage", 1.0),
-    "mv": ("voltage", 1e-3),
-    "a": ("current", 1.0),
-    "ma": ("current", 1e-3),
-    "ohm": ("resistance", 1.0),
-    "hz": ("frequency", 1.0),
-    "khz": ("frequency", 1e3),
-    "rad/s": ("angular_frequency", 1.0),
-    "f": ("capacitance", 1.0),
-    "uf": ("capacitance", 1e-6),
-    "pf": ("capacitance", 1e-12),
-    "h": ("inductance", 1.0),
-    "mh": ("inductance", 1e-3),
-    "c": ("charge", 1.0),
-    "mc": ("charge", 1e-3),
-    "uc": ("charge", 1e-6),
-    "nc": ("charge", 1e-9),
-    "n": ("force", 1.0),
-    "mn": ("force", 1e-3),
-    "w": ("power", 1.0),
-    "mw": ("power", 1e-3),
-    "wb": ("flux", 1.0),
-    "mwb": ("flux", 1e-3),
-    "uwb": ("flux", 1e-6),
-    "t": ("magnetic_field", 1.0),
-    "mt": ("magnetic_field", 1e-3),
-    "m": ("length", 1.0),
-    "cm": ("length", 1e-2),
-    "mm": ("length", 1e-3),
-    "v/m": ("field", 1.0),
-    "n/c": ("field", 1.0),
-    "%": ("percent", 1.0),
-    "degree": ("angle", 1.0),
-    "turns": ("turns", 1.0),
-    "turns/m": ("turn_density", 1.0),
-}
-
-
-def normalize_text(value: Any) -> str:
-    text = str(value or "").strip().lower()
-    text = text.replace("\\sqrt", "sqrt")
-    text = text.replace("\u2212", "-").replace("\u2013", "-")
-    text = re.sub(r"\s+", " ", text)
-    return text.strip(" .,:;")
->>>>>>> duc
-
-
-def normalize_answer(value: Any) -> str:
-    """Normalize answers exactly as the zip P1 scorer does for logic labels."""
-    text = normalize_text(value)
-    aliases = {
-        "uncertain": "unknown",
-        "cannot be determined": "unknown",
-        "not enough information": "unknown",
-        "true": "yes",
-        "false": "no",
-    }
-    text = aliases.get(text, text)
-    if re.fullmatch(r"[abcd]", text):
-        return text.upper()
-    return text
-
-
-def normalize_unit(value: str) -> str:
-    unit = normalize_text(value)
-    replacements = {
-        "\\omega": "ohm",
-        "omega": "ohm",
-        "ohms": "ohm",
+        "degree": "độ",
+        "degrees": "độ",
+        "ohms": "ω",
+        "ohm": "ω",
         "newton": "n",
         "newtons": "n",
         "volt": "v",
@@ -189,178 +31,223 @@ def normalize_unit(value: str) -> str:
         "metres": "m",
         "second": "s",
         "seconds": "s",
-        "\u03c9": "ohm",
-        "\u03a9": "ohm",
-        "\u03bc": "u",
-        "\u00b5": "u",
-        "\\mu": "u",
-        "micro": "u",
-        "^{\\circ}": "degree",
-        "^\\circ": "degree",
-        "degrees": "degree",
     }
-    for old, new in replacements.items():
-        unit = unit.replace(old.lower(), new)
-    unit = unit.replace(" ", "")
-    if unit in {"", "-", "dimensionless"}:
-        return ""
-    return unit
 
-
-def extract_number(text: str) -> tuple[float | None, str]:
-    match = NUMBER_RE.search(str(text))
-    if match is None:
-        return None, ""
-    try:
-        value = float(match.group(0))
-    except ValueError:
-        return None, ""
-    unit = str(text)[match.end() :].strip().split(",", 1)[0].strip()
-    return value, unit
-
-
-def _scaled(value: float, unit: str) -> tuple[str, float] | None:
-    mapped = UNIT_FACTORS.get(normalize_unit(unit))
-    if mapped is None:
-        return None
-    dimension, factor = mapped
-    return dimension, value * factor
-
-
-def numeric_match(
-    predicted_answer: str,
-    expected_answer: str,
-    expected_unit: str = "",
-    *,
-    rtol: float = DEFAULT_RTOL,
-    atol: float = DEFAULT_ATOL,
-) -> dict[str, Any] | None:
-    predicted_value, predicted_unit = extract_number(predicted_answer)
-    expected_value, embedded_expected_unit = extract_number(expected_answer)
-    if predicted_value is None or expected_value is None:
-        return None
-
-    expected_unit = expected_unit or embedded_expected_unit
-    predicted_scaled = _scaled(predicted_value, predicted_unit)
-    expected_scaled = _scaled(expected_value, expected_unit)
-    if predicted_scaled and expected_scaled and predicted_scaled[0] == expected_scaled[0]:
-        predicted_value = predicted_scaled[1]
-        expected_value = expected_scaled[1]
-
-    tolerance = max(atol, abs(expected_value) * rtol)
-    correct = math.isclose(predicted_value, expected_value, rel_tol=rtol, abs_tol=tolerance)
-    return {
-        "correct": correct,
-        "method": "numeric",
-        "reason": f"numeric tolerance={tolerance:g}",
-        "predicted_value": predicted_value,
-        "expected_value": expected_value,
-        "predicted_unit": normalize_unit(predicted_unit),
-        "expected_unit": normalize_unit(expected_unit),
-    }
+    return aliases.get(u, u)
 
 
 def answer_match(
-    predicted_answer: Any,
-    expected_answer: Any,
-    predicted_unit: Any = "",
-    expected_unit: Any = "",
-    *,
-    rtol: float = DEFAULT_RTOL,
-    atol: float = DEFAULT_ATOL,
+    pred: Any,
+    gold: Any,
+    pred_unit: Any = "",
+    gold_unit: Any = "",
+    numeric_tol: float = 1e-2,
 ) -> bool:
-    """Return P1 correctness for both logic and physics answers.
+    pg = normalize_answer(pred)
+    gg = normalize_answer(gold)
 
-    This mirrors the zip evaluator: first compare normalized answer labels, then
-    fall back to numeric matching with unit normalization for physics.
-    """
-    predicted_normalized = normalize_answer(predicted_answer)
-    expected_normalized = normalize_answer(expected_answer)
-    expected_unit_normalized = normalize_unit(str(expected_unit or ""))
-    if predicted_normalized == expected_normalized:
-        return not expected_unit_normalized or normalize_unit(str(predicted_unit or "")) == expected_unit_normalized
+    if pg == gg:
+        return not gold_unit or unit_norm(pred_unit) == unit_norm(gold_unit)
 
-    numeric = numeric_match(
-        str(predicted_answer or ""),
-        str(expected_answer or ""),
-        str(expected_unit or ""),
-        rtol=rtol,
-        atol=atol,
-    )
-    if numeric is None:
-        return False
-    return bool(numeric["correct"]) and (
-        not expected_unit_normalized
-        or numeric["predicted_unit"] == expected_unit_normalized
-    )
+    pv = parse_float_like(pred)
+    gv = parse_float_like(gold)
+
+    if pv is not None and gv is not None:
+        tol = max(numeric_tol, abs(gv) * 1e-3)
+        return abs(pv - gv) <= tol and (
+            not gold_unit or unit_norm(pred_unit) == unit_norm(gold_unit)
+        )
+
+    return False
 
 
-def evaluate_prediction(
-    predicted_answer: Any,
-    expected_answer: Any,
-    expected_unit: str = "",
-    *,
-    predicted_unit: str = "",
-    rtol: float = DEFAULT_RTOL,
-    atol: float = DEFAULT_ATOL,
-) -> dict[str, Any]:
-    predicted_text = str(predicted_answer or "")
-    expected_text = str(expected_answer or "")
-    predicted_normalized = normalize_answer(predicted_text)
-    expected_normalized = normalize_answer(expected_text)
-    expected_unit_normalized = normalize_unit(expected_unit)
-    predicted_unit_normalized = normalize_unit(predicted_unit)
-    if predicted_normalized == expected_normalized:
-        unit_ok = not expected_unit_normalized or predicted_unit_normalized == expected_unit_normalized
-        return {
-            "correct": unit_ok,
-            "method": "normalized_answer_exact",
-            "reason": "normalized answer exact match",
-            "predicted_normalized": predicted_normalized,
-            "expected_normalized": expected_normalized,
-            "predicted_unit": predicted_unit_normalized,
-            "expected_unit": expected_unit_normalized,
-        }
+def _safe_list(x: Any) -> List[Any]:
+    if x is None:
+        return []
+    if isinstance(x, list):
+        return x
+    return [x]
 
-    numeric = numeric_match(
-        predicted_text,
-        expected_text,
-        expected_unit,
-        rtol=rtol,
-        atol=atol,
-    )
-    if numeric is not None:
-        return numeric
+
+def eval_logic(
+    path: str,
+    pipe: ExactPipeline,
+    max_records: Optional[int] = None,
+    use_fol: bool = True,
+) -> Dict[str, Any]:
+    data = json.loads(Path(path).read_text(encoding="utf-8"))
+
+    if max_records:
+        data = data[:max_records]
+
+    total = 0
+    correct = 0
+    rag_used_count = 0
+    rag_fol_used_count = 0
+    rows = []
+
+    from tqdm import tqdm
+    for ridx, rec in enumerate(tqdm(data, desc="Evaluating Logic")):
+        questions = _safe_list(rec.get("questions"))
+        answers = _safe_list(rec.get("answers"))
+
+        for qidx, q in enumerate(questions):
+            payload = {
+                "type": "logic",
+                "question": q,
+                "premises-NL": rec.get("premises-NL", []),
+                "idx": rec.get("idx"),
+                "__record_index": ridx,
+                "__question_index": qidx,
+            }
+
+            if use_fol:
+                payload["premises-FOL"] = rec.get("premises-FOL", [])
+
+            pred = pipe.predict(payload)
+
+            gold = answers[qidx] if qidx < len(answers) else None
+            ok = answer_match(pred.get("answer"), gold)
+
+            total += 1
+            correct += int(ok)
+
+            rag_used = bool(pred.get("rag_used"))
+            rag_fol_used = bool(pred.get("rag_fol_used"))
+
+            rag_used_count += int(rag_used)
+            rag_fol_used_count += int(rag_fol_used)
+
+            rows.append(
+                {
+                    "task": "logic",
+                    "record": ridx,
+                    "idx": rec.get("idx"),
+                    "question_index": qidx,
+                    "question": q,
+                    "pred": pred.get("answer"),
+                    "gold": gold,
+                    "ok": ok,
+                    "confidence": pred.get("confidence"),
+                    "question_type": pred.get("question_type"),
+                    "rag_used": rag_used,
+                    "rag_fol_used": rag_fol_used,
+                    "rag_context": pred.get("rag_context", [])[:3],
+                    "cot": pred.get("cot", [])[:5],
+                    "fol": pred.get("fol"),
+                }
+            )
 
     return {
-        "correct": predicted_normalized == expected_normalized,
-        "method": "normalized_answer_exact",
-        "reason": "normalized answer exact match",
-        "predicted_normalized": predicted_normalized,
-        "expected_normalized": expected_normalized,
-    }
-
-
-def summarize_p1(results: list[dict[str, Any]], task_key: str = "task") -> dict[str, Any]:
-    total = len(results)
-    correct = sum(1 for item in results if item.get("correct") is True)
-    summary: dict[str, Any] = {
+        "task": "logic",
         "total": total,
         "correct": correct,
         "p1": correct / total if total else 0.0,
-        "p1_accuracy": correct / total if total else 0.0,
+        "rag_used_count": rag_used_count,
+        "rag_used_rate": rag_used_count / total if total else 0.0,
+        "rag_fol_used_count": rag_fol_used_count,
+        "rag_fol_used_rate": rag_fol_used_count / total if total else 0.0,
+        "rows": rows,
     }
 
-    tasks = sorted({str(item.get(task_key) or "unknown") for item in results})
-    by_task: dict[str, dict[str, Any]] = {}
-    for task in tasks:
-        subset = [item for item in results if str(item.get(task_key) or "unknown") == task]
-        task_correct = sum(1 for item in subset if item.get("correct") is True)
-        by_task[task] = {
-            "total": len(subset),
-            "correct": task_correct,
-            "p1": task_correct / len(subset) if subset else 0.0,
-            "p1_accuracy": task_correct / len(subset) if subset else 0.0,
+
+def eval_physics(
+    path: str,
+    pipe: ExactPipeline,
+    max_records: Optional[int] = None,
+) -> Dict[str, Any]:
+    raw_data = json.loads(Path(path).read_text(encoding="utf-8"))
+
+    # Bỏ các record QA nếu dataset có.
+    data = [
+        r
+        for r in raw_data
+        if not str(r.get("id", "")).startswith("QA")
+    ]
+
+    if max_records:
+        data = data[:max_records]
+
+    total = 0
+    correct = 0
+    rag_used_count = 0
+    rows = []
+
+    for ridx, rec in enumerate(data):
+        payload = {
+            "type": "physics",
+            "id": rec.get("id"),
+            "question": rec.get("question", ""),
+            "__record_index": ridx,
         }
-    summary["by_task"] = by_task
-    return summary
+
+        pred = pipe.predict(payload)
+
+        ok = answer_match(
+            pred.get("answer"),
+            rec.get("answer"),
+            pred.get("unit"),
+            rec.get("unit"),
+        )
+
+        total += 1
+        correct += int(ok)
+
+        rag_used = bool(pred.get("rag_used"))
+        rag_used_count += int(rag_used)
+
+        rows.append(
+            {
+                "task": "physics",
+                "record": ridx,
+                "id": rec.get("id"),
+                "question": rec.get("question", ""),
+                "pred": pred.get("answer"),
+                "pred_unit": pred.get("unit"),
+                "gold": rec.get("answer"),
+                "gold_unit": rec.get("unit"),
+                "ok": ok,
+                "confidence": pred.get("confidence"),
+                "rag_used": rag_used,
+                "rag_context": pred.get("rag_context", [])[:3],
+                "cot": pred.get("cot", [])[:5],
+            }
+        )
+
+    return {
+        "task": "physics",
+        "total": total,
+        "correct": correct,
+        "p1": correct / total if total else 0.0,
+        "rag_used_count": rag_used_count,
+        "rag_used_rate": rag_used_count / total if total else 0.0,
+        "rows": rows,
+    }
+
+
+def summarize(results: List[Dict[str, Any]]) -> Dict[str, Any]:
+    total = sum(r["total"] for r in results)
+    correct = sum(r["correct"] for r in results)
+
+    rag_used_count = sum(r.get("rag_used_count", 0) for r in results)
+    rag_fol_used_count = sum(r.get("rag_fol_used_count", 0) for r in results)
+
+    by_task = [
+        {
+            k: v
+            for k, v in r.items()
+            if k != "rows"
+        }
+        for r in results
+    ]
+
+    return {
+        "total": total,
+        "correct": correct,
+        "p1": correct / total if total else 0.0,
+        "rag_used_count": rag_used_count,
+        "rag_used_rate": rag_used_count / total if total else 0.0,
+        "rag_fol_used_count": rag_fol_used_count,
+        "rag_fol_used_rate": rag_fol_used_count / total if total else 0.0,
+        "by_task": by_task,
+    }

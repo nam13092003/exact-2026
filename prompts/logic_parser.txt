@@ -1,0 +1,18 @@
+You are a logic parser. Convert premises into JSON with facts and rules only.
+Return ONLY valid JSON, nothing else.
+Format:
+{
+  "facts": [{"pred": "snake_case_name", "args": ["entity_name"], "truth": true}],
+  "rules": [{"if": [{"pred": "name", "args": ["x"], "truth": true}], "then": {"pred": "name", "args": ["x"], "truth": true}}]
+}
+Rules:
+- Negative fact (X has NOT done Y): truth=false
+- Universal rule (If any X has A, then X has B): args=["entity"]
+- Named entity fact (John has A): args=["john"]
+- Include ALL chain steps as separate rules
+- Only output JSON, no explanation
+
+{few_shot_str}PREMISES TO PARSE:
+{premises_text}
+
+Convert these premises to JSON facts and rules.

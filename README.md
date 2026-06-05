@@ -1,27 +1,28 @@
-# EXACT 2026
+# EXACT 2026 RAG agents
 
-## Cài đặt môi trường
+This version adds leakage-safe RAG for both tasks:
 
-```bash
-pip install -r requirements.txt
-```
+- Logic: classify question type, build a prompt by question type, parse NL to Horn/FOL, run symbolic reasoning, then use a Logic RAG retriever only as fallback/pattern guidance.
+- Physics: formula solver first, LLM parser/solver second, Physics RAG fallback third.
 
-## Chạy demo P1
+## Evaluation leakage control
 
-Chạy demo logic:
+During evaluation, every payload includes `__record_index` and, when available, `id`/`idx`. The RAG retrievers skip the current test row before ranking:
 
-```bash
-python demo_p1.py --logic-samples 2 --physics-samples 0 --output outputs/demo_logic_p1_output.json
-```
+- Logic excludes `__record_index`, `idx`, and exact duplicate current question text.
+- Physics excludes `__record_index`, `id`, and exact duplicate current question text.
 
-Chạy demo physics:
+This prevents the nearest-neighbor RAG step from retrieving the exact sample being evaluated and copying its gold answer.
 
-```bash
-python demo_p1.py --logic-samples 0 --physics-samples 2 --output outputs/demo_physics_p1_output.json
-```
-
-Chạy cả hai phần:
+## Run
 
 ```bash
-python demo_p1.py --logic-samples 2 --physics-samples 2 --output outputs/demo_p1_output.json
+python main.py eval \
+  --logic data/Logic_Based_Educational_Queries.json \
+  --physics data/Physics_Problems_Text_Only_removeQA.json \
+  --max-records 20 \
+  --no-fol \
+  --details details.json
 ```
+
+Use `--details` to inspect `rag_context` and verify retrieved examples are not the current record.

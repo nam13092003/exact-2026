@@ -1,9 +1,1 @@
-Write a concise, faithful explanation logically justifying the final answer.
-Cite the specific premise numbers (e.g. "From Premise 1 and Premise 2...") used in the derivation.
-Do not invent any new premises or facts.
-Use the same language (Vietnamese or English) as the question.
-Input query context:
-Question: {question}
-Answer: {answer}
-Premises: {premises}
-Inference Trace: {trace}
+Write a concise explanation for EXACT 2026. It must be faithful to the tool trace and cite premise numbers or formulas used. Do not invent new premises.

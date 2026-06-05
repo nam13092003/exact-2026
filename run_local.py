@@ -26,7 +26,7 @@ LIMIT_PHYSICS = 100
 
 import re
 import math
-from agents.physics.Parsing.Parsing_Agent import UNIT_TO_SI, _canonical_unit_key
+from agents.physics.domain.units import UNIT_TO_SI, _canonical_unit_key
 
 def compare_physics_answer(actual: str, expected_val: str, expected_unit: str) -> bool:
     expected_full = f"{expected_val} {expected_unit}".strip().lower()
@@ -131,7 +131,7 @@ def run_logic_tests(graph: ExactGraph):
     return passed, failed, total
 
 def run_physics_tests(graph: ExactGraph):
-    data_file = "data/Physics_Problems_100_generated_checked.json"
+    data_file = "data/Physics_Problems_Text_Only_removeQA.json"
     logging.info(f"\n{'='*50}\n🚀 BẮT ĐẦU TEST PHYSICS ({data_file})\n{'='*50}")
     
     with open(data_file, 'r', encoding='utf-8') as f:

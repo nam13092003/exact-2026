@@ -62,9 +62,14 @@ SymPy contract:
 
 Minimal strategy guidance:
 - Solve the requested target directly; use deterministic hints as scaffold, with `parsed_question` authoritative.
+- If the requested target or required input is missing, return a direct conceptual insufficient-information answer instead of inventing values.
+- Prefer ratio/cancellation formulas when absolute quantities cancel; do not introduce unparsed variables such as C, L, omega0, or V_rms for pure ratio questions.
 - Define helper distances, coordinates, reactances, totals, derivatives, or components in equations.
 - Series RLC resonance yes/no computes f_res and compares with parsed f; a "by what factor" resonance question is numeric.
-- Perpendicular bisector geometry needs distances, signed components, then magnitude if requested. Measurement uncertainty uses delta_<symbol>; optimization can use `diff`.
+- Series RLC quality factor is `sqrt(L/C)/R`, not `2*pi*sqrt(L*C)/R`.
+- Perpendicular bisector geometry needs distances, signed components, then magnitude; force on a test charge multiplies net field by the signed test charge.
+- For disconnected/isolated capacitors, charge stays constant; dielectric insertion lowers energy by epsilon_r, and increased plate separation raises energy by the same distance factor.
+- Measurement uncertainty uses delta_<symbol>; optimization can use `diff`.
 
 Examples:
 
@@ -156,38 +161,127 @@ Output:
 
 Input parsed_question:
 {
-  "question": "Charges q1 = -2 microC at A and q2 = 3 microC at B lie on A-B-N with AB = 10 cm and BN = 10 cm. Find the electric field magnitude at N.",
+  "question": "Two charges q1 = +9 × 10^-7 C and q2 = -9 × 10^-7 C are placed at two points A and B, separated by 10 cm. A third charge q3 = -9 × 10^-7 C is placed at the midpoint of AB. Calculate the electric force acting on q3.",
   "domain": "Electric Charges and Fields",
-  "target": {"symbol": "E_N", "unit": "N/C"},
+  "target": {
+    "symbol": "F_3",
+    "unit": "N"
+  },
   "givens": [
-    {"symbol": "q1", "si_value": -0.000002, "si_unit": "C", "uncertainty": null},
-    {"symbol": "q2", "si_value": 0.000003, "si_unit": "C", "uncertainty": null}
+    {
+      "symbol": "q1",
+      "si_value": 0.0000009,
+      "si_unit": "C",
+      "uncertainty": null
+    },
+    {
+      "symbol": "q2",
+      "si_value": -0.0000009,
+      "si_unit": "C",
+      "uncertainty": null
+    },
+    {
+      "symbol": "q3",
+      "si_value": -0.0000009,
+      "si_unit": "C",
+      "uncertainty": null
+    },
+    {
+      "symbol": "AB",
+      "si_value": 0.1,
+      "si_unit": "m",
+      "uncertainty": null
+    }
   ],
-  "relations": ["A-B-N are collinear"],
+  "relations": [
+    "q1 is placed at A",
+    "q2 is placed at B",
+    "q3 is placed at the midpoint of AB"
+  ],
   "question_kind": "computational",
   "geometry": {
     "present": true,
-    "type": "collinear",
-    "line_order": ["A", "B", "N"],
-    "target_point": "N",
-    "object_locations": {"q1": "A", "q2": "B"},
-    "segments": [{"symbol": "AB", "si_value": 0.1, "si_unit": "m"}, {"symbol": "BN", "si_value": 0.1, "si_unit": "m"}],
-    "derived_distances": [{"symbol": "AN", "expression": "AB + BN", "si_value": 0.2, "si_unit": "m"}],
-    "direction_convention": "positive from A toward N"
+    "type": "collinear_midpoint",
+    "points": ["A", "M", "B"],
+    "target_point": "M",
+    "object_locations": {
+      "q1": "A",
+      "q2": "B",
+      "q3": "M"
+    },
+    "segments": [
+      {
+        "symbol": "AB",
+        "si_value": 0.1,
+        "si_unit": "m"
+      },
+      {
+        "symbol": "AM",
+        "si_value": 0.05,
+        "si_unit": "m"
+      },
+      {
+        "symbol": "BM",
+        "si_value": 0.05,
+        "si_unit": "m"
+      }
+    ],
+    "derived_distances": [
+      {
+        "symbol": "r_13",
+        "expression": "AB / 2",
+        "si_value": 0.05,
+        "si_unit": "m"
+      },
+      {
+        "symbol": "r_23",
+        "expression": "AB / 2",
+        "si_value": 0.05,
+        "si_unit": "m"
+      }
+    ],
+    "direction_convention": "x-axis from A to B; positive direction is from A toward B"
   },
-  "answer_format": {"requested_form": "magnitude"}
+  "answer_format": {
+    "requested_form": "magnitude_and_direction"
+  }
 }
+
 Output:
 {
   "mode": "computational",
-  "answer_type": "numeric",
+  "answer_type": "numeric_with_direction",
   "sympy_spec": {
-    "target_symbol": "E_N",
-    "target_unit": "N/C",
-    "equations": ["E1_N = k*q1/AN**2", "E2_N = k*q2/BN**2", "E_signed = E1_N + E2_N", "E_N = Abs(E_signed)"],
-    "known_values": {"q1": -0.000002, "q2": 0.000003, "AB": 0.1, "BN": 0.1, "AN": 0.2, "k": 9000000000.0}
+    "target_symbol": "F_3",
+    "target_unit": "N",
+    "equations": [
+      "r_13 = AB / 2",
+      "r_23 = AB / 2",
+      "F13 = k*q1*q3/r_13**2",
+      "F23 = -k*q2*q3/r_23**2",
+      "F_signed = F13 + F23",
+      "F_3 = Abs(F_signed)"
+    ],
+    "known_values": {
+      "q1": 0.0000009,
+      "q2": -0.0000009,
+      "q3": -0.0000009,
+      "AB": 0.1,
+      "k": 9000000000.0
+    },
+    "direction_rule": {
+      "axis": "positive from A toward B",
+      "if_F_signed_positive": "toward B",
+      "if_F_signed_negative": "toward A"
+    }
   },
-  "solution_steps": ["Use the parsed collinear order and distances.", "Compute signed field contributions along the chosen positive direction.", "Take the magnitude for the requested field strength."]
+  "solution_steps": [
+    "Use the midpoint condition to get r_13 = r_23 = AB / 2.",
+    "Compute signed force from q1 on q3 along the A-to-B axis.",
+    "Compute signed force from q2 on q3; since q2 is to the right of q3, its signed contribution uses the opposite direction convention.",
+    "Add the signed force contributions.",
+    "Take the absolute value for magnitude and use the sign to determine direction."
+  ]
 }
 
 Retrieved hints:

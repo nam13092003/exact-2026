@@ -16,6 +16,10 @@ SYMBOL_REPLACEMENTS = {
     "μ": "mu",
     "µ": "mu",
     "λ": "lambda_",
+    "π": "pi",
+    "Π": "pi",
+    "×": "*",
+    "·": "*",
     "−": "-",
     "–": "-",
 }
@@ -42,6 +46,8 @@ def _normalize_text(value: str) -> str:
     normalized = value
     for source, replacement in SYMBOL_REPLACEMENTS.items():
         normalized = normalized.replace(source, replacement)
+    normalized = re.sub(r"(?<=\d)\s*(?=pi\b)", "*", normalized)
+    normalized = re.sub(r"\bpi\s*(?=[A-Za-z_])", "pi*", normalized)
     return normalized
 
 

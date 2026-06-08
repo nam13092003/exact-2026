@@ -55,20 +55,29 @@ class RAGSolutionProvider(LLMSolutionProvider):
         return self._documents
 
     def retrieve(self, question: str) -> list[dict[str, Any]]:
-        """Return the top-k examples with the closest question text."""
+        """Return the top-k examples with similar question text."""
         normalized_question = question.lower()
         self._load_documents()
         documents = self._normalized_documents or []
-        ranked = sorted(
-            documents,
-            key=lambda item_and_text: SequenceMatcher(
+
+        scored = []
+        for item, text in documents:
+            score = SequenceMatcher(
                 None,
                 normalized_question,
-                item_and_text[1],
-            ).ratio(),
+                text,
+            ).ratio()
+
+            if score > 0.65:
+                scored.append((item, score))
+
+        ranked = sorted(
+            scored,
+            key=lambda item_and_score: item_and_score[1],
             reverse=True,
-        )[: self.top_k]
-        return [item for item, _ in ranked]
+        )
+
+        return [item for item, _ in ranked[: self.top_k]]
 
     def _compact_example(self, item: dict[str, Any]) -> dict[str, Any]:
         """Convert a retrieved solved problem into a small formula/strategy hint."""

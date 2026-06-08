@@ -1,7 +1,4 @@
 PREMISES TO PARSE:
 {premises_text}
 
-QUESTION TO PARSE:
-{question}
-
-Convert the premises and the question to JSON facts, rules, query (if it's a Yes/No question), and choices (if it's a multiple choice question) according to the format exactly.
+Convert these premises to JSON facts and rules according to the rules and format exactly.

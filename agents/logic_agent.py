@@ -485,6 +485,12 @@ class LogicNLParserAgent:
                 response_format={"type": "json_object"},
             )
             parsed = extract_json(text)
+            if parsed:
+                # Add empty query and choices - symbolic engine handles these
+                if "query" not in parsed:
+                    parsed["query"] = None
+                if "choices" not in parsed:
+                    parsed["choices"] = {}
             return parsed
         except Exception:
             return None

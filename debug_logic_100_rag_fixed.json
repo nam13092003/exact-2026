@@ -1,10 +1,10 @@
 {
   "task": "logic",
   "total": 192,
-  "correct": 138,
-  "p1": 0.71875,
-  "rag_used_count": 192,
-  "rag_used_rate": 1.0,
+  "correct": 132,
+  "p1": 0.6875,
+  "rag_used_count": 191,
+  "rag_used_rate": 0.9947916666666666,
   "rag_fol_used_count": 0,
   "rag_fol_used_rate": 0.0,
   "rows": [
@@ -22,59 +22,16 @@
       ],
       "question_index": 0,
       "question": "Which conclusion follows with the fewest premises?\nA. If a Python project is not optimized, then it is not well-tested\nB. If all Python projects are optimized, then all Python projects are well-structured\nC. If a Python project is well-tested, then it must be clean and readable\nD. If a Python project is not optimized, then it does not follow PEP 8 standards",
-      "pred": "Unknown",
+      "pred": "C",
       "gold": "Unknown",
-      "ok": true,
-      "confidence": 0.28,
-      "question_type": "MultiChoice",
-      "rag_used": true,
+      "ok": false,
+      "confidence": 0.9,
+      "question_type": "MetaLogic",
+      "rag_used": false,
       "rag_fol_used": false,
-      "rag_context": [
-        {
-          "record_index": 53,
-          "score": 722.5303,
-          "questions": [
-            "Based on the above premises, which conclusion is correct?\nA. If a Python project is not optimized, then it is unlikely to be well-tested.\nB. If all Python projects are well-structured, then all Python projects are optimized.\nC. If a Python project follows PEP 8 standards, then it must be well-tested.\nD. If a Python project is not well-structured, then it might not follow PEP 8 standards.",
-            "According to the above premises, is the following statement true?\nStatement: If all Python projects are well-structured, then all Python projects are optimized."
-          ],
-          "answers": [
-            "B",
-            "Yes"
-          ],
-          "fol_count": 0
-        },
-        {
-          "record_index": 129,
-          "score": 676.076,
-          "questions": [
-            "Based on the above premises, which conclusion can be inferred?\nA. All Python code is optimized.\nB. All optimized code is not well-tested.\nC. If a Python code is optimized, then it is not well-tested.\nD. No Python code follows PEP 8 standards.",
-            "Based on the above premises, is the statement true?\nStatement: If a Python code is optimized, then it is well-tested."
-          ],
-          "answers": [
-            "Unknown",
-            "No"
-          ],
-          "fol_count": 13
-        },
-        {
-          "record_index": 309,
-          "score": 421.2303,
-          "questions": [
-            "Based on the above premises, which statement can be inferred?\nA. There exists a script without error handling.\nB. There exists a program that does not produce reliable outputs.\nC. All Python programs are optimized.\nD. There exists a program that does not follow best practices.",
-            "Based on the above premises, is the statement true?\nStatement: ForAll(x, (PythonScript(x) → HasErrorHandling(x)))"
-          ],
-          "answers": [
-            "Unknown",
-            "No"
-          ],
-          "fol_count": 19
-        }
-      ],
+      "rag_context": [],
       "cot": [
-        "Classified logic question as MultiChoice.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
-        "RAG retrieved similar logic examples as few-shot parser guidance."
+        "MetaLogic bypass active. Answered directly by LLM."
       ],
       "fol": null
     },
@@ -92,10 +49,10 @@
       ],
       "question_index": 1,
       "question": "Does it follow that if all Python projects are well-structured, then all Python projects are optimized, according to the premises?",
-      "pred": "Unknown",
+      "pred": "Yes",
       "gold": "Yes",
-      "ok": false,
-      "confidence": 0.25,
+      "ok": true,
+      "confidence": 0.82,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -226,11 +183,8 @@
         }
       ],
       "cot": [
-        "Premise 7: completed_core_curriculum(Sophia)",
-        "Premise 8: passed_science_assessment(Sophia)",
-        "Premise 1: ForAll(x, (completed_core_curriculum(x) ∧ passed_science_assessment(x)) → qualified_for_advanced_courses(x))",
-        "Premise 9: completed_research_methodology(Sophia)",
-        "Premise 2: ForAll(x, (qualified_for_advanced_courses(x) ∧ completed_research_methodology(x)) → eligible_for_international_program(x))"
+        "LLM fact | LLM fact | Rule: LLM rule => qualified_for_advanced_course(sophia) | LLM fact | Rule: LLM rule => eligible_for_international_program(sophia)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
       "fol": "eligible_for_international_program(sophia)"
     },
@@ -266,7 +220,7 @@
       "pred": "Yes",
       "gold": "Yes",
       "ok": true,
-      "confidence": 0.7,
+      "confidence": 0.85,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -312,13 +266,10 @@
         }
       ],
       "cot": [
-        "Premise 7: completed_core_curriculum(Sophia)",
-        "Premise 8: passed_science_assessment(Sophia)",
-        "Premise 1: ForAll(x, (completed_core_curriculum(x) ∧ passed_science_assessment(x)) → qualified_for_advanced_courses(x))",
-        "Premise 9: completed_research_methodology(Sophia)",
-        "Premise 2: ForAll(x, (qualified_for_advanced_courses(x) ∧ completed_research_methodology(x)) → eligible_for_international_program(x))"
+        "LLM fact | LLM fact | Rule: LLM rule => qualified_for_advanced_course(sophia) | LLM fact | Rule: LLM rule => eligible_for_international_program(sophia) | LLM fact | Rule: LLM rule => awarded_honors_diploma(sophia) | LLM fact | Rule: LLM rule => qualified_for_university_scholarship(sophia)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "qualifies_for_scholarship(sophia)"
+      "fol": "qualified_for_university_scholarship(sophia)"
     },
     {
       "task": "logic",
@@ -398,11 +349,8 @@
         }
       ],
       "cot": [
-        "Premise 7: completed_core_curriculum(Sophia)",
-        "Premise 8: passed_science_assessment(Sophia)",
-        "Premise 1: ForAll(x, (completed_core_curriculum(x) ∧ passed_science_assessment(x)) → qualified_for_advanced_courses(x))",
-        "Premise 9: completed_research_methodology(Sophia)",
-        "Premise 2: ForAll(x, (qualified_for_advanced_courses(x) ∧ completed_research_methodology(x)) → eligible_for_international_program(x))"
+        "LLM fact | LLM fact | Rule: LLM rule => qualified_for_advanced_course(sophia) | LLM fact | Rule: LLM rule => eligible_for_international_program(sophia)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
       "fol": "eligible_for_international_program(sophia)"
     },
@@ -438,7 +386,7 @@
       "pred": "Yes",
       "gold": "Yes",
       "ok": true,
-      "confidence": 0.7,
+      "confidence": 0.85,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -484,13 +432,10 @@
         }
       ],
       "cot": [
-        "Premise 7: completed_core_curriculum(Sophia)",
-        "Premise 8: passed_science_assessment(Sophia)",
-        "Premise 1: ForAll(x, (completed_core_curriculum(x) ∧ passed_science_assessment(x)) → qualified_for_advanced_courses(x))",
-        "Premise 9: completed_research_methodology(Sophia)",
-        "Premise 2: ForAll(x, (qualified_for_advanced_courses(x) ∧ completed_research_methodology(x)) → eligible_for_international_program(x))"
+        "LLM fact",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "qualifies_for_scholarship(sophia)"
+      "fol": "qualified_for_university_scholarship(sophia)"
     },
     {
       "task": "logic",
@@ -565,13 +510,10 @@
         }
       ],
       "cot": [
-        "Premise 5: completed_required_courses(John)",
-        "Premise 1: ForAll(x, completed_required_courses(x) → eligible_for_graduation(x))",
-        "Premise 6: gpa_above_3_5(John)",
-        "Premise 2: ForAll(x, (eligible_for_graduation(x) ∧ gpa_above_3_5(x)) → graduates_with_honors(x))",
-        "Premise 7: completed_thesis(John)"
+        "LLM fact | LLM fact | Rule: LLM rule => graduates_with_honor(john) | LLM fact | Rule: LLM rule => received_academic_distinction(john) | Rule: LLM rule => qualifies_for_graduate_fellowship_program(john)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "qualifies_for_fellowship(john)"
+      "fol": "qualifies_for_graduate_fellowship_program(john)"
     },
     {
       "task": "logic",
@@ -646,13 +588,10 @@
         }
       ],
       "cot": [
-        "Premise 5: completed_required_courses(John)",
-        "Premise 1: ForAll(x, completed_required_courses(x) → eligible_for_graduation(x))",
-        "Premise 6: gpa_above_3_5(John)",
-        "Premise 2: ForAll(x, (eligible_for_graduation(x) ∧ gpa_above_3_5(x)) → graduates_with_honors(x))",
-        "Premise 7: completed_thesis(John)"
+        "LLM fact | Rule: LLM rule => eligible_for_graduation(john) | LLM fact | Rule: LLM rule => graduates_with_honor(john) | LLM fact | Rule: LLM rule => receives_academic_distinction(john)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "academic_distinction(john)"
+      "fol": "receives_academic_distinction(john)"
     },
     {
       "task": "logic",
@@ -730,13 +669,10 @@
         }
       ],
       "cot": [
-        "Premise 5: completed_pedagogical_training(John)",
-        "Premise 1: ForAll(x, completed_pedagogical_training(x) → can_teach_undergraduate(x))",
-        "Premise 6: holds_phd(John)",
-        "Premise 2: ForAll(x, (can_teach_undergraduate(x) ∧ holds_phd(x)) → can_supervise_graduate(x))",
-        "Premise 7: has_at_least_three_publications(John)"
+        "LLM fact | Rule: LLM rule => can_teach_undergrad(john) | LLM fact | Rule: LLM rule => can_supervise_grad_student(john) | LLM fact | Rule: LLM rule => can_serve_on_curriculum_committee(john) | LLM fact | Rule: LLM rule => can_propose_new_course(john)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "can_propose_courses(john)"
+      "fol": "can_propose_new_course(john)"
     },
     {
       "task": "logic",
@@ -765,10 +701,10 @@
       ],
       "question_index": 1,
       "question": "Does Professor John meet all requirements to propose new courses, according to the premises?",
-      "pred": "Yes",
+      "pred": "No",
       "gold": "Yes",
-      "ok": true,
-      "confidence": 0.7,
+      "ok": false,
+      "confidence": 0.65,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -814,13 +750,10 @@
         }
       ],
       "cot": [
-        "Premise 5: completed_pedagogical_training(John)",
-        "Premise 1: ForAll(x, completed_pedagogical_training(x) → can_teach_undergraduate(x))",
-        "Premise 6: holds_phd(John)",
-        "Premise 2: ForAll(x, (can_teach_undergraduate(x) ∧ holds_phd(x)) → can_supervise_graduate(x))",
-        "Premise 7: has_at_least_three_publications(John)"
+        "LLM fact",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "can_propose_courses(john)"
+      "fol": "completed_training(john)"
     },
     {
       "task": "logic",
@@ -898,13 +831,10 @@
         }
       ],
       "cot": [
-        "Premise 5: taught_min_five_years(John)",
-        "Premise 1: ForAll(x, taught_min_five_years(x) → eligible_extended_library(x))",
-        "Premise 6: has_publications(John)",
-        "Premise 2: ForAll(x, (eligible_extended_library(x) ∧ has_publications(x)) → can_access_restricted_archives(x))",
-        "Premise 7: completed_ethics_training(John)"
+        "LLM fact | Rule: LLM rule => eligible_for_extended_library_acces(john) | Rule: LLM rule => can_access_restricted_archive(john) | Rule: LLM rule => can_submit_research_proposal(john) | Rule: LLM rule => can_apply_for_collaborative_research_project(john)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "can_apply_collaborative_projects(john)"
+      "fol": "can_apply_for_collaborative_research_project(john)"
     },
     {
       "task": "logic",
@@ -936,7 +866,7 @@
       "pred": "Yes",
       "gold": "Yes",
       "ok": true,
-      "confidence": 0.55,
+      "confidence": 0.65,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -982,13 +912,10 @@
         }
       ],
       "cot": [
-        "Premise 5: taught_min_five_years(John)",
-        "Premise 1: ForAll(x, taught_min_five_years(x) → eligible_extended_library(x))",
-        "Premise 6: has_publications(John)",
-        "Premise 2: ForAll(x, (eligible_extended_library(x) ∧ has_publications(x)) → can_access_restricted_archives(x))",
-        "Premise 7: completed_ethics_training(John)"
+        "LLM fact | Rule: LLM rule => eligible_for_extended_library_acces(john) | LLM fact | Rule: LLM rule => can_access_restricted_archive(john) | LLM fact | Rule: LLM rule => can_submit_research_proposal(john) | LLM fact | Rule: LLM rule => can_apply_for_collaborative_research_project(john)",
+        "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "can_apply_collaborative_projects(john)"
+      "fol": "can_apply_for_collaborative_research_project(john)"
     },
     {
       "task": "logic",
@@ -1299,12 +1226,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as YesNo.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact | LLM fact | Rule: LLM rule => teaches_graduate(john) | LLM fact | Rule: LLM rule => is_research_mentor(john)",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "is_research_mentor(john)"
     },
     {
       "task": "logic",
@@ -1329,10 +1254,10 @@
       ],
       "question_index": 0,
       "question": "Based on the premises, what can we conclude about the curriculum?\nA. It enhances student engagement but not critical thinking\nB. It enhances critical thinking\nC. It needs more resources to enhance critical thinking\nD. It is well-structured but lacks exercises",
-      "pred": "Unknown",
+      "pred": "B",
       "gold": "B",
-      "ok": false,
-      "confidence": 0.28,
+      "ok": true,
+      "confidence": 0.65,
       "question_type": "MultiChoice",
       "rag_used": true,
       "rag_fol_used": false,
@@ -1378,12 +1303,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as MultiChoice.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "enhances_critical_thinking(curriculum)"
     },
     {
       "task": "logic",
@@ -1411,7 +1334,7 @@
       "pred": "Yes",
       "gold": "Yes",
       "ok": true,
-      "confidence": 0.461,
+      "confidence": 0.683,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -1457,10 +1380,10 @@
         }
       ],
       "cot": [
-        "Premise 4: pedagogical_training(faculty) ∧ curriculum_development(faculty)",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "curriculum_development(faculty)"
+      "fol": "enhances_critical_thinking(curriculum)"
     },
     {
       "task": "logic",
@@ -1485,10 +1408,10 @@
       ],
       "question_index": 0,
       "question": "Based on the premises, what can we conclude about the curriculum?\nA. It enhances student engagement but not critical thinking\nB. It enhances critical thinking\nC. It needs more resources to enhance critical thinking\nD. It is well-structured but lacks exercises",
-      "pred": "Unknown",
+      "pred": "B",
       "gold": "B",
-      "ok": false,
-      "confidence": 0.28,
+      "ok": true,
+      "confidence": 0.65,
       "question_type": "MultiChoice",
       "rag_used": true,
       "rag_fol_used": false,
@@ -1534,12 +1457,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as MultiChoice.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "enhances_critical_thinking(curriculum)"
     },
     {
       "task": "logic",
@@ -1567,7 +1488,7 @@
       "pred": "Yes",
       "gold": "Yes",
       "ok": true,
-      "confidence": 0.461,
+      "confidence": 0.683,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -1613,10 +1534,10 @@
         }
       ],
       "cot": [
-        "Premise 4: pedagogical_training(faculty) ∧ curriculum_development(faculty)",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "curriculum_development(faculty)"
+      "fol": "enhances_critical_thinking(curriculum)"
     },
     {
       "task": "logic",
@@ -1635,10 +1556,10 @@
       ],
       "question_index": 0,
       "question": "Based on the prerequisites, what is David’s current eligibility status?\nA. Eligible for Course C but not the internship\nB. Eligible for the internship program\nC. Needs to pass Course B first\nD. Only eligible for Course B",
-      "pred": "Unknown",
+      "pred": "B",
       "gold": "B",
-      "ok": false,
-      "confidence": 0.28,
+      "ok": true,
+      "confidence": 0.65,
       "question_type": "MultiChoice",
       "rag_used": true,
       "rag_fol_used": false,
@@ -1684,12 +1605,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as MultiChoice.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact | Rule: LLM rule => eligible_for_internship_program(david)",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "eligible_for_internship_program(david)"
     },
     {
       "task": "logic",
@@ -1711,7 +1630,7 @@
       "pred": "Yes",
       "gold": "Yes",
       "ok": true,
-      "confidence": 0.475,
+      "confidence": 0.572,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -1757,10 +1676,10 @@
         }
       ],
       "cot": [
-        "Premise 4: complete(david, A)",
+        "LLM fact | Rule: LLM rule => eligible_for_internship_program(david)",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "complete(david,a)"
+      "fol": "eligible_for_internship_program(david)"
     },
     {
       "task": "logic",
@@ -1782,10 +1701,10 @@
       ],
       "question_index": 0,
       "question": "Based on Alex's status, which statement is correct?\nA. Alex can use equipment but cannot book training without a trainer\nB. Alex can book personal training sessions if assigned a trainer\nC. Alex needs a longer membership duration\nD. Alex must pay additional fees",
-      "pred": "Unknown",
+      "pred": "C",
       "gold": "C",
-      "ok": false,
-      "confidence": 0.28,
+      "ok": true,
+      "confidence": 0.65,
       "question_type": "MultiChoice",
       "rag_used": true,
       "rag_fol_used": false,
@@ -1831,12 +1750,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as MultiChoice.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "membership_duration(alex)"
     },
     {
       "task": "logic",
@@ -1858,10 +1775,10 @@
       ],
       "question_index": 1,
       "question": "Does Alex meet all requirements for booking training sessions, according to the premises?",
-      "pred": "Yes",
+      "pred": "No",
       "gold": "No",
-      "ok": false,
-      "confidence": 0.475,
+      "ok": true,
+      "confidence": 0.65,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -1907,13 +1824,10 @@
         }
       ],
       "cot": [
-        "Premise 3: paid_annual_fee(Alex)",
-        "Premise 7: ForAll(x, paid_annual_fee(x) → valid_membership(x))",
-        "Premise 1: safety_orientation(Alex)",
-        "Premise 4: ForAll(x, (valid_membership(x) ∧ safety_orientation(x)) → use_equipment(x))",
+        "LLM fact | LLM fact | Rule: LLM rule => eligible_for_trainer(alex)",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "use_equipment(alex)"
+      "fol": "eligible_for_trainer(alex)"
     },
     {
       "task": "logic",
@@ -2009,10 +1923,10 @@
       ],
       "question_index": 1,
       "question": "Does Sarah meet all requirements to take advanced classes, according to the premises?",
-      "pred": "Yes",
+      "pred": "No",
       "gold": "No",
-      "ok": false,
-      "confidence": 0.475,
+      "ok": true,
+      "confidence": 0.65,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -2058,10 +1972,10 @@
         }
       ],
       "cot": [
-        "Premise 5: has_approval(sarah)",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "has_approval(sarah)"
+      "fol": "has_active_statu(sarah)"
     },
     {
       "task": "logic",
@@ -2080,10 +1994,10 @@
       ],
       "question_index": 0,
       "question": "Based on Professor John's qualifications, which capabilities does he have?\nA. Can teach graduate courses but cannot supervise research\nB. Can supervise Master's students but not graduate research\nC. Can both teach graduate courses and supervise research\nD. Needs additional certification to supervise",
-      "pred": "Unknown",
+      "pred": "C",
       "gold": "Unknown",
-      "ok": true,
-      "confidence": 0.28,
+      "ok": false,
+      "confidence": 0.65,
       "question_type": "MultiChoice",
       "rag_used": true,
       "rag_fol_used": false,
@@ -2129,12 +2043,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as MultiChoice.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact | Rule: LLM rule => qualified_to_teach_graduate_course(professor_john) | Rule: LLM rule => can_supervise_masters_student(professor_john) | Rule: LLM rule => can_supervise_graduate_level_research(professor_john)",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "can_supervise_graduate_level_research(professor_john)"
     },
     {
       "task": "logic",
@@ -2153,10 +2065,10 @@
       ],
       "question_index": 1,
       "question": "Can Professor John supervise graduate-level research based on his PhD qualification, according to the premises?",
-      "pred": "Unknown",
+      "pred": "Yes",
       "gold": "No",
       "ok": false,
-      "confidence": 0.25,
+      "confidence": 0.7,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -2202,12 +2114,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as YesNo.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact | Rule: LLM rule => qualified_to_teach_graduate_course(john) | Rule: LLM rule => eligible_to_supervise_masters_student(john) | Rule: LLM rule => can_supervise_graduate_level_research(john)",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "can_supervise_graduate_level_research(john)"
     },
     {
       "task": "logic",
@@ -2302,7 +2212,7 @@
       "pred": "Yes",
       "gold": "No",
       "ok": false,
-      "confidence": 0.493,
+      "confidence": 0.517,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -2348,10 +2258,10 @@
         }
       ],
       "cot": [
-        "Premise 7: department_head(John) ∧ has_degree(John, PhD)",
+        "LLM fact | Rule: LLM rule => can_teach_undergrad(a)",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "department_head(john)"
+      "fol": "can_teach_undergrad(a)"
     },
     {
       "task": "logic",
@@ -2372,10 +2282,10 @@
       ],
       "question_index": 0,
       "question": "Based on Nurse John's qualifications, which statement is correct?\nA. He can prescribe medication\nB. He needs more clinical hours\nC. He isn't registered\nD. He can't prescribe without additional certification",
-      "pred": "Unknown",
+      "pred": "A",
       "gold": "A",
-      "ok": false,
-      "confidence": 0.28,
+      "ok": true,
+      "confidence": 0.65,
       "question_type": "MultiChoice",
       "rag_used": true,
       "rag_fol_used": false,
@@ -2421,12 +2331,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as MultiChoice.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact | Rule: LLM rule => has_advanced_practice_certification(nurse_john) | Rule: LLM rule => is_authorized_to_prescribe_medication(nurse_john)",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "is_authorized_to_prescribe_medication(nurse_john)"
     },
     {
       "task": "logic",
@@ -2496,10 +2404,10 @@
         }
       ],
       "cot": [
-        "Premise 3: registered_nurse(john)",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "registered_nurse(john)"
+      "fol": "is_registered_nurse(john)"
     },
     {
       "task": "logic",
@@ -2520,10 +2428,10 @@
       ],
       "question_index": 0,
       "question": "Based on Alex's status, which statement is correct?\nA. Alex can use equipment but can't book training\nB. Alex can book personal training sessions\nC. Alex needs longer membership duration\nD. Alex must pay additional fees",
-      "pred": "Unknown",
+      "pred": "B",
       "gold": "B",
-      "ok": false,
-      "confidence": 0.28,
+      "ok": true,
+      "confidence": 0.65,
       "question_type": "MultiChoice",
       "rag_used": true,
       "rag_fol_used": false,
@@ -2569,12 +2477,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as MultiChoice.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact | LLM fact | Rule: LLM rule => can_use_equipment(alex) | LLM fact | LLM fact | Rule: LLM rule => eligible_for_trainer(alex) | Rule: LLM rule => can_book_training(alex)",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "can_book_training(alex)"
     },
     {
       "task": "logic",
@@ -2595,10 +2501,10 @@
       ],
       "question_index": 1,
       "question": "Does the logical sequence demonstrate that Alex meets all requirements for booking training sessions?",
-      "pred": "Unknown",
+      "pred": "Yes",
       "gold": "Yes",
-      "ok": false,
-      "confidence": 0.25,
+      "ok": true,
+      "confidence": 0.55,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -2644,12 +2550,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as YesNo.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact | LLM fact | Rule: LLM rule => can_use_equipment(alex) | LLM fact | LLM fact | Rule: LLM rule => eligible_trainer(alex) | Rule: LLM rule => can_book_training(alex)",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "can_book_training(alex)"
     },
     {
       "task": "logic",
@@ -2666,10 +2570,10 @@
       ],
       "question_index": 0,
       "question": "Based on Minh's academic progress, which of the following is logically supported?\nA. Minh has met the criteria to pursue Biochemistry\nB. Minh cannot take Biochemistry without Lab Safety Certification\nC. Minh is not eligible to enroll in Organic Chemistry\nD. Minh needs to repeat Chemistry 101",
-      "pred": "Unknown",
+      "pred": "C",
       "gold": "Unknown",
-      "ok": true,
-      "confidence": 0.28,
+      "ok": false,
+      "confidence": 0.65,
       "question_type": "MultiChoice",
       "rag_used": true,
       "rag_fol_used": false,
@@ -2715,12 +2619,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as MultiChoice.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact | LLM fact | Rule: LLM rule => can_enroll_in_organic_chemistry(minh)",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "can_enroll_in_organic_chemistry(minh)"
     },
     {
       "task": "logic",
@@ -2740,7 +2642,7 @@
       "pred": "Yes",
       "gold": "No",
       "ok": false,
-      "confidence": 0.7,
+      "confidence": 0.85,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -2786,11 +2688,10 @@
         }
       ],
       "cot": [
-        "Premise 7: completed(Minh, OrganicChem)",
-        "Premise 3: ForAll(x, completed(x, OrganicChem) → can_take(x, Biochemistry))",
+        "LLM fact | Rule: LLM rule => can_take_biochemistry(minh)",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "can_take(minh,biochemistry)"
+      "fol": "can_take_biochemistry(minh)"
     },
     {
       "task": "logic",
@@ -2810,7 +2711,7 @@
       "pred": "Yes",
       "gold": "Yes",
       "ok": true,
-      "confidence": 0.82,
+      "confidence": 0.55,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -2856,11 +2757,10 @@
         }
       ],
       "cot": [
-        "Premise 1: ForAll(x, UpdateEmail(x))",
-        "Premise 3: ForAll(x, UpdateEmail(x) → Paid(x))",
+        "LLM fact | Rule: LLM rule => has_paid(entity)",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "paid(entity)"
+      "fol": "has_paid(entity)"
     },
     {
       "task": "logic",
@@ -2877,10 +2777,10 @@
       ],
       "question_index": 1,
       "question": "Are all employees registered?",
-      "pred": "Yes",
+      "pred": "Unknown",
       "gold": "Yes",
-      "ok": true,
-      "confidence": 0.82,
+      "ok": false,
+      "confidence": 0.25,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -2926,11 +2826,12 @@
         }
       ],
       "cot": [
-        "Premise 1: ForAll(x, UpdateEmail(x))",
-        "Premise 6: ForAll(x, UpdateEmail(x) → Registered(x))",
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks.",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "registered(entity)"
+      "fol": null
     },
     {
       "task": "logic",
@@ -2951,7 +2852,7 @@
       "pred": "Yes",
       "gold": "Yes",
       "ok": true,
-      "confidence": 0.6,
+      "confidence": 0.72,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -2997,11 +2898,10 @@
         }
       ],
       "cot": [
-        "Premise 6: ForAll(x, PromotionEligible(x))",
-        "Premise 5: ForAll(x, PromotionEligible(x) → Bonus(x))",
+        "LLM fact | Rule: LLM rule => will_receive_bonu(entity)",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "bonus(entity)"
+      "fol": "will_receive_bonu(entity)"
     },
     {
       "task": "logic",
@@ -3022,7 +2922,7 @@
       "pred": "Yes",
       "gold": "Yes",
       "ok": true,
-      "confidence": 0.683,
+      "confidence": 0.72,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -3068,12 +2968,10 @@
         }
       ],
       "cot": [
-        "Premise 4: ForAll(x, ResearchBackground(x))",
-        "Premise 1: ForAll(x, ResearchBackground(x) → StrongQualifications(x))",
-        "Premise 2: ForAll(x, StrongQualifications(x) → SeniorRoleSuitability(x))",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "senior_role_suitability(entity)"
+      "fol": "suitable_for_senior_role(entity)"
     },
     {
       "task": "logic",
@@ -3161,10 +3059,10 @@
       ],
       "question_index": 1,
       "question": "Is it true that a student who completes 3 courses with scores above 8.5 will graduate, according to the premises?",
-      "pred": "No",
+      "pred": "Yes",
       "gold": "No",
-      "ok": true,
-      "confidence": 0.68,
+      "ok": false,
+      "confidence": 0.8,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -3457,10 +3355,10 @@
       ],
       "question_index": 1,
       "question": "Is producing original research while avoiding presentations sufficient to qualify for a scholarship, according to the premises?",
-      "pred": "No",
+      "pred": "Yes",
       "gold": "No",
-      "ok": true,
-      "confidence": 0.68,
+      "ok": false,
+      "confidence": 0.8,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -3767,10 +3665,10 @@
       ],
       "question_index": 1,
       "question": "Which of these conclusions is supported by the forgetting curve research?\nA. Review timing has no impact on retention\nB. Optimal intervals prevent both premature review and excessive forgetting\nC. Sleep has no effect on memory consolidation\nD. All learning methods yield identical results",
-      "pred": "Unknown",
+      "pred": "C",
       "gold": "Unknown",
-      "ok": true,
-      "confidence": 0.28,
+      "ok": false,
+      "confidence": 0.65,
       "question_type": "MultiChoice",
       "rag_used": true,
       "rag_fol_used": false,
@@ -3816,12 +3714,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as MultiChoice.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "adequate_sleep_enhances_memory_consolidation()"
     },
     {
       "task": "logic",
@@ -3913,10 +3809,10 @@
       ],
       "question_index": 1,
       "question": "Which of these conclusions is supported by the forgetting curve research?\nA. Review timing has no impact on retention\nB. Optimal intervals prevent both premature review and excessive forgetting\nC. Sleep has no effect on memory consolidation\nD. All learning methods yield identical results",
-      "pred": "Unknown",
+      "pred": "C",
       "gold": "Unknown",
-      "ok": true,
-      "confidence": 0.28,
+      "ok": false,
+      "confidence": 0.65,
       "question_type": "MultiChoice",
       "rag_used": true,
       "rag_fol_used": false,
@@ -3962,12 +3858,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as MultiChoice.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "adequate_sleep_enhances_memory_consolidation()"
     },
     {
       "task": "logic",
@@ -5118,10 +5012,10 @@
       ],
       "question_index": 0,
       "question": "Which of the following can be inferred about students?\nA. All students complete all assigned exercises\nB. Some students seek help from teaching assistants when needed\nC. All students have a consistent study routine\nD. Some students do not attend class regularly",
-      "pred": "Unknown",
+      "pred": "C",
       "gold": "Unknown",
-      "ok": true,
-      "confidence": 0.28,
+      "ok": false,
+      "confidence": 0.65,
       "question_type": "MultiChoice",
       "rag_used": true,
       "rag_fol_used": false,
@@ -5167,12 +5061,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as MultiChoice.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "has_consistent_study_routine(entity)"
     },
     {
       "task": "logic",
@@ -5261,10 +5153,10 @@
       ],
       "question_index": 0,
       "question": "Based on the above premises, which conclusion is correct?\nA. At least one student attends lectures regularly.\nB. There exists a student who attends lectures but does not complete assignments on time.\nC. All students understand the material.",
-      "pred": "Unknown",
+      "pred": "A",
       "gold": "A",
-      "ok": false,
-      "confidence": 0.28,
+      "ok": true,
+      "confidence": 0.65,
       "question_type": "MultiChoice",
       "rag_used": true,
       "rag_fol_used": false,
@@ -5308,12 +5200,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as MultiChoice.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact | Rule: LLM rule => attends_lectures_regularly(entity)",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "attends_lectures_regularly(entity)"
     },
     {
       "task": "logic",
@@ -5479,10 +5369,10 @@
       ],
       "question_index": 1,
       "question": "According to the premises, is the following statement true?\nStatement: If a student is registered for an advanced course, they will achieve success.",
-      "pred": "No",
+      "pred": "Yes",
       "gold": "No",
-      "ok": true,
-      "confidence": 0.68,
+      "ok": false,
+      "confidence": 0.8,
       "question_type": "OpenEnded",
       "rag_used": true,
       "rag_fol_used": false,
@@ -5549,10 +5439,10 @@
       ],
       "question_index": 0,
       "question": "Based on the premises, which statement is correct?\nA. Students who solve math problems correctly must have practiced them.\nB. Some students ask questions in math class even if they do not attend lectures.\nC. All students who practice math problems ask questions in class.",
-      "pred": "Unknown",
+      "pred": "A",
       "gold": "Unknown",
-      "ok": true,
-      "confidence": 0.28,
+      "ok": false,
+      "confidence": 0.65,
       "question_type": "MultiChoice",
       "rag_used": true,
       "rag_fol_used": false,
@@ -5596,12 +5486,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as MultiChoice.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "can_solve_math_problems_correctly(entity)"
     },
     {
       "task": "logic",
@@ -5617,10 +5505,10 @@
       ],
       "question_index": 1,
       "question": "According to the premises, is the following statement true?\nStatement: If a student passes the math exam, they will excel in mathematics.",
-      "pred": "No",
+      "pred": "Yes",
       "gold": "No",
-      "ok": true,
-      "confidence": 0.68,
+      "ok": false,
+      "confidence": 0.8,
       "question_type": "OpenEnded",
       "rag_used": true,
       "rag_fol_used": false,
@@ -6418,10 +6306,10 @@
       ],
       "question_index": 0,
       "question": "Based on the premises, which of the following is best supported?\nA. Students who attend career workshops are guaranteed to get hired after interviews.\nB. Building a strong resume directly leads to financial stability.\nC. Having a career mentor leads to better long-term career growth.\nD. Gaining relevant work experience prevents the need for strong interview performance.",
-      "pred": "Unknown",
+      "pred": "C",
       "gold": "Unknown",
-      "ok": true,
-      "confidence": 0.28,
+      "ok": false,
+      "confidence": 0.65,
       "question_type": "MultiChoice",
       "rag_used": true,
       "rag_fol_used": false,
@@ -6467,12 +6355,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as MultiChoice.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "has_better_long_term_career_growth(entity)"
     },
     {
       "task": "logic",
@@ -7201,10 +7087,10 @@
       ],
       "question_index": 1,
       "question": "Based on the premises, is the following rule enforced?\nRule: If a student applies for financial aid, and they have a low family income, they increase their chances of receiving support and reducing tuition burden.",
-      "pred": "Yes",
+      "pred": "Unknown",
       "gold": "No",
       "ok": false,
-      "confidence": 0.45,
+      "confidence": 0.55,
       "question_type": "OpenEnded",
       "rag_used": true,
       "rag_fol_used": false,
@@ -7250,10 +7136,10 @@
         }
       ],
       "cot": [
-        "Premise 1: ∃x(ReceivesFinancialAid(x))",
+        "LLM fact | Rule: LLM rule => increases_chances_of_receiving_financial_support(entity)",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "receives_financial_aid(some_1)"
+      "fol": "increases_chances_of_receiving_financial_support(entity)"
     },
     {
       "task": "logic",
@@ -7339,10 +7225,10 @@
       ],
       "question_index": 1,
       "question": "Based on the above premises, is the statement true?\nStatement: If a student never practices coding, they will still become proficient in Python.",
-      "pred": "No",
+      "pred": "Yes",
       "gold": "No",
-      "ok": true,
-      "confidence": 0.68,
+      "ok": false,
+      "confidence": 0.8,
       "question_type": "OpenEnded",
       "rag_used": true,
       "rag_fol_used": false,
@@ -7408,10 +7294,10 @@
       ],
       "question_index": 0,
       "question": "Based on the above premises, which conclusion is correct?\nA. If a Python project is not optimized, then it is unlikely to be well-tested.\nB. If all Python projects are well-structured, then all Python projects are optimized.\nC. If a Python project follows PEP 8 standards, then it must be well-tested.\nD. If a Python project is not well-structured, then it might not follow PEP 8 standards.",
-      "pred": "B",
+      "pred": "Unknown",
       "gold": "B",
-      "ok": true,
-      "confidence": 0.65,
+      "ok": false,
+      "confidence": 0.28,
       "question_type": "MultiChoice",
       "rag_used": true,
       "rag_fol_used": false,
@@ -7457,11 +7343,12 @@
         }
       ],
       "cot": [
-        "Premise 3: All Python projects are easy to maintain.",
-        "Premise 13: All Python projects are well-structured.",
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks.",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "well_structured(entity)"
+      "fol": null
     },
     {
       "task": "logic",
@@ -7548,10 +7435,10 @@
       ],
       "question_index": 0,
       "question": "Based on the above premises, which statement can be inferred?\nA. A cost-effective Raspberry Pi system may fail to support all versatile use-cases if it is not thoroughly tested and well-documented.\nB. Every Raspberry Pi system is necessarily versatile if it is cost-effective.\nC. If a Raspberry Pi system is cost-effective but not thoroughly tested and well-documented, then it is still versatile.\nD. A Raspberry Pi system is necessarily versatile even if it is not cost-effective.",
-      "pred": "B",
+      "pred": "Unknown",
       "gold": "Unknown",
-      "ok": false,
-      "confidence": 0.65,
+      "ok": true,
+      "confidence": 0.28,
       "question_type": "MultiChoice",
       "rag_used": true,
       "rag_fol_used": false,
@@ -7597,10 +7484,12 @@
         }
       ],
       "cot": [
-        "Premise 2: Exists(x, RaspberryPiCostEffective(x))",
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks.",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "raspberry_pi_cost_effective(some_2)"
+      "fol": null
     },
     {
       "task": "logic",
@@ -7616,10 +7505,10 @@
       ],
       "question_index": 1,
       "question": "Based on the above premises, is the statement true?\nStatement: If a Raspberry Pi system is cost-effective, then it is necessarily versatile.",
-      "pred": "Yes",
+      "pred": "No",
       "gold": "Unknown",
       "ok": false,
-      "confidence": 0.82,
+      "confidence": 0.72,
       "question_type": "OpenEnded",
       "rag_used": true,
       "rag_fol_used": false,
@@ -7807,7 +7696,7 @@
         }
       ],
       "cot": [
-        "Premise 1: ForAll(x, SupportsFastCharging(x))",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
       "fol": "supports_fast_charging(entity)"
@@ -8099,10 +7988,10 @@
       ],
       "question_index": 0,
       "question": "Does it follow that every hardware component is thoroughly validated?",
-      "pred": "Yes",
+      "pred": "No",
       "gold": "Yes",
-      "ok": true,
-      "confidence": 0.683,
+      "ok": false,
+      "confidence": 0.7,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -8148,11 +8037,12 @@
         }
       ],
       "cot": [
-        "Premise 10: ForAll(x, PowerEfficient(x))",
-        "Premise 5: ForAll(x, PowerEfficient(x) → ThoroughlyValidated(x))",
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks.",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "thoroughly_validated(entity)"
+      "fol": null
     },
     {
       "task": "logic",
@@ -8169,10 +8059,10 @@
       ],
       "question_index": 0,
       "question": "Does every drone have a GPS system?",
-      "pred": "Yes",
+      "pred": "Unknown",
       "gold": "No",
       "ok": false,
-      "confidence": 0.55,
+      "confidence": 0.45,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -8216,11 +8106,10 @@
         }
       ],
       "cot": [
-        "Premise 10: ForAll(x, FollowsFlightPath(x))",
-        "Premise 11: ForAll(x, FollowsFlightPath(x) → HasGPS(x))",
+        "Z3 checked entailment for drone_have_a_gps_system(every).",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "has_gps(entity)"
+      "fol": "drone_have_a_gps_system(every)"
     },
     {
       "task": "logic",
@@ -8237,10 +8126,10 @@
       ],
       "question_index": 1,
       "question": "Are all drones operating safely?",
-      "pred": "Unknown",
+      "pred": "Yes",
       "gold": "No",
       "ok": false,
-      "confidence": 0.25,
+      "confidence": 0.82,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -8284,12 +8173,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as YesNo.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "operating_safely(entity)"
     },
     {
       "task": "logic",
@@ -8455,7 +8342,7 @@
       "pred": "Yes",
       "gold": "Yes",
       "ok": true,
-      "confidence": 0.55,
+      "confidence": 0.7,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -8499,11 +8386,10 @@
         }
       ],
       "cot": [
-        "Premise 12: ForAll(x, Performance(x))",
-        "Premise 6: ForAll(x, Performance(x) → Tested(x))",
+        "LLM fact | Rule: LLM rule => thoroughly_tested_vr_game(vr_game)",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "tested(entity)"
+      "fol": "thoroughly_tested_vr_game(vr_game)"
     },
     {
       "task": "logic",
@@ -8590,10 +8476,10 @@
       ],
       "question_index": 0,
       "question": "Are all blockchain networks efficient?",
-      "pred": "Yes",
+      "pred": "Unknown",
       "gold": "Yes",
-      "ok": true,
-      "confidence": 0.6,
+      "ok": false,
+      "confidence": 0.45,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -8639,11 +8525,10 @@
         }
       ],
       "cot": [
-        "Premise 6: ForAll(x, Secure(x))",
-        "Premise 10: ForAll(x, Secure(x) → Efficient(x))",
+        "Z3 checked entailment for efficient(all).",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "efficient(entity)"
+      "fol": "efficient(all)"
     },
     {
       "task": "logic",
@@ -8661,10 +8546,10 @@
       ],
       "question_index": 1,
       "question": "Are all blockchain networks scalable?",
-      "pred": "Unknown",
+      "pred": "Yes",
       "gold": "Yes",
-      "ok": false,
-      "confidence": 0.25,
+      "ok": true,
+      "confidence": 0.6,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -8710,12 +8595,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as YesNo.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "is_scalable(entity)"
     },
     {
       "task": "logic",
@@ -8736,7 +8619,7 @@
       "pred": "Unknown",
       "gold": "Unknown",
       "ok": true,
-      "confidence": 0.25,
+      "confidence": 0.45,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -8782,12 +8665,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as YesNo.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "Z3 checked entailment for safe(all).",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "safe(all)"
     },
     {
       "task": "logic",
@@ -8808,7 +8689,7 @@
       "pred": "Unknown",
       "gold": "Yes",
       "ok": false,
-      "confidence": 0.25,
+      "confidence": 0.45,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -8854,12 +8735,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as YesNo.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "Z3 checked entailment for adopted_by_market(all).",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "adopted_by_market(all)"
     },
     {
       "task": "logic",
@@ -9092,7 +8971,7 @@
       "pred": "Yes",
       "gold": "No",
       "ok": false,
-      "confidence": 0.72,
+      "confidence": 0.7,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -9138,11 +9017,10 @@
         }
       ],
       "cot": [
-        "Premise 10: ForAll(x, MeetsPerformanceStandards(x))",
-        "Premise 5: ForAll(x, MeetsPerformanceStandards(x) → CostEffective(x))",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "cost_effective(entity)"
+      "fol": "is_cost_effective(entity)"
     },
     {
       "task": "logic",
@@ -9305,7 +9183,7 @@
       "pred": "Yes",
       "gold": "No",
       "ok": false,
-      "confidence": 0.82,
+      "confidence": 0.72,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -9351,11 +9229,10 @@
         }
       ],
       "cot": [
-        "Premise 4: ForAll(x, LatestProcessor(x))",
-        "Premise 5: ForAll(x, LatestProcessor(x) → HighlyEfficient(x))",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "highly_efficient(entity)"
+      "fol": "is_highly_efficient(entity)"
     },
     {
       "task": "logic",
@@ -9422,10 +9299,10 @@
         }
       ],
       "cot": [
-        "Premise 7: Exists(x, AdvancedCameraFeatures(x)) → (Exists(x, LatestProcessor(x)) → ForAll(x, HighResDisplay(x) → SuperiorScreenQuality(x)))",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "advanced_camera_features(x_exists_x,latest_processor_x_for_all_x,high_res_display_x_superior_screen_quality_x)"
+      "fol": "supports_advanced_camera_feature(entity)"
     },
     {
       "task": "logic",
@@ -9442,10 +9319,10 @@
       ],
       "question_index": 0,
       "question": "Do all courses meet curriculum standards?",
-      "pred": "Unknown",
+      "pred": "No",
       "gold": "No",
-      "ok": false,
-      "confidence": 0.25,
+      "ok": true,
+      "confidence": 0.493,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -9491,12 +9368,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as YesNo.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "¬meets_curriculum_standard(entity)"
     },
     {
       "task": "logic",
@@ -9513,10 +9388,10 @@
       ],
       "question_index": 1,
       "question": "Are there any courses offered online?",
-      "pred": "Unknown",
+      "pred": "Yes",
       "gold": "No",
       "ok": false,
-      "confidence": 0.25,
+      "confidence": 0.6,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -9562,12 +9437,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as YesNo.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "not_every_course_offered_online(entity)"
     },
     {
       "task": "logic",
@@ -9585,10 +9458,10 @@
       ],
       "question_index": 0,
       "question": "Are all research projects successful?",
-      "pred": "Yes",
+      "pred": "Unknown",
       "gold": "Yes",
-      "ok": true,
-      "confidence": 0.683,
+      "ok": false,
+      "confidence": 0.25,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -9634,10 +9507,12 @@
         }
       ],
       "cot": [
-        "Premise 11: Exists(x, Successful(x))",
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks.",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "successful(some_11)"
+      "fol": null
     },
     {
       "task": "logic",
@@ -9729,7 +9604,7 @@
       "pred": "Unknown",
       "gold": "Yes",
       "ok": false,
-      "confidence": 0.25,
+      "confidence": 0.45,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -9775,12 +9650,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as YesNo.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "Z3 checked entailment for is_current(all).",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "is_current(all)"
     },
     {
       "task": "logic",
@@ -9797,10 +9670,10 @@
       ],
       "question_index": 1,
       "question": "Do all academic works meet quality standards?",
-      "pred": "Yes",
+      "pred": "No",
       "gold": "No",
-      "ok": false,
-      "confidence": 0.72,
+      "ok": true,
+      "confidence": 0.475,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -9846,10 +9719,10 @@
         }
       ],
       "cot": [
-        "Premise 5: Exists(x, MeetsQualityStandards(x))",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "meets_quality_standards(some_5)"
+      "fol": "¬meets_quality_standard(entity)"
     },
     {
       "task": "logic",
@@ -9985,10 +9858,10 @@
         }
       ],
       "cot": [
-        "Premise 11: Exists(x, Portable(x))",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "portable(some_11)"
+      "fol": "portable(entity)"
     },
     {
       "task": "logic",
@@ -10003,10 +9876,10 @@
       ],
       "question_index": 0,
       "question": "Are all biometric systems secure?",
-      "pred": "Yes",
+      "pred": "Unknown",
       "gold": "No",
       "ok": false,
-      "confidence": 0.683,
+      "confidence": 0.45,
       "question_type": "YesNo",
       "rag_used": true,
       "rag_fol_used": false,
@@ -10050,13 +9923,10 @@
         }
       ],
       "cot": [
-        "Premise 4: ForAll(x, MachineLearning(x))",
-        "Premise 4: ForAll(x, MachineLearning(x))",
-        "Premise 5: ForAll(x, MachineLearning(x) -> DetectsAttack(x))",
-        "Premise 8: ForAll(x, (MachineLearning(x) & DetectsAttack(x)) -> Secure(x))",
+        "Z3 checked entailment for is_secure(all).",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "secure(entity)"
+      "fol": "is_secure(all)"
     },
     {
       "task": "logic",
@@ -10706,10 +10576,10 @@
       ],
       "question_index": 0,
       "question": "Based on the above premises, which statement can be inferred?\nA. If a student participates in social work, then they meet academic requirements.\nB. If someone participates in social work, then they meet extracurricular requirements.\nC. If someone meets academic requirements, then they are not a student.\nD. If a student meets academic requirements, they are not eligible for graduation.",
-      "pred": "Unknown",
+      "pred": "A",
       "gold": "Unknown",
-      "ok": true,
-      "confidence": 0.28,
+      "ok": false,
+      "confidence": 0.65,
       "question_type": "MultiChoice",
       "rag_used": true,
       "rag_fol_used": false,
@@ -10755,12 +10625,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as MultiChoice.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "participates_in_social_work(entity)"
     },
     {
       "task": "logic",
@@ -11266,7 +11134,7 @@
       ],
       "question_index": 0,
       "question": "Based on the above premises, which statement can be inferred?\nA. If a student submits assignments on time, then they receive extra credit.\nB. If a student receives extra credit, then they study regularly.\nC. If a student achieves good grades, then they do not receive extra credit.\nD. If a student does not submit assignments on time, then they study regularly.",
-      "pred": "A",
+      "pred": "B",
       "gold": "Unknown",
       "ok": false,
       "confidence": 0.65,
@@ -11315,10 +11183,10 @@
         }
       ],
       "cot": [
-        "Premise 2: Exists(x, SubmitsAssignmentsOnTime(x))",
+        "LLM fact | Rule: LLM rule => receives_extra_credit(entity)",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "submits_assignments_on_time(some_2)"
+      "fol": "receives_extra_credit(entity)"
     },
     {
       "task": "logic",
@@ -11453,7 +11321,7 @@
         }
       ],
       "cot": [
-        "Premise 1: ForAll(x, ReceivesExtraCredit(x))",
+        "LLM fact",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
       "fol": "receives_extra_credit(entity)"
@@ -11683,10 +11551,10 @@
       ],
       "question_index": 0,
       "question": "Based on the above premises, which statement can be inferred?\nA. If a student wins a scholarship, then they publish research.\nB. If a student publishes research, then they take advanced courses.\nC. If a student is not a student, then they do not win a scholarship.\nD. If someone does not take advanced courses, then they cannot publish research.",
-      "pred": "Unknown",
+      "pred": "A",
       "gold": "Unknown",
-      "ok": true,
-      "confidence": 0.28,
+      "ok": false,
+      "confidence": 0.65,
       "question_type": "MultiChoice",
       "rag_used": true,
       "rag_fol_used": false,
@@ -11732,12 +11600,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as MultiChoice.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact | Rule: LLM rule => wins_scholarship(x)",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "wins_scholarship(x)"
     },
     {
       "task": "logic",
@@ -11755,10 +11621,10 @@
       ],
       "question_index": 1,
       "question": "Based on the above premises, is the statement true?\nStatement: There exists someone who wins a scholarship.",
-      "pred": "No",
+      "pred": "Yes",
       "gold": "No",
-      "ok": true,
-      "confidence": 0.72,
+      "ok": false,
+      "confidence": 0.75,
       "question_type": "OpenEnded",
       "rag_used": true,
       "rag_fol_used": false,
@@ -11826,10 +11692,10 @@
       ],
       "question_index": 0,
       "question": "Based on the above premises, which statement can be inferred?\nA. If someone is a researcher, then they are qualified.\nB. If someone is a professor, then they are not qualified.\nC. If someone is qualified, then they are a student.\nD. If someone takes courses, then they are a professor.",
-      "pred": "D",
+      "pred": "Unknown",
       "gold": "Unknown",
-      "ok": false,
-      "confidence": 0.65,
+      "ok": true,
+      "confidence": 0.28,
       "question_type": "MultiChoice",
       "rag_used": true,
       "rag_fol_used": false,
@@ -11875,10 +11741,12 @@
         }
       ],
       "cot": [
-        "Premise 2: ForAll(x, TakesCourses(x))",
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks.",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "takes_courses(entity)"
+      "fol": null
     },
     {
       "task": "logic",
@@ -11965,10 +11833,10 @@
       ],
       "question_index": 0,
       "question": "Based on the above premises, which statement can be inferred?\nA. If someone passes the exam, they are qualified.\nB. If someone takes courses, then they are qualified.\nC. If someone is not a student, they take courses.\nD. If someone understands the lecture, then they are not a student.",
-      "pred": "B",
+      "pred": "Unknown",
       "gold": "Unknown",
-      "ok": false,
-      "confidence": 0.65,
+      "ok": true,
+      "confidence": 0.28,
       "question_type": "MultiChoice",
       "rag_used": true,
       "rag_fol_used": false,
@@ -12014,10 +11882,12 @@
         }
       ],
       "cot": [
-        "Premise 1: ForAll(x, TakesCourses(x))",
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks.",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": "takes_courses(entity)"
+      "fol": null
     },
     {
       "task": "logic",
@@ -13674,10 +13544,10 @@
       ],
       "question_index": 0,
       "question": "Based on the above premises, which statement can be inferred?\nA. If at least one student has received a scholarship and if failing to follow academic policies results in no scholarship, then failing to follow academic policies prevents students from receiving scholarships.\nB. If at least one student has received a scholarship and if failing to follow academic policies results in no scholarship, then failing to follow academic policies does not prevent students from receiving scholarships.\nC. If at least one student has received a scholarship and if failing to follow academic policies results in no scholarship, then failing to follow academic policies sometimes prevents students from receiving scholarships.\nD. If at least one student has received a scholarship and if failing to follow academic policies results in no scholarship, then failing to follow academic policies prevents students from receiving scholarships in some cases but not all.",
-      "pred": "Unknown",
+      "pred": "A",
       "gold": "Unknown",
-      "ok": true,
-      "confidence": 0.28,
+      "ok": false,
+      "confidence": 0.65,
       "question_type": "MultiChoice",
       "rag_used": true,
       "rag_fol_used": false,
@@ -13723,12 +13593,10 @@
         }
       ],
       "cot": [
-        "Classified logic question as MultiChoice.",
-        "Parsed premises into a Horn-rule knowledge base.",
-        "Ran forward chaining and Z3 entailment checks.",
+        "LLM fact | Rule: LLM rule => failing_to_follow_policies_results_in_no_scholarship(entity)",
         "RAG retrieved similar logic examples as few-shot parser guidance."
       ],
-      "fol": null
+      "fol": "failing_to_follow_policies_results_in_no_scholarship(entity)"
     },
     {
       "task": "logic",

@@ -68,13 +68,18 @@ SI and symbol notes:
 - Preserve SI units like Wb, T, J, N, W, Hz, rad/s, N/C, V/m; use ASCII unit strings such as `Ohm`, `microF`, `m^2`.
 - For measured x +/- dx, put `uncertainty`: {"si_value": dx_in_SI, "si_unit": "...", "kind": "absolute"}; otherwise use null.
 - Good target symbols include `I_rms`, `I_max`, `f_res`, `E_N`, `Q_source`, `F`, `P`, `epsilon_r`.
+- Preserve requested display units in `answer_format.requested_unit`; for "how many times/factor/bao nhiêu lần", use a dimensionless ratio target.
+- For chained equalities such as `q1=q2=q3=value`, emit each charge with the same signed SI value; if `q1/q2` are sources and `q` is a test charge, keep `q` separate.
+- For sinusoidal current `I(t)=A sin(...)` or `I(t)=A cos(...)`, include `I_max = abs(A)` when maximum/peak current or maximum magnetic energy is requested.
+- For circular capacitor plates, capture radius as `r`; for air/vacuum between capacitor plates, capture `epsilon_r = 1`.
 
 Geometry notes:
 - Collinear problems need point order, object locations, target point, stated segments, directly derived source-target distances, and a sign/direction convention.
 - Midpoint of AB: type `midpoint_1d`, line_order ["A","M","B"], derived AM = BM = AB / 2.
 - Perpendicular bisector: type `perpendicular_bisector`; no line_order; include AB, d_mid = AB / 2, ell, and AM = BM = sqrt(d_mid**2 + ell**2).
 - Equilateral triangle ABN: put A and B on the x-axis, N above AB, and preserve object locations.
-- Circuits: preserve RMS/peak wording, resonance/equality/phase wording, and named sections such as AM/MB when relevant.
+- Capacitors: preserve disconnected/isolated vs battery-connected wording, dielectric replacement values, and plate-distance change factors.
+- Circuits: preserve RMS/peak wording, resonance/equality/phase wording, quality-factor requests, and named sections such as AM/MB when relevant.
 
 Examples:
 
@@ -151,31 +156,94 @@ Output:
   "answer_format": {"requested_form": "magnitude"}
 }
 
-Input: Charges q1 = 5e-7 C at A and q2 = -5e-7 C at B are 6 cm apart. M is on the perpendicular bisector of AB, 4 cm from the midpoint. Find the electric field magnitude at M.
-Output:
+Input:
+Two charges q1 = +9e-7 C and q2 = -9e-7 C are placed at two points A and B, separated by 10 cm. A third charge q3 = -9e-7 C is placed at the midpoint of AB. Calculate the electric force acting on q3.
+Output: 
 {
-  "question": "Charges q1 = 5e-7 C at A and q2 = -5e-7 C at B are 6 cm apart. M is on the perpendicular bisector of AB, 4 cm from the midpoint. Find the electric field magnitude at M.",
+  "question": "Two charges q1 = +9 × 10^-7 C and q2 = -9 × 10^-7 C are placed at two points A and B, separated by 10 cm. A third charge q3 = -9 × 10^-7 C is placed at the midpoint of AB. Calculate the electric force acting on q3.",
   "domain": "Electric Charges and Fields",
-  "target": {"symbol": "E_M", "unit": "N/C"},
+  "target": {
+    "symbol": "F_3",
+    "unit": "N"
+  },
   "givens": [
-    {"symbol": "q1", "si_value": 0.0000005, "si_unit": "C", "uncertainty": null},
-    {"symbol": "q2", "si_value": -0.0000005, "si_unit": "C", "uncertainty": null},
-    {"symbol": "AB", "si_value": 0.06, "si_unit": "m", "uncertainty": null},
-    {"symbol": "ell", "si_value": 0.04, "si_unit": "m", "uncertainty": null}
+    {
+      "symbol": "q1",
+      "si_value": 0.0000009,
+      "si_unit": "C",
+      "uncertainty": null
+    },
+    {
+      "symbol": "q2",
+      "si_value": -0.0000009,
+      "si_unit": "C",
+      "uncertainty": null
+    },
+    {
+      "symbol": "q3",
+      "si_value": -0.0000009,
+      "si_unit": "C",
+      "uncertainty": null
+    },
+    {
+      "symbol": "AB",
+      "si_value": 0.1,
+      "si_unit": "m",
+      "uncertainty": null
+    }
   ],
-  "relations": ["M is on the perpendicular bisector of AB"],
+  "relations": [
+    "q1 is placed at A",
+    "q2 is placed at B",
+    "q3 is placed at the midpoint of AB"
+  ],
   "question_kind": "computational",
   "geometry": {
     "present": true,
-    "type": "perpendicular_bisector",
-    "points": ["A", "B", "M"],
+    "type": "collinear_midpoint",
+    "points": ["A", "M", "B"],
     "target_point": "M",
-    "object_locations": {"q1": "A", "q2": "B"},
-    "segments": [{"symbol": "AB", "si_value": 0.06, "si_unit": "m"}, {"symbol": "d_mid", "si_value": 0.03, "si_unit": "m"}, {"symbol": "ell", "si_value": 0.04, "si_unit": "m"}],
-    "derived_distances": [{"symbol": "AM", "expression": "sqrt(d_mid**2 + ell**2)", "si_value": 0.05, "si_unit": "m"}, {"symbol": "BM", "expression": "sqrt(d_mid**2 + ell**2)", "si_value": 0.05, "si_unit": "m"}],
-    "direction_convention": "x-axis from A to B; y-axis from midpoint of AB toward M"
+    "object_locations": {
+      "q1": "A",
+      "q2": "B",
+      "q3": "M"
+    },
+    "segments": [
+      {
+        "symbol": "AB",
+        "si_value": 0.1,
+        "si_unit": "m"
+      },
+      {
+        "symbol": "AM",
+        "si_value": 0.05,
+        "si_unit": "m"
+      },
+      {
+        "symbol": "BM",
+        "si_value": 0.05,
+        "si_unit": "m"
+      }
+    ],
+    "derived_distances": [
+      {
+        "symbol": "r_13",
+        "expression": "AB / 2",
+        "si_value": 0.05,
+        "si_unit": "m"
+      },
+      {
+        "symbol": "r_23",
+        "expression": "AB / 2",
+        "si_value": 0.05,
+        "si_unit": "m"
+      }
+    ],
+    "direction_convention": "x-axis from A to B; positive direction is from A toward B"
   },
-  "answer_format": {"requested_form": "magnitude"}
+  "answer_format": {
+    "requested_form": "magnitude_and_direction"
+  }
 }
 
 Now parse this question:

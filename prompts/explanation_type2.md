@@ -10,9 +10,14 @@ Output exactly:
 
 Faithfulness contract:
 - `answer` is the public answer string, such as `0.07 microF` or `4.44 μF`.
+- For numeric computation, `answer` must come only from `verified_output.final_answer`.
 - If the raw question explicitly requests a unit and rounding, convert the verified SI value to that unit and round as requested.
 - If no explicit unit/rounding request exists, format `verified_output.final_answer` as `<value> <unit>` without changing its value or unit.
-- Do not solve again, verify again, or change the answer.
+- Do not append direction, orientation, comparison text, labels, or descriptive phrases to `answer` unless they are explicitly present in `verified_output.final_answer` or explicitly requested by the raw question.
+- If `answer_format.requested_form` contains "magnitude", return magnitude only. Do not include direction.
+- If `answer_format.requested_form` is "magnitude_and_direction", include direction only if it is present in `verified_output.final_answer` or `vector_result`.
+- Never infer a richer answer form from geometry alone.
+- Do not solve again, verify again, infer missing answer parts, or change the answer.
 - Use only parsed_question, verified_output, solution_output, equations, known_values, solution_steps, direct_answer.rationale_steps, sympy_result.trace, decision_result, vector_result, geometry, comparison, and answer_format.
 - Do not introduce formulas, constants, assumptions, intermediate values, units, or rounding that are absent from the verified data or the raw question request.
 - Do not mention internal systems, JSON, SymPy, agents, pipelines, rejected candidates, or validation.
@@ -31,8 +36,9 @@ Mode guidance:
 - Numeric computation: follow solution_steps and sympy_spec.equations, then end with the public answer string.
 - Yes/no computation: state the computed value, expected value, tolerance/difference if present, then the verified Yes/No answer.
 - Direct answer: use direct_answer.rationale_steps and end with the verified direct answer.
-- Vector/geometry: mention components, distances, directions, or magnitude only when present in parsed_question or verified equations/results.
-
+- Vector/geometry: mention components, distances, directions, or magnitude only when present in parsed_question or verified equations/results, but include direction in the public `answer` only when `answer_format.requested_form` asks for direction or `verified_output.final_answer` already contains direction.
+- Preserve the answer form of `verified_output.final_answer`: if it is a scalar, return a scalar; if it is a vector/list/components, return the vector/components. Do not convert scalar to vector, vector to magnitude, or components to magnitude.
+- For multiple-choice answers, remove option labels such as A, B, C, D or similar prefixes from the public `answer`. Return only the actual answer content.
 Examples:
 
 Input summary:
@@ -44,6 +50,17 @@ Output:
   "answer": "0.0000044444444444444444 F",
   "explanation": "The requested quantity is the capacitance C. The verified setup uses C = Q/U with the parsed values Q = 0.00004 C and U = 9 V. Therefore, C = 0.0000044444444444444444 F."
 }
+
+Input summary:
+answer_format.requested_form = "magnitude and direction"
+verified_output.final_answer = {"symbol": "F_3", "value": 5.83, "unit": "N"}
+vector_result.direction = "parallel to AB, from B to A"
+Output:
+{
+  "answer": "5.83 N",
+  "explanation": "The requested quantity is the magnitude of the electric force on q3. The verified setup uses the given midpoint geometry and force contributions from the surrounding charges. Since the requested form is magnitude, the public answer keeps only the verified force magnitude. Therefore, the answer is 5.83 N."
+}
+
 
 parsed_question:
 {{PARSED_QUESTION}}

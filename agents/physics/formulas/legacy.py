@@ -21,6 +21,10 @@ SYMBOL_REPLACEMENTS = {
     "μ": "mu",
     "µ": "mu",
     "λ": "lambda_",
+    "π": "pi",
+    "Π": "pi",
+    "×": "*",
+    "·": "*",
     "√": "sqrt",
     "−": "-",
     "–": "-",
@@ -80,6 +84,8 @@ def _normalize_text(value: str) -> str:
     normalized = value
     for source, replacement in SYMBOL_REPLACEMENTS.items():
         normalized = normalized.replace(source, replacement)
+    normalized = re.sub(r"(?<=\d)\s*(?=pi\b)", "*", normalized)
+    normalized = re.sub(r"\bpi\s*(?=[A-Za-z_])", "pi*", normalized)
     return normalized
 
 
@@ -323,7 +329,7 @@ _CHARGE_UNIT_SCALE = {
     "nc": 1e-9,
     "pc": 1e-12,
 }
-_NUMBER_PATTERN = r"[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:\s*(?:x|\*)\s*10\s*(?:\^|\*\*)?\s*[+-]?\d+)?"
+_NUMBER_PATTERN = r"[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:(?:[eE][+-]?\d+)|(?:\s*(?:x|\*)\s*10\s*(?:\^|\*\*)?\s*[+-]?\d+))?"
 
 
 def _scaled_text_value(number: str, unit: str, scales: dict[str, float]) -> float | None:
@@ -345,6 +351,28 @@ def _merge_text_electrostatic_values(semantic_output: dict[str, Any], values: di
 
     charge_unit = r"(?:micro\s*c|muc|uc|nc|pc|c)"
     for match in re.finditer(
+        rf"\b(?P<symbols>q(?:_?test|\d+)?(?:\s*=\s*q(?:_?test|\d+)?)+)\s*=\s*"
+        rf"(?P<value>{_NUMBER_PATTERN})\s*(?P<unit>{charge_unit})\b",
+        question,
+        flags=re.IGNORECASE,
+    ):
+        value = _scaled_text_value(match.group("value"), match.group("unit"), _CHARGE_UNIT_SCALE)
+        if value is None:
+            continue
+        for raw_symbol in re.split(r"\s*=\s*", match.group("symbols")):
+            symbol = _canonical_formula_symbol(raw_symbol)
+            if symbol:
+                merged[symbol] = value
+    for match in re.finditer(
+        rf"\b(?P<first>q\d+)\s*=\s*(?P<second>q\d+)\s*=\s*(?P<value>{_NUMBER_PATTERN})\s*(?P<unit>{charge_unit})\b",
+        question,
+        flags=re.IGNORECASE,
+    ):
+        value = _scaled_text_value(match.group("value"), match.group("unit"), _CHARGE_UNIT_SCALE)
+        if value is not None:
+            merged[_canonical_formula_symbol(match.group("first"))] = value
+            merged[_canonical_formula_symbol(match.group("second"))] = value
+    for match in re.finditer(
         rf"\b(?P<symbol>q(?:_?test|\d+)?)\s*=\s*(?P<value>{_NUMBER_PATTERN})\s*(?P<unit>{charge_unit})\b",
         question,
         flags=re.IGNORECASE,
@@ -354,7 +382,7 @@ def _merge_text_electrostatic_values(semantic_output: dict[str, Any], values: di
             symbol = "q_test"
         value = _scaled_text_value(match.group("value"), match.group("unit"), _CHARGE_UNIT_SCALE)
         if value is not None:
-            merged.setdefault(symbol, value)
+            merged[symbol] = value
 
     distance_unit = r"(?:cm|mm|m)"
     for match in re.finditer(
@@ -489,7 +517,7 @@ def _solution(
 
 
 def _is_force_target(target: str, text: str) -> bool:
-    return _target_is(target, "F", "F_net", "F_total", "force") or "force" in text
+    return _target_is(target, "F", "F_net", "F_total", "force") or "force" in text or "lực" in text or "luc" in text
 
 
 def _point_charge_vector_solution(
@@ -688,11 +716,11 @@ def _formula_only_solution(semantic_output: dict[str, Any], text: str, values: d
     return None
 
 
-def _electric_equilateral_solution(semantic_output: dict[str, Any]) -> dict[str, Any] | None:
-    values = _numeric_values(semantic_output)
+def _electric_equilateral_solution(semantic_output: dict[str, Any], values: dict[str, float] | None = None) -> dict[str, Any] | None:
+    values = values or _numeric_values(semantic_output)
     q1 = values.get("q1")
     q2 = values.get("q2")
-    side = values.get("a") or values.get("AB")
+    side = values.get("a") or values.get("AB") or values.get("side")
     if q1 is None or q2 is None or side is None:
         return None
     target = _target_from_terms(semantic_output, "E_net_magnitude")
@@ -722,8 +750,8 @@ def _electric_equilateral_solution(semantic_output: dict[str, Any]) -> dict[str,
     )
 
 
-def _electric_midpoint_solution(semantic_output: dict[str, Any]) -> dict[str, Any] | None:
-    values = _numeric_values(semantic_output)
+def _electric_midpoint_solution(semantic_output: dict[str, Any], values: dict[str, float] | None = None) -> dict[str, Any] | None:
+    values = values or _numeric_values(semantic_output)
     q1 = values.get("q1")
     q2 = values.get("q2")
     ab = values.get("AB") or values.get("a")
@@ -731,7 +759,7 @@ def _electric_midpoint_solution(semantic_output: dict[str, Any]) -> dict[str, An
         return None
     text = _semantic_text(semantic_output)
     target = _target_from_terms(semantic_output, "E_net_magnitude")
-    test_charge = _test_charge_symbol(values)
+    test_charge = _test_charge_symbol(values, text)
     target_kind = "force" if _is_force_target(target, text) and test_charge is not None else "field"
     target = target if _is_identifier(target) and target != "result" else ("F_net_magnitude" if target_kind == "force" else "E_net_magnitude")
     unit = _target_unit_from_semantics(semantic_output, "N" if target_kind == "force" else "N/C")
@@ -1042,10 +1070,14 @@ def _two_source_charges(values: dict[str, float]) -> tuple[dict[str, float], lis
     return {"q1": float(q1), "q2": float(q2)}, [("q1", "Ax", "Ay"), ("q2", "Bx", "By")]
 
 
-def _test_charge_symbol(values: dict[str, float]) -> tuple[str, float] | None:
+def _test_charge_symbol(values: dict[str, float], text: str = "") -> tuple[str, float] | None:
     for symbol in ("q3", "q0", "q_test"):
         if values.get(symbol) is not None:
             return symbol, float(values[symbol])
+    if values.get("q") is not None and (values.get("q1") is not None or values.get("q2") is not None):
+        lowered = f" {text.lower()} "
+        if any(cue in lowered for cue in ("test charge", "charge q", " on q", "force on q", "lực", "dien tich q", "điện tích q")):
+            return "q", float(values["q"])
     return None
 
 
@@ -1132,7 +1164,7 @@ def _collinear_test_charge_force_solution(
     text: str,
 ) -> dict[str, Any] | None:
     charges = _two_source_charges(values)
-    test_charge = _test_charge_symbol(values)
+    test_charge = _test_charge_symbol(values, text)
     if charges is None or test_charge is None:
         return None
     target = _target_from_terms(semantic_output, "F_net_magnitude")
@@ -1194,12 +1226,48 @@ def _square_center_symmetry_force_solution(semantic_output: dict[str, Any], text
     )
 
 
+def _square_center_unknown_charge_solution(
+    semantic_output: dict[str, Any],
+    values: dict[str, float],
+    text: str,
+) -> dict[str, Any] | None:
+    if "square" not in text or "center" not in text:
+        return None
+    if not ("zero" in text and ("field" in text or "electric" in text)):
+        return None
+    target = _target_from_terms(semantic_output, "q4")
+    if not (_target_is(target, "q4") or "q4" in text or "charge at d" in text):
+        return None
+    q1 = values.get("q1")
+    q2 = values.get("q2")
+    q3 = values.get("q3")
+    if q1 is None or q2 is None or q3 is None:
+        return None
+    if not math.isclose(float(q1), float(q3), rel_tol=1e-9, abs_tol=1e-18):
+        return None
+    solved_target = target if _target_is(target, "q4") else "q4"
+    return _solution(
+        ["electrostatics.square_center_unknown_charge_zero_field"],
+        solved_target,
+        _target_unit_from_semantics(semantic_output, "C"),
+        [f"{solved_target} = q2"],
+        {"q2": float(q2)},
+        [
+            "At the square center, fields from opposite vertices lie on the same diagonal in opposite directions.",
+            "Because q1 and q3 are equal at opposite vertices, their fields cancel.",
+            "The remaining opposite pair cancels only when q4 equals q2.",
+        ],
+    )
+
+
 def _equilateral_center_identical_field_solution(semantic_output: dict[str, Any], text: str) -> dict[str, Any] | None:
-    if "equilateral triangle" not in text or not any(term in text for term in ("center", "centroid", "centre")):
+    if "equilateral triangle" not in text and "tam giác đều" not in text and "tam giac deu" not in text:
         return None
-    if "identical" not in text and "same" not in text and "three charges" not in text:
+    if not any(term in text for term in ("center", "centroid", "centre", "tâm", "tam", "trọng tâm", "trong tam")):
         return None
-    if not any(term in text for term in ("electric field", "field intensity", "field strength")):
+    if not any(term in text for term in ("identical", "same", "equal", "three charges", "cùng dấu", "cung dau", "bằng nhau", "bang nhau")):
+        return None
+    if not any(term in text for term in ("electric field", "field intensity", "field strength", "điện trường", "dien truong")):
         return None
     target = _target_from_terms(semantic_output, "E_net_magnitude")
     target = target if _is_identifier(target) and target != "result" else "E_net_magnitude"
@@ -1268,7 +1336,7 @@ def _equilateral_charge_force_solution(semantic_output: dict[str, Any], values: 
     target = _target_from_terms(semantic_output, "F_net_magnitude")
     target = target if _is_identifier(target) and target != "result" else "F_net_magnitude"
 
-    test_charge = _test_charge_symbol(values)
+    test_charge = _test_charge_symbol(values, text)
     if test_charge is not None and (values.get("q1") is not None or values.get("q") is not None):
         q1 = values.get("q1", values.get("q"))
         q2 = values.get("q2", q1)
@@ -1336,7 +1404,7 @@ def _perpendicular_bisector_vector_solution(semantic_output: dict[str, Any], val
     if "perpendicular bisector" not in text and "trung truc" not in text and "trung trực" not in text:
         return None
     target = _target_from_terms(semantic_output, "E_net_magnitude")
-    test_charge = _test_charge_symbol(values)
+    test_charge = _test_charge_symbol(values, text)
     target_kind = "force" if _is_force_target(target, text) and test_charge is not None else "field"
     target = target if _is_identifier(target) and target != "result" else ("F_net_magnitude" if target_kind == "force" else "E_net_magnitude")
     knowns = {**charges[0], base_symbol: float(values[base_symbol]), height_symbol: float(values[height_symbol]), "k": 9e9}
@@ -1376,7 +1444,7 @@ def _triangle_ab_point_vector_solution(semantic_output: dict[str, Any], values: 
         return None
     point_name, from_a, from_b = point_symbols
     target = _target_from_terms(semantic_output, "E_net_magnitude")
-    test_charge = _test_charge_symbol(values)
+    test_charge = _test_charge_symbol(values, text)
     target_kind = "force" if _is_force_target(target, text) and test_charge is not None else "field"
     target = target if _is_identifier(target) and target != "result" else ("F_net_magnitude" if target_kind == "force" else "E_net_magnitude")
     knowns = {**charges[0], "AB": float(ab), from_a: float(values[from_a]), from_b: float(values[from_b]), "k": 9e9}
@@ -1588,6 +1656,9 @@ def _electric_solution(semantic_output: dict[str, Any], text: str) -> dict[str, 
     if "electric" not in domain and "charge" not in domain:
         return None
     values = _merge_text_electrostatic_values(semantic_output, _numeric_values(semantic_output))
+    square_unknown = _square_center_unknown_charge_solution(semantic_output, values, text)
+    if square_unknown is not None:
+        return square_unknown
     square_symmetry = _square_center_symmetry_force_solution(semantic_output, text)
     if square_symmetry is not None:
         return square_symmetry
@@ -1645,7 +1716,7 @@ def _electric_solution(semantic_output: dict[str, Any], text: str) -> dict[str, 
             )
     # Only use equilateral branch when explicitly stated in text.
     if "equilateral triangle" in text:
-        return _electric_equilateral_solution(semantic_output)
+        return _electric_equilateral_solution(semantic_output, values)
     dielectric = _dielectric_point_charge_solution(semantic_output, text)
     if dielectric is not None:
         return dielectric
@@ -1653,7 +1724,7 @@ def _electric_solution(semantic_output: dict[str, Any], text: str) -> dict[str, 
     if midpoint_identical is not None:
         return midpoint_identical
     if "midpoint" in geometry_type or "midpoint" in text:
-        return _electric_midpoint_solution(semantic_output)
+        return _electric_midpoint_solution(semantic_output, values)
     unknown_charge_solution = _zero_field_unknown_charge_solution(semantic_output, text)
     if unknown_charge_solution is not None:
         return unknown_charge_solution
@@ -1768,11 +1839,44 @@ def _is_ac_context(text: str) -> bool:
             "impedance",
             "lc circuit",
             "rms voltage",
+            "out of phase",
+            "phase",
             "lcomega",
             "lc*omega",
             "uam",
             "umb",
+            "quality factor",
+            "hệ số phẩm chất",
+            "he so pham chat",
         )
+    )
+
+
+def _insufficient_two_section_phase_solution(
+    semantic_output: dict[str, Any],
+    values: dict[str, float],
+    text: str,
+) -> dict[str, Any] | None:
+    if not ("am" in text and "mb" in text and ("90" in text or "quadrature" in text or "out of phase" in text)):
+        return None
+    if not all(symbol in values for symbol in ("R1", "R2")):
+        return None
+    if _lookup_value(values, "U") is not None or _lookup_value(values, "P") is not None:
+        return None
+    target = _target_from_terms(semantic_output, "result")
+    if not (
+        target in {"", "result", "answer"}
+        or _target_is(target, "I", "I_rms", "U", "V", "U_AM", "U_MB", "P", "power")
+        or "find" not in text
+    ):
+        return None
+    return _direct(
+        "Insufficient information to determine a unique numeric answer.",
+        [
+            "The phase relation and R1/R2 describe the circuit constraint, but no requested quantity is specified clearly.",
+            "A numeric current, voltage, or power also needs an additional source voltage, current, or power datum.",
+        ],
+        ["physics.insufficient_information"],
     )
 
 
@@ -2185,6 +2289,29 @@ def _ac_solution(semantic_output: dict[str, Any], values: dict[str, float], text
     unit = _target_unit_from_semantics(semantic_output)
     i_value = _lookup_value(values, "I", "I_rms")
     r_value = _lookup_value(values, "R")
+    l_value = _lookup_value(values, "L")
+    c_value = _lookup_value(values, "C")
+    insufficient = _insufficient_two_section_phase_solution(semantic_output, values, text)
+    if insufficient is not None:
+        return insufficient
+    if (
+        r_value is not None
+        and l_value is not None
+        and c_value is not None
+        and c_value > 0
+        and r_value != 0
+        and ("quality factor" in text or "hệ số phẩm chất" in text or "he so pham chat" in text or _target_is(target, "Q", "Q_factor", "quality_factor"))
+    ):
+        solved_target = target if _target_is(target, "Q", "Q_factor", "quality_factor") else "Q_factor"
+        return _solution(
+            ["rlc.series.quality_factor"],
+            solved_target,
+            unit or "dimensionless",
+            [f"{solved_target} = sqrt(L / C) / R"],
+            {"L": float(l_value), "C": float(c_value), "R": float(r_value)},
+            ["For a series RLC circuit, the quality factor is Q = (1/R)*sqrt(L/C)."],
+            assumptions={"circuit_type": "series_assumed"},
+        )
     if (
         i_value is not None
         and r_value is not None
@@ -2315,6 +2442,57 @@ def _extract_voltage_from_text(question_norm: str) -> float | None:
     return _parse_number_token(match.group("value")) if match else None
 
 
+def _extract_epsilon_sequence_from_text(question_norm: str) -> list[float]:
+    values: list[float] = []
+    patterns = (
+        rf"\b(?:epsilon_r|epsilon_|epsilon|eps|er)\s*=?\s*(?P<value>{_NUMBER_PATTERN})",
+        rf"\b(?:dielectric constant|relative permittivity)\s*(?:=|is|of)?\s*(?P<value>{_NUMBER_PATTERN})",
+    )
+    for pattern in patterns:
+        for match in re.finditer(pattern, question_norm, flags=re.IGNORECASE):
+            value = _parse_number_token(match.group("value"))
+            if value is not None:
+                values.append(float(value))
+    return values
+
+
+def _distance_change_factor(question_norm: str) -> float | None:
+    phrase_factors = {
+        "doubled": 2.0,
+        "double": 2.0,
+        "twice": 2.0,
+        "tripled": 3.0,
+        "triple": 3.0,
+        "quadrupled": 4.0,
+        "quadruple": 4.0,
+        "halved": 0.5,
+        "tăng gấp đôi": 2.0,
+        "tang gap doi": 2.0,
+        "tăng gấp ba": 3.0,
+        "tang gap ba": 3.0,
+        "tăng gấp bốn": 4.0,
+        "tang gap bon": 4.0,
+    }
+    for phrase, factor in phrase_factors.items():
+        if phrase in question_norm:
+            return factor
+    match = re.search(
+        rf"(?:distance|separation|plate separation|khoảng cách|khoang cach).*?"
+        rf"(?:factor of|by a factor of|increases? by|increased by|gấp|gap)\s*(?P<value>{_NUMBER_PATTERN})",
+        question_norm,
+    )
+    if match:
+        return _parse_number_token(match.group("value"))
+    match = re.search(
+        rf"(?:distance|separation|plate separation|khoảng cách|khoang cach).*?"
+        rf"(?P<value>{_NUMBER_PATTERN})\s*(?:times|x|lần|lan)",
+        question_norm,
+    )
+    if match:
+        return _parse_number_token(match.group("value"))
+    return None
+
+
 def _extract_time_from_text(question_norm: str) -> float | None:
     unit_scales = {"s": 1.0, "ms": 1e-3, "microseconds": 1e-6, "microsecond": 1e-6, "us": 1e-6}
     pi_match = re.search(
@@ -2347,6 +2525,27 @@ def _time_function_rhs(question_norm: str, function_name: str, output_symbol: st
     return f"{symbol} = {amplitude} * {match.group('trig')}({omega} * t)"
 
 
+def _time_function_amplitude(question_norm: str, function_name: str) -> float | None:
+    match = re.search(
+        rf"\b{function_name}\s*\(\s*t\s*\)\s*=\s*(?P<amp>{_NUMBER_PATTERN})\s*\*?\s*(?:sin|cos)\s*\(",
+        question_norm,
+    )
+    if not match:
+        return None
+    amplitude = _parse_number_token(match.group("amp"))
+    return abs(amplitude) if amplitude is not None else None
+
+
+def _is_parallel_plate_capacitor_text(text: str) -> bool:
+    compact = text.replace("-", " ")
+    return (
+        "parallel plate capacitor" in compact
+        or ("parallel plate" in compact and "capacitor" in compact)
+        or "tụ phẳng" in compact
+        or "tu phang" in compact
+    )
+
+
 def _capacitance_solution(semantic_output: dict[str, Any], values: dict[str, float], text: str) -> dict[str, Any] | None:
     domain = str(semantic_output.get("domain") or "").lower()
     if (
@@ -2376,6 +2575,84 @@ def _capacitance_solution(semantic_output: dict[str, Any], values: dict[str, flo
     area_value = _extract_area_from_text(question_norm) or values.get("A") or values.get("S")
     separation_value = _extract_length_from_text(question_norm, "plate separation", "separation", "distance", "d") or values.get("d")
     t_value = _lookup_value(values, "t", "time")
+    epsilon_text_values = _extract_epsilon_sequence_from_text(question_norm)
+
+    disconnected = any(term in question_norm for term in ("disconnected", "isolated", "ngắt", "ngat", "ngắt nguồn", "ngat nguon"))
+    dielectric_context = any(term in question_norm for term in ("dielectric", "permittivity", "điện môi", "dien moi", "epsilon"))
+    ratio_question = any(term in question_norm for term in ("how many times", "bao nhiêu lần", "bao nhieu lan", "mấy lần", "may lan", "factor", "times"))
+
+    if (
+        (_is_parallel_plate_capacitor_text(question_norm) or ("capacitance" in question_norm and area_value is not None))
+        and area_value is not None
+        and separation_value is not None
+        and len(epsilon_text_values) >= 2
+        and ("capacitance" in question_norm or _target_is(target, "C", "C_new"))
+    ):
+        epsilon_initial = epsilon_text_values[0]
+        epsilon_new = epsilon_text_values[-1]
+        if separation_value != 0 and epsilon_initial != 0:
+            solved_target = target if _target_is(target, "C", "C_new") and target != "C" else "C_new"
+            relationship = f"{epsilon_new / epsilon_initial:.6g} of the initial capacitance"
+            return _solution(
+                ["capacitance.parallel_plate_dielectric_replacement"],
+                solved_target,
+                unit or "F",
+                [
+                    f"A_eff = {float(area_value)}",
+                    f"d_eff = {float(separation_value)}",
+                    f"epsilon_r_initial = {float(epsilon_initial)}",
+                    f"epsilon_r_new = {float(epsilon_new)}",
+                    f"{solved_target} = epsilon_0 * epsilon_r_new * A_eff / d_eff",
+                ],
+                {},
+                [
+                    "For unchanged parallel plates, C is proportional to epsilon_r.",
+                    "Use the replacement dielectric constant with the same area and separation to compute C_new.",
+                ],
+                relationship=relationship,
+            )
+
+    distance_factor = _distance_change_factor(question_norm)
+    if disconnected and distance_factor is not None and distance_factor > 0 and "energy" in question_norm and ratio_question:
+        solved_target = target if target in {"energy_ratio", "ratio", "factor", "change_factor"} else "energy_ratio"
+        return _solution(
+            ["capacitance.isolated_plate_separation_energy_ratio"],
+            solved_target,
+            "dimensionless",
+            [f"distance_factor = {float(distance_factor)}", f"{solved_target} = distance_factor"],
+            {},
+            [
+                "For a disconnected capacitor, charge remains constant.",
+                "C is inversely proportional to plate separation, so W = Q**2/(2*C) scales directly with separation.",
+            ],
+        )
+
+    if (
+        disconnected
+        and dielectric_context
+        and c_value is not None
+        and u_value is not None
+        and ("energy" in question_norm or _target_is(target, "W", "E", "W_new"))
+    ):
+        epsilon_r = _lookup_value(values, "epsilon_r", "epsilon", "eps_r", "er")
+        if epsilon_text_values:
+            epsilon_r = epsilon_text_values[-1]
+        if epsilon_r is not None and epsilon_r != 0:
+            solved_target = target if _target_is(target, "W", "E", "W_new") else "W_new"
+            return _solution(
+                ["capacitance.isolated_dielectric_energy_from_initial_voltage"],
+                solved_target,
+                unit or "J",
+                [
+                    "W_initial = C * U**2 / 2",
+                    f"{solved_target} = W_initial / epsilon_r",
+                ],
+                {"C": float(c_value), "U": float(u_value), "epsilon_r": float(epsilon_r)},
+                [
+                    "After disconnection, charge remains constant.",
+                    "Adding dielectric increases capacitance by epsilon_r, so stored energy divides by epsilon_r.",
+                ],
+            )
 
     if (
         "identical capacitor" in question_norm
@@ -2393,10 +2670,13 @@ def _capacitance_solution(semantic_output: dict[str, Any], values: dict[str, flo
             ["capacitance.series_parallel_identical_energy_ratio"],
         )
 
-    if (
-        ("u is doubled" in question_norm or "voltage is doubled" in question_norm or "if u is doubled" in question_norm)
-        and ("energy" in question_norm or "electric field energy" in question_norm)
-    ):
+    voltage_doubles = bool(
+        re.search(
+            r"\b(?:voltage|potential difference|u|v)\b.*\b(?:doubles|double|is doubled|becomes twice|twice)\b",
+            question_norm,
+        )
+    )
+    if voltage_doubles and ("energy" in question_norm or "electric field energy" in question_norm):
         return _direct(
             "4",
             [
@@ -2512,10 +2792,40 @@ def _capacitance_solution(semantic_output: dict[str, Any], values: dict[str, flo
                 ],
             )
 
-    if (
+    lc_equal_energy = (
         ("lc circuit" in question_norm or "ideal lc" in question_norm)
-        and ("electric energy equals the magnetic energy" in question_norm or "electric energy equals magnetic energy" in question_norm)
-    ):
+        and (
+            "electric energy equals the magnetic energy" in question_norm
+            or "electric energy equals magnetic energy" in question_norm
+            or "electric field energy equals the magnetic field energy" in question_norm
+            or ("electric field energy" in question_norm and "magnetic field energy" in question_norm and "equal" in question_norm)
+        )
+    )
+    wants_lc_current_percent = (
+        lc_equal_energy
+        and (
+            "percentage of the peak current" in question_norm
+            or "percent of the peak current" in question_norm
+            or "percent of peak current" in question_norm
+            or _target_is(target, "current_percent", "I_percent", "percent_Imax")
+        )
+    )
+    if wants_lc_current_percent:
+        solved_target = target if _target_is(target, "current_percent", "I_percent", "percent_Imax") else "current_percent"
+        return _solution(
+            ["lc.current_percent_equal_energies"],
+            solved_target,
+            "%",
+            ["current_fraction = sqrt(1 / 2)", f"{solved_target} = current_fraction * 100"],
+            {},
+            [
+                "In an ideal LC oscillator, W_L/W_total = (I/I_max)**2.",
+                "When electric and magnetic energies are equal, W_L is half the total energy.",
+                "Therefore I/I_max = sqrt(1/2), or about 70.7 percent.",
+            ],
+        )
+
+    if lc_equal_energy:
         total_energy = _lookup_value(values, "W_total", "E_total", "total_energy", "W") or text_energy
         if total_energy is not None:
             target_symbol = "W_C" if target in {"result", "each_energy", ""} else target
@@ -2793,7 +3103,27 @@ def _capacitance_solution(semantic_output: dict[str, Any], values: dict[str, flo
             ],
         )
 
-    if "parallel plate capacitor" in question_norm and (_target_is(target, "Q", "q") or "charge" in question_norm):
+    if _is_parallel_plate_capacitor_text(question_norm) and (_target_is(target, "Q", "q") or "charge" in question_norm):
+        radius_value = _lookup_value(values, "r") or _extract_length_from_text(question_norm, "radius", "r")
+        d_value = _lookup_value(values, "d") or separation_value
+        epsilon_r = _lookup_value(values, "epsilon_r", "epsilon", "eps_r")
+        if epsilon_r is None and any(term in question_norm for term in ("air", "vacuum")):
+            epsilon_r = 1.0
+        if radius_value is not None and d_value is not None and u_value is not None and epsilon_r is not None:
+            solved_target = "Q" if not _target_is(target, "Q", "q") else target
+            return _solution(
+                ["capacitance.parallel_plate_circular_charge"],
+                solved_target,
+                unit or "C",
+                ["A = pi * r**2", "C_eq = epsilon_0 * epsilon_r * A / d", f"{solved_target} = C_eq * U"],
+                {"r": float(radius_value), "d": float(d_value), "U": float(u_value), "epsilon_r": float(epsilon_r)},
+                [
+                    "For circular plates, compute plate area as A = pi*r**2.",
+                    "Use C = epsilon_0*epsilon_r*A/d and then Q = C*U.",
+                ],
+            )
+
+    if _is_parallel_plate_capacitor_text(question_norm) and (_target_is(target, "Q", "q") or "charge" in question_norm):
         s_value = values.get("S") or values.get("A")
         d_value = values.get("d")
         epsilon_r = _lookup_value(values, "epsilon_r", "epsilon", "eps_r")
@@ -2825,6 +3155,8 @@ def _capacitance_solution(semantic_output: dict[str, Any], values: dict[str, flo
             )
             if epsilon_match:
                 epsilon_r = float(epsilon_match.group(1))
+        if epsilon_r is None and any(term in question_norm for term in ("air", "vacuum")):
+            epsilon_r = 1.0
         if s_value is not None and d_value is not None and epsilon_r is not None and u_value is not None:
             epsilon_symbol = "epsilon_r" if "epsilon_r" in values else "epsilon" if "epsilon" in values else "epsilon_r"
             solved_target = "Q" if not _target_is(target, "Q", "q") else target
@@ -3289,6 +3621,8 @@ def _inductance_solution(semantic_output: dict[str, Any], values: dict[str, floa
             )
             if current_match:
                 i_value = _parse_number_token(current_match.group(1))
+        if i_value is None and ("maximum" in question or "max" in question):
+            i_value = _time_function_amplitude(question, "i")
         if w_value is None:
             energy_match = re.search(
                 r"energy(?:\s+of)?\s*([+-]?(?:\d+(?:\.\d*)?|\.\d+))\s*(mj|uj|microj|j)\b",

@@ -6,7 +6,7 @@ import logging
 import re
 from typing import Any
 
-from agents.formatting import convert_si_to_requested, format_number
+from agents.formatting import convert_si_to_requested, format_number, normalize_unit
 from agents.physics.validation import (
     comparison_tolerance,
     direction_from_components,
@@ -24,6 +24,27 @@ logger = logging.getLogger(__name__)
 class PhysicsAnswerBuilder:
     """Build the verified_output and public result payloads."""
 
+    @staticmethod
+    def _display_unit(parsed_question: dict[str, Any], context_unit: str) -> str:
+        answer_format = parsed_question.get("answer_format") or {}
+        if isinstance(answer_format, dict):
+            requested_unit = str(answer_format.get("requested_unit") or "").strip()
+            if requested_unit and PhysicsAnswerBuilder._question_explicitly_requests_unit(parsed_question, requested_unit):
+                return requested_unit
+        return context_unit
+
+    @staticmethod
+    def _question_explicitly_requests_unit(parsed_question: dict[str, Any], requested_unit: str) -> bool:
+        question = str(parsed_question.get("question") or "").replace("μ", "u").replace("µ", "u").lower()
+        raw_unit = requested_unit.replace("μ", "u").replace("µ", "u").lower().replace(" ", "")
+        compact_question = re.sub(r"\s+", "", question)
+        if raw_unit and raw_unit in compact_question:
+            return True
+        normalized = normalize_unit(requested_unit)
+        if normalized and normalized in compact_question:
+            return True
+        return normalized in {"uf", "microf"} and "microfarad" in question
+
     def build(
         self,
         parsed_question: dict[str, Any],
@@ -35,7 +56,8 @@ class PhysicsAnswerBuilder:
     ) -> dict[str, Any]:
         logger.debug("physics.sympy_result=%s", {"value": computation.value, "trace": computation.trace})
         target = context.target
-        unit = context.unit
+        context_unit = context.unit
+        unit = self._display_unit(parsed_question, context_unit)
         equations = context.equations
         quantities = context.quantities
 
@@ -115,7 +137,7 @@ class PhysicsAnswerBuilder:
             "sympy_result": {
                 "symbol": target,
                 "value": computation.value,
-                "unit": unit,
+                "unit": context_unit,
                 "trace": computation.trace,
                 "values": computation.values,
             },

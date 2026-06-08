@@ -12,10 +12,6 @@ from agents.logic_rag import LogicRAGRetriever
 from tools.z3_logic import Atom, HornKB, Rule, parse_fol_to_kb, pred_name
 
 
-# ---------------------------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------------------------
-
 def split_choices(question: str) -> Dict[str, str]:
     choices: Dict[str, str] = {}
     matches = list(re.finditer(r"(?:^|\n)\s*([A-D])\.\s*", question))
@@ -171,9 +167,9 @@ def _fuzzy_closure(kb: HornKB) -> HornKB:
                         break
             if ok:
                 cons = rule.consequent
-                if cons.args[0] == "entity":
+                if cons.args and cons.args[0] == "entity":
                     for mf in matched:
-                        if mf.args[0] != "entity":
+                        if mf.args and mf.args[0] != "entity":
                             cons = Atom(cons.pred, mf.args, cons.truth)
                             break
                 if cons not in kb.facts:
@@ -476,7 +472,7 @@ class LogicNLParserAgent:
             system_msg = f.read()
             
         with open(os.path.join(base_dir, "prompts", "logic_parser_user.txt"), "r", encoding="utf-8") as f:
-            user_msg = f.read().replace("{premises_text}", premises_text)
+            user_msg = f.read().replace("{premises_text}", premises_text).replace("{question}", question)
 
         try:
             text = self.llm.chat(
@@ -489,14 +485,6 @@ class LogicNLParserAgent:
                 response_format={"type": "json_object"},
             )
             parsed = extract_json(text)
-            if parsed:
-                # Add empty query and choices - symbolic engine handles these
-                if "query" not in parsed:
-                    parsed["query"] = None
-                if "choices" not in parsed:
-                    parsed["choices"] = {}
-                # Disabled _validate_and_patch because it treats negative rules as negative facts
-                # parsed = self._validate_and_patch(parsed, premises_nl)
             return parsed
         except Exception:
             return None
@@ -999,6 +987,8 @@ class LogicAgent:
         idx: Optional[Any] = None,
     ) -> Dict[str, Any]:
 
+        original_premises_nl = list(premises_nl)
+
         # --- Filter to focused premises when idx is provided ---
         focused_indices = None
         if idx is not None and question_index is not None:
@@ -1018,7 +1008,7 @@ class LogicAgent:
 
         # Stage 0: RAG
         retrieved = (
-            self.rag.retrieve(question, premises_nl, top_k=3,
+            self.rag.retrieve(question, original_premises_nl, top_k=3,
                               exclude_record_index=exclude_record_index,
                               exclude_idx=exclude_idx, exclude_question=question)
             if (use_rag and self.rag.enabled) else []
@@ -1041,10 +1031,16 @@ class LogicAgent:
         # Stage 2: RAG-FOL fallback (same-premise only, no LLM)
         rag_fol_used = None
         if (answer == "Unknown" or conf < 0.55) and not premises_fol and retrieved:
-            rag_fol_used = self.rag.best_fol_if_same_premises(premises_nl, retrieved)
+            rag_fol_used = self.rag.best_fol_if_same_premises(original_premises_nl, retrieved)
             if rag_fol_used:
+                if focused_indices:
+                    focused_set = set(focused_indices)
+                    filtered_rag_fol = [p for i, p in enumerate(rag_fol_used, 1) if i in focused_set]
+                else:
+                    filtered_rag_fol = rag_fol_used
+                    
                 kb2, parsed2, answer2, atom2, conf2 = self._reason_once(
-                    question, premises_nl, rag_fol_used, fewshot_examples=retrieved)
+                    question, premises_nl, filtered_rag_fol, fewshot_examples=retrieved)
                 if answer2 != "Unknown" or conf2 > conf:
                     kb, parsed, answer, atom, conf = kb2, parsed2, answer2, atom2, max(conf2, 0.78)
 

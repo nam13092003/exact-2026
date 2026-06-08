@@ -1,0 +1,6045 @@
+{
+  "task": "logic",
+  "total": 192,
+  "correct": 127,
+  "p1": 0.6614583333333334,
+  "rag_used_count": 0,
+  "rag_used_rate": 0.0,
+  "rag_fol_used_count": 0,
+  "rag_fol_used_rate": 0.0,
+  "rows": [
+    {
+      "task": "logic",
+      "record": 0,
+      "idx": [
+        [
+          1
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "question_index": 0,
+      "question": "Which conclusion follows with the fewest premises?\nA. If a Python project is not optimized, then it is not well-tested\nB. If all Python projects are optimized, then all Python projects are well-structured\nC. If a Python project is well-tested, then it must be clean and readable\nD. If a Python project is not optimized, then it does not follow PEP 8 standards",
+      "pred": "D",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.9,
+      "question_type": "MetaLogic",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "MetaLogic bypass active. Answered directly by LLM."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 0,
+      "idx": [
+        [
+          1
+        ],
+        [
+          7,
+          10
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does it follow that if all Python projects are well-structured, then all Python projects are optimized, according to the premises?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.82,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 1,
+      "idx": [
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which is the strongest conclusion?\nA. Sophia qualifies for the university scholarship\nB. Sophia needs a faculty recommendation to qualify for the scholarship\nC. Sophia is eligible for the international program\nD. Sophia needs to pass the language proficiency exam to get an honors diploma",
+      "pred": "C",
+      "gold": "C",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | LLM fact | Rule: LLM rule => qualified_for_advanced_course(sophia) | LLM fact | Rule: LLM rule => eligible_for_international_program(sophia)"
+      ],
+      "fol": "eligible_for_international_program(sophia)"
+    },
+    {
+      "task": "logic",
+      "record": 1,
+      "idx": [
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does Sophia qualify for the university scholarship, according to the premises?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.85,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | LLM fact | Rule: LLM rule => qualified_for_advanced_course(sophia) | LLM fact | Rule: LLM rule => eligible_for_international_program(sophia) | LLM fact | Rule: LLM rule => awarded_honors_diploma(sophia) | LLM fact | Rule: LLM rule => qualified_for_university_scholarship(sophia)"
+      ],
+      "fol": "qualified_for_university_scholarship(sophia)"
+    },
+    {
+      "task": "logic",
+      "record": 2,
+      "idx": [
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which conclusion is correct?\nA. Sophia qualifies for the university scholarship\nB. Sophia needs a faculty recommendation to qualify for the scholarship\nC. Sophia is eligible for the international program\nD. Sophia needs to pass the language proficiency exam to get an honors diploma",
+      "pred": "C",
+      "gold": "C",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | LLM fact | Rule: LLM rule => qualified_for_advanced_course(sophia) | LLM fact | Rule: LLM rule => eligible_for_international_program(sophia)"
+      ],
+      "fol": "eligible_for_international_program(sophia)"
+    },
+    {
+      "task": "logic",
+      "record": 2,
+      "idx": [
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        [
+          1,
+          2,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does Sophia qualify for the university scholarship, according to the premises?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.85,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | LLM fact | Rule: LLM rule => qualified_for_advanced_course(sophia) | LLM fact | Rule: LLM rule => eligible_for_international_program(sophia) | LLM fact | Rule: LLM rule => awarded_honors_diploma(sophia) | LLM fact | Rule: LLM rule => qualified_for_university_scholarship(sophia)"
+      ],
+      "fol": "qualified_for_university_scholarship(sophia)"
+    },
+    {
+      "task": "logic",
+      "record": 3,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          1,
+          2,
+          3,
+          5,
+          6,
+          7
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which conclusion logically follows?\nA. John qualifies for the graduate fellowship program\nB. John needs faculty recommendation for the fellowship\nC. John must complete an internship to qualify\nD. John’s GPA is insufficient for honors",
+      "pred": "A",
+      "gold": "A",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | Rule: LLM rule => eligible_for_graduation(john) | LLM fact | Rule: LLM rule => graduated_with_honor(john) | LLM fact | Rule: LLM rule => received_academic_distinction(john) | Rule: LLM rule => qualified_for_graduate_fellowship_program(john)"
+      ],
+      "fol": "qualified_for_graduate_fellowship_program(john)"
+    },
+    {
+      "task": "logic",
+      "record": 3,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          1,
+          2,
+          3,
+          5,
+          6,
+          7
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does John receive academic distinction, according to the premises?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.85,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | Rule: LLM rule => eligible_for_graduation(john) | LLM fact | Rule: LLM rule => graduates_with_honor(john) | LLM fact | Rule: LLM rule => receives_academic_distinction(john)"
+      ],
+      "fol": "receives_academic_distinction(john)"
+    },
+    {
+      "task": "logic",
+      "record": 4,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, what is the correct conclusion about Professor John?\nA. He can teach undergraduate courses but cannot supervise graduates\nB. He can serve on curriculum committees but cannot propose courses\nC. He can propose new courses\nD. He needs more publications to serve on committees",
+      "pred": "C",
+      "gold": "C",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | Rule: LLM rule => can_teach_undergraduate_course(john) | LLM fact | Rule: LLM rule => can_supervise_graduate_student(john) | LLM fact | Rule: LLM rule => can_serve_on_curriculum_committee(john) | LLM fact | Rule: LLM rule => can_propose_new_course(john)"
+      ],
+      "fol": "can_propose_new_course(john)"
+    },
+    {
+      "task": "logic",
+      "record": 4,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does Professor John meet all requirements to propose new courses, according to the premises?",
+      "pred": "No",
+      "gold": "Yes",
+      "ok": false,
+      "confidence": 0.65,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | Rule: LLM rule => can_teach_undergraduate_course(john) | LLM fact | Rule: LLM rule => can_supervise_graduate_student(john) | LLM fact | Rule: LLM rule => can_serve_on_curriculum_committee(john) | LLM fact | Rule: LLM rule => can_propose_new_course(john)"
+      ],
+      "fol": "can_propose_new_course(john)"
+    },
+    {
+      "task": "logic",
+      "record": 5,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, what is the correct conclusion about Professor John?\nA. He can access restricted archives but cannot submit proposals\nB. He can apply for collaborative research projects\nC. He needs more publications to access archives\nD. He is eligible for extended library access but cannot apply for projects",
+      "pred": "B",
+      "gold": "B",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | Rule: LLM rule => eligible_for_extended_library_acces(john) | Rule: LLM rule => can_access_restricted_archive(john) | Rule: LLM rule => can_submit_research_proposal(john) | Rule: LLM rule => can_apply_for_collaborative_research_project(john)"
+      ],
+      "fol": "can_apply_for_collaborative_research_project(john)"
+    },
+    {
+      "task": "logic",
+      "record": 5,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does the logical chain demonstrate that Professor John meets all requirements for collaborative research projects?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | Rule: LLM rule => eligible_for_extended_library_acces(john) | Rule: LLM rule => can_access_restricted_archive(john) | Rule: LLM rule => can_submit_research_proposal(john) | Rule: LLM rule => can_apply_for_collaborative_research_project(john)"
+      ],
+      "fol": "can_apply_for_collaborative_research_project(john)"
+    },
+    {
+      "task": "logic",
+      "record": 6,
+      "idx": [
+        [
+          1,
+          2,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, what can we conclude about John’s qualifications?\nA. John can transport hazardous materials but cannot cross state lines\nB. John can cross state lines with hazardous cargo\nC. John cannot transport hazardous materials\nD. John is not qualified to transport any kind of goods",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 6,
+      "idx": [
+        [
+          1,
+          2,
+          4,
+          5,
+          6,
+          7
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does John meet all requirements to cross state lines with hazardous cargo, according to the premises?",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 7,
+      "idx": [
+        [
+          2,
+          3,
+          6,
+          7,
+          8
+        ],
+        [
+          2,
+          3,
+          6,
+          7,
+          8
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, which capabilities does Dr. John have?\nA. Can teach undergraduate courses only\nB. Can be a research mentor\nC. Cannot teach graduate courses\nD. Needs additional certification to mentor",
+      "pred": "B",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "can_be_research_mentor(john)"
+    },
+    {
+      "task": "logic",
+      "record": 7,
+      "idx": [
+        [
+          2,
+          3,
+          6,
+          7,
+          8
+        ],
+        [
+          2,
+          3,
+          6,
+          7,
+          8
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does Dr. John’s PhD qualification make him eligible to be a research mentor, according to the premises?",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 8,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, what can we conclude about the curriculum?\nA. It enhances student engagement but not critical thinking\nB. It enhances critical thinking\nC. It needs more resources to enhance critical thinking\nD. It is well-structured but lacks exercises",
+      "pred": "B",
+      "gold": "B",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | Rule: LLM rule => is_well_structur(curriculum) | LLM fact | Rule: LLM rule => enhances_student_engagement(curriculum) | LLM fact | Rule: LLM rule => enhances_critical_thinking(curriculum)"
+      ],
+      "fol": "enhances_critical_thinking(curriculum)"
+    },
+    {
+      "task": "logic",
+      "record": 8,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does the combination of faculty priorities and curriculum features lead to enhanced critical thinking, according to the premises?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.683,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | LLM fact | Rule: LLM rule => is_well_structur(curriculum) | Rule: LLM rule => enhances_student_engagement(curriculum) | LLM fact | Rule: LLM rule => enhances_critical_thinking(curriculum)"
+      ],
+      "fol": "enhances_critical_thinking(curriculum)"
+    },
+    {
+      "task": "logic",
+      "record": 9,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, what can we conclude about the curriculum?\nA. It enhances student engagement but not critical thinking\nB. It enhances critical thinking\nC. It needs more resources to enhance critical thinking\nD. It is well-structured but lacks exercises",
+      "pred": "B",
+      "gold": "B",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | LLM fact | Rule: LLM rule => is_well_structur(curriculum) | Rule: LLM rule => enhances_student_engagement(curriculum) | LLM fact | Rule: LLM rule => enhances_critical_thinking(curriculum)"
+      ],
+      "fol": "enhances_critical_thinking(curriculum)"
+    },
+    {
+      "task": "logic",
+      "record": 9,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does the combination of faculty priorities and curriculum features lead to enhanced critical thinking, according to the premises?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.683,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | LLM fact | Rule: LLM rule => is_well_structur(curriculum) | Rule: LLM rule => enhances_student_engagement(curriculum) | LLM fact | Rule: LLM rule => enhances_critical_thinking(curriculum)"
+      ],
+      "fol": "enhances_critical_thinking(curriculum)"
+    },
+    {
+      "task": "logic",
+      "record": 10,
+      "idx": [
+        [
+          2,
+          3,
+          5
+        ],
+        [
+          2,
+          3,
+          5
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the prerequisites, what is David’s current eligibility status?\nA. Eligible for Course C but not the internship\nB. Eligible for the internship program\nC. Needs to pass Course B first\nD. Only eligible for Course B",
+      "pred": "B",
+      "gold": "B",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | Rule: LLM rule => can_enroll_in_course_b(david) | Rule: LLM rule => can_enroll_in_course_c(david) | Rule: LLM rule => eligible_for_internship_program(david)"
+      ],
+      "fol": "eligible_for_internship_program(david)"
+    },
+    {
+      "task": "logic",
+      "record": 10,
+      "idx": [
+        [
+          2,
+          3,
+          5
+        ],
+        [
+          2,
+          3,
+          5
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does the logical progression demonstrate that David meets all requirements for the internship?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.572,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | LLM fact | Rule: LLM rule => can_enroll_in_course_c(david) | Rule: LLM rule => eligible_for_internship_program(david)"
+      ],
+      "fol": "eligible_for_internship_program(david)"
+    },
+    {
+      "task": "logic",
+      "record": 11,
+      "idx": [
+        [
+          1,
+          3,
+          4,
+          7
+        ],
+        [
+          1,
+          3,
+          4,
+          5,
+          7
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on Alex's status, which statement is correct?\nA. Alex can use equipment but cannot book training without a trainer\nB. Alex can book personal training sessions if assigned a trainer\nC. Alex needs a longer membership duration\nD. Alex must pay additional fees",
+      "pred": "C",
+      "gold": "C",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "membership_duration(alex,8)"
+    },
+    {
+      "task": "logic",
+      "record": 11,
+      "idx": [
+        [
+          1,
+          3,
+          4,
+          7
+        ],
+        [
+          1,
+          3,
+          4,
+          5,
+          7
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does Alex meet all requirements for booking training sessions, according to the premises?",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | Rule: LLM rule => is_eligible_for_trainer(alex)"
+      ],
+      "fol": "is_eligible_for_trainer(alex)"
+    },
+    {
+      "task": "logic",
+      "record": 12,
+      "idx": [
+        [
+          1,
+          3,
+          4
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the requirements, which statement about Sarah is correct?\nA. She can take advanced classes because she has approval\nB. She cannot take advanced classes due to insufficient completed courses\nC. She is eligible but lacks approval\nD. Her active status alone qualifies her",
+      "pred": "Unknown",
+      "gold": "D",
+      "ok": false,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 12,
+      "idx": [
+        [
+          1,
+          3,
+          4
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does Sarah meet all requirements to take advanced classes, according to the premises?",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | LLM fact | Rule: LLM rule => eligible_for_advanced_classe(sarah)"
+      ],
+      "fol": "eligible_for_advanced_classe(sarah)"
+    },
+    {
+      "task": "logic",
+      "record": 13,
+      "idx": [
+        [
+          1,
+          4,
+          5
+        ],
+        [
+          1,
+          4,
+          5
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on Professor John's qualifications, which capabilities does he have?\nA. Can teach graduate courses but cannot supervise research\nB. Can supervise Master's students but not graduate research\nC. Can both teach graduate courses and supervise research\nD. Needs additional certification to supervise",
+      "pred": "C",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | Rule: LLM rule => qualified_to_teach_graduate_course(john) | Rule: LLM rule => can_supervise_graduate_level_research(john)"
+      ],
+      "fol": "can_supervise_graduate_level_research(john)"
+    },
+    {
+      "task": "logic",
+      "record": 13,
+      "idx": [
+        [
+          1,
+          4,
+          5
+        ],
+        [
+          1,
+          4,
+          5
+        ]
+      ],
+      "question_index": 1,
+      "question": "Can Professor John supervise graduate-level research based on his PhD qualification, according to the premises?",
+      "pred": "Yes",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.7,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | Rule: LLM rule => qualified_to_teach_graduate_course(john) | Rule: LLM rule => qualified_to_supervise_graduate_level_research(john)"
+      ],
+      "fol": "qualified_to_supervise_graduate_level_research(john)"
+    },
+    {
+      "task": "logic",
+      "record": 14,
+      "idx": [
+        [
+          2,
+          3,
+          7
+        ],
+        [
+          2,
+          3,
+          7
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on Dr. John's qualifications, which statement is correct?\nA. He can teach undergraduate courses\nB. He qualifies as department head but cannot teach\nC. He needs a Master's degree to teach undergraduates\nD. His PhD is insufficient for teaching",
+      "pred": "A",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "can_teach_undergraduate_course(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 14,
+      "idx": [
+        [
+          2,
+          3,
+          7
+        ],
+        [
+          2,
+          3,
+          7
+        ]
+      ],
+      "question_index": 1,
+      "question": "Can Dr. John teach undergraduate courses, according to the premises?",
+      "pred": "Yes",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.7,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | Rule: LLM rule => can_teach_undergraduate_course(john)"
+      ],
+      "fol": "can_teach_undergraduate_course(john)"
+    },
+    {
+      "task": "logic",
+      "record": 15,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on Nurse John's qualifications, which statement is correct?\nA. He can prescribe medication\nB. He needs more clinical hours\nC. He isn't registered\nD. He can't prescribe without additional certification",
+      "pred": "A",
+      "gold": "A",
+      "ok": true,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | LLM fact | Rule: LLM rule => grants_advanced_practice_certification(john) | Rule: LLM rule => is_advanced_practice_certify(john) | Rule: LLM rule => is_authorized_to_prescribe_medication(john)"
+      ],
+      "fol": "is_authorized_to_prescribe_medication(john)"
+    },
+    {
+      "task": "logic",
+      "record": 15,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "question_index": 1,
+      "question": "Can Nurse John prescribe medication, according to the premises?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.7,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | LLM fact | Rule: LLM rule => grants_advanced_practice_certification(john) | Rule: LLM rule => is_authorized_to_prescribe_medication(john)"
+      ],
+      "fol": "is_authorized_to_prescribe_medication(john)"
+    },
+    {
+      "task": "logic",
+      "record": 16,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on Alex's status, which statement is correct?\nA. Alex can use equipment but can't book training\nB. Alex can book personal training sessions\nC. Alex needs longer membership duration\nD. Alex must pay additional fees",
+      "pred": "Unknown",
+      "gold": "B",
+      "ok": false,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 16,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4
+        ],
+        [
+          1,
+          2,
+          3,
+          4
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does the logical sequence demonstrate that Alex meets all requirements for booking training sessions?",
+      "pred": "Unknown",
+      "gold": "Yes",
+      "ok": false,
+      "confidence": 0.25,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 17,
+      "idx": [
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          7
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on Minh's academic progress, which of the following is logically supported?\nA. Minh has met the criteria to pursue Biochemistry\nB. Minh cannot take Biochemistry without Lab Safety Certification\nC. Minh is not eligible to enroll in Organic Chemistry\nD. Minh needs to repeat Chemistry 101",
+      "pred": "C",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | LLM fact | Rule: LLM rule => can_enroll_in_organic_chemistry(minh)"
+      ],
+      "fol": "can_enroll_in_organic_chemistry(minh)"
+    },
+    {
+      "task": "logic",
+      "record": 17,
+      "idx": [
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          7
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does Minh qualify to take Biochemistry based on her completed coursework, according to the premises?",
+      "pred": "Yes",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.85,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | Rule: LLM rule => can_take_biochemistry(minh)"
+      ],
+      "fol": "can_take_biochemistry(minh)"
+    },
+    {
+      "task": "logic",
+      "record": 18,
+      "idx": [
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          6
+        ]
+      ],
+      "question_index": 0,
+      "question": "Have all employees paid?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.55,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | Rule: LLM rule => has_paid(everyone)"
+      ],
+      "fol": "has_paid(everyone)"
+    },
+    {
+      "task": "logic",
+      "record": 18,
+      "idx": [
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          6
+        ]
+      ],
+      "question_index": 1,
+      "question": "Are all employees registered?",
+      "pred": "Unknown",
+      "gold": "Yes",
+      "ok": false,
+      "confidence": 0.25,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 19,
+      "idx": [
+        [
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          4
+        ]
+      ],
+      "question_index": 0,
+      "question": "Do all employees receive a bonus?",
+      "pred": "Unknown",
+      "gold": "Yes",
+      "ok": false,
+      "confidence": 0.25,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 19,
+      "idx": [
+        [
+          5,
+          6
+        ],
+        [
+          1,
+          2,
+          4
+        ]
+      ],
+      "question_index": 1,
+      "question": "Are all employees suitable for a senior role?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | Rule: LLM rule => has_strong_qualification(entity) | Rule: LLM rule => is_suitable_for_senior_role(entity)"
+      ],
+      "fol": "is_suitable_for_senior_role(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 20,
+      "idx": [
+        [
+          2,
+          10
+        ],
+        [
+          6,
+          7,
+          9
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, which conclusion is logically valid?\nA. A student with low attendance, assignment completion, and professor approval can pass the course if they complete the exam.\nB. A student with less than 80% attendance who doesn’t complete the assignment can still take the exam.\nC. A student with 60% attendance and a scholarship automatically passes all courses.\nD. A student who attends every class but doesn’t complete the exam can still pass.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 20,
+      "idx": [
+        [
+          2,
+          10
+        ],
+        [
+          6,
+          7,
+          9
+        ]
+      ],
+      "question_index": 1,
+      "question": "Is it true that a student who completes 3 courses with scores above 8.5 will graduate, according to the premises?",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.68,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 21,
+      "idx": [
+        [
+          1,
+          2,
+          4,
+          7,
+          8
+        ],
+        [
+          7,
+          8
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, which conclusion is correct?\nA. A student who studies >12 hours, doesn’t debate, and writes a high-quality essay in political studies can qualify for a fellowship\nB. A student studying <6 hours who avoids both debates and essays will pass\nC. Understanding ideologies without policy analysis leads to automatic recognition\nD. All students must participate in debates regardless of their study hours",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 21,
+      "idx": [
+        [
+          1,
+          2,
+          4,
+          7,
+          8
+        ],
+        [
+          7,
+          8
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does writing a high-quality analytical essay guarantee qualification for a research fellowship, according to the premises?",
+      "pred": "Yes",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.8,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 22,
+      "idx": [
+        [
+          1,
+          2,
+          4,
+          7,
+          8
+        ],
+        [
+          4,
+          7,
+          8
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, which conclusion is correct?\nA. A student mastering superposition who writes an original research paper in quantum mechanics qualifies for a scholarship\nB. Limited study time (<8h) doesn’t impair superposition understanding\nC. Merely explaining quantum measurement guarantees recognition\nD. All students must analyze entanglement regardless of their expertise",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 22,
+      "idx": [
+        [
+          1,
+          2,
+          4,
+          7,
+          8
+        ],
+        [
+          4,
+          7,
+          8
+        ]
+      ],
+      "question_index": 1,
+      "question": "Is producing original research while avoiding presentations sufficient to qualify for a scholarship, according to the premises?",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.68,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 23,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          13
+        ],
+        [
+          11,
+          12,
+          13,
+          14
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, which conclusion is correct?\nA. A student who develops through the quantum theory chain, from duality to advanced research preparation, can make academic contributions through publication or seminar\nB. Laboratory access is independent of publication/seminar participation\nC. Interpretation critique alone qualifies for research positions\nD. Understanding wave-particle duality guarantees lab access",
+      "pred": "Unknown",
+      "gold": "A",
+      "ok": false,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 23,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          13
+        ],
+        [
+          11,
+          12,
+          13,
+          14
+        ]
+      ],
+      "question_index": 1,
+      "question": "According to the premises, is the following statement true?\nStatement: A student who reaches advanced research preparation but avoids both publication and seminar opportunities will still qualify for laboratory access",
+      "pred": "No",
+      "gold": "False",
+      "ok": true,
+      "confidence": 0.68,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 24,
+      "idx": [
+        [
+          2,
+          4
+        ],
+        [
+          1,
+          8,
+          9
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the learning science principles, which statement is correct?\nA. Spaced repetition improves both memory and academic performance\nB. Excessively long intervals preserve knowledge without review\nC. AI cannot optimize study schedules for memory retention\nD. Passive reading is more effective than active recall",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 24,
+      "idx": [
+        [
+          2,
+          4
+        ],
+        [
+          1,
+          8,
+          9
+        ]
+      ],
+      "question_index": 1,
+      "question": "Which of these conclusions is supported by the forgetting curve research?\nA. Review timing has no impact on retention\nB. Optimal intervals prevent both premature review and excessive forgetting\nC. Sleep has no effect on memory consolidation\nD. All learning methods yield identical results",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 25,
+      "idx": [
+        [
+          2,
+          4,
+          10
+        ],
+        [
+          1,
+          8,
+          9
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the learning science principles, which statement is correct?\nA. Spaced repetition improves both memory and academic performance\nB. Excessively long intervals preserve knowledge without review\nC. AI cannot optimize study schedules for memory retention\nD. Passive reading is more effective than active recall",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 25,
+      "idx": [
+        [
+          2,
+          4,
+          10
+        ],
+        [
+          1,
+          8,
+          9
+        ]
+      ],
+      "question_index": 1,
+      "question": "Which of these conclusions is supported by the forgetting curve research?\nA. Review timing has no impact on retention\nB. Optimal intervals prevent both premature review and excessive forgetting\nC. Sleep has no effect on memory consolidation\nD. All learning methods yield identical results",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 26,
+      "idx": [
+        [
+          1,
+          3,
+          7
+        ],
+        [
+          1,
+          3,
+          7
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the geometric principles, which statement about quadrilaterals is correct?\nA. A quadrilateral with opposite angles summing to 180° and a perpendicular bisecting diagonal must be a cyclic trapezium\nB. All quadrilaterals with perpendicular diagonals are cyclic\nC. Only rectangles can have opposite angles summing to 180°\nD. A quadrilateral cannot be both cyclic and have perpendicular diagonals",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 26,
+      "idx": [
+        [
+          1,
+          3,
+          7
+        ],
+        [
+          1,
+          3,
+          7
+        ]
+      ],
+      "question_index": 1,
+      "question": "Which premises support that a quadrilateral with opposite angles summing to 180° and a perpendicular bisecting diagonal is a cyclic trapezium?\nA. Premises 1, 3, 7\nB. Premises 2, 5, 6\nC. Premises 4, 8\nD. Premises 1, 2, 5",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 27,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        [
+          1,
+          3,
+          7
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the learning principles, which combination of factors most significantly decreases learning efficiency?\nA. Procrastination + passive review + sleep deprivation\nB. Clear deadlines + high stress\nC. Pomodoro technique + overwhelming task size\nD. Task breakdown + excessive distractions",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 27,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        [
+          1,
+          3,
+          7
+        ]
+      ],
+      "question_index": 1,
+      "question": "Which premises directly support the conclusion about decreased learning efficiency?",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.25,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 28,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          9,
+          11,
+          13,
+          16
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the mission parameters, which scenario accurately describes Luna's Mars expedition?\nA. Flawless simulations, minor trajectory tweak, routine rover check, brief signal delay\nB. Failed simulations, audit rejection, high radiation, equipment breakdown\nC. Incomplete training, miscalculated trajectory, unsafe landing, delayed return\nD. Perfect execution, instant breakthrough, permanent Mars base",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 29,
+      "idx": [
+        [
+          2,
+          3,
+          5,
+          11
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the online learning rules, which scenario is correct?\nA. A student with 6h downtime must retake a rescheduled exam\nB. A student with 6h downtime earns a certificate despite failing courses\nC. External proctors block exam rescheduling after 6h downtime\nD. 100% live attendance overrides 6h downtime effects",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 30,
+      "idx": [
+        [
+          1,
+          6,
+          12
+        ],
+        [
+          1,
+          6,
+          12
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the learning strategies, which combination is most effective for comprehension and retention?\nA. Structured plan + hands-on experiments + visualization\nB. Interactive tools + excessive screen time + cognitive fatigue\nC. Minimal distractions + historical perspectives + leisure overload\nD. Physical exercise + parallel subjects + scattered focus",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 30,
+      "idx": [
+        [
+          1,
+          6,
+          12
+        ],
+        [
+          1,
+          6,
+          12
+        ]
+      ],
+      "question_index": 1,
+      "question": "Do the premises support that a student using structured plans, hands-on experiments, and visualization will have improved comprehension and retention?",
+      "pred": "Unknown",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.25,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 31,
+      "idx": [
+        [
+          1,
+          3,
+          9,
+          18,
+          19
+        ]
+      ],
+      "question_index": 0,
+      "question": "If a student engages in play-based learning, participates in simulations, receives immediate and constructive feedback, and reflects on their learning, they will retain knowledge more effectively and develop problem-solving skills. Is this statement true?",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.68,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 32,
+      "idx": [
+        [
+          1,
+          3,
+          5,
+          7,
+          10,
+          13,
+          14,
+          15,
+          16
+        ]
+      ],
+      "question_index": 0,
+      "question": "Do schools that implement structured disciplinary policies, restorative justice, and positive reinforcement strategies experience fewer infractions, higher student morale, and improved academic performance?",
+      "pred": "Unknown",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.25,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 33,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          15,
+          17,
+          19,
+          21,
+          23,
+          25,
+          27
+        ],
+        [
+          4,
+          5,
+          12,
+          13,
+          25
+        ]
+      ],
+      "question_index": 0,
+      "question": "Does Alex earn a scholarship despite initial fears of fund depletion that were unfounded, attend university and gain internship opportunities through a professional network that nearly dissolved but was saved, complete an internship with mentorship despite initial mentor shortages that were resolved, develop professional skills and secure job offers at career fairs that were almost canceled but proceeded, and start a successful career after graduating with honors despite a competitive job market that improved just in time?",
+      "pred": "Unknown",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.25,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 33,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          15,
+          17,
+          19,
+          21,
+          23,
+          25,
+          27
+        ],
+        [
+          4,
+          5,
+          12,
+          13,
+          25
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does Alex not secure job offers because the job market weakened unexpectedly, and fail to start a successful career despite graduating with honors?",
+      "pred": "Unknown",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.55,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Premise 13: honors(Alex)"
+      ],
+      "fol": "honors(alex)"
+    },
+    {
+      "task": "logic",
+      "record": 34,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          6,
+          8,
+          12,
+          13,
+          14,
+          20,
+          22,
+          23,
+          24,
+          26
+        ]
+      ],
+      "question_index": 0,
+      "question": "Can Mai successfully change majors from Information Technology to Biomedical Engineering, considering the entrance exam score, scholarship, and make-up course requirements, while assessing the risks of academic warnings or scholarship loss if she doesn't meet the requirements within 1 year after the transfer?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.45,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Premise 25: entrance_exam(Mai) ∧ standard_score(Mai) = 80 ∧ exam_score(Mai) = 78"
+      ],
+      "fol": "entrance_exam(mai)"
+    },
+    {
+      "task": "logic",
+      "record": 35,
+      "idx": [
+        [
+          1,
+          8,
+          9,
+          11,
+          14,
+          15,
+          17
+        ]
+      ],
+      "question_index": 0,
+      "question": "Can Lan participate in the flight practice session, and if not, does she have to take a make-up session within 2 weeks to retain her flight exam eligibility, considering the weather, absent instructor, and cancellation notification time?",
+      "pred": "Unknown",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.55,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Premise 14: instructor_absent(Lan, '8:15', '25/3/2025')"
+      ],
+      "fol": "instructor_absent(lan,8_15,25_3_2025)"
+    },
+    {
+      "task": "logic",
+      "record": 36,
+      "idx": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          11,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33
+        ]
+      ],
+      "question_index": 0,
+      "question": "Should Student A be confirmed as cheating and suspended from the exam, considering the signs from the exam, behavior during the exam, AI analysis, personal history, and the possibility of appeal being denied, and assessing additional penalties if there is evidence from the camera?",
+      "pred": "Unknown",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.25,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 37,
+      "idx": [
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "question_index": 0,
+      "question": "Which of the following can be inferred about students?\nA. All students complete all assigned exercises\nB. Some students seek help from teaching assistants when needed\nC. All students have a consistent study routine\nD. Some students do not attend class regularly",
+      "pred": "C",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "has_consistent_study_routine(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 37,
+      "idx": [
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "question_index": 1,
+      "question": "Is the following statement true? Statement: If there exists at least one student who attends class regularly, then there exists at least one student who completes all assigned exercises",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 38,
+      "idx": [
+        [
+          2,
+          4,
+          8
+        ],
+        [
+          2,
+          8
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which conclusion is correct?\nA. At least one student attends lectures regularly.\nB. There exists a student who attends lectures but does not complete assignments on time.\nC. All students understand the material.",
+      "pred": "C",
+      "gold": "A",
+      "ok": false,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | Rule: LLM rule => will_understand_material(entity)"
+      ],
+      "fol": "will_understand_material(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 38,
+      "idx": [
+        [
+          2,
+          4,
+          8
+        ],
+        [
+          2,
+          8
+        ]
+      ],
+      "question_index": 1,
+      "question": "According to the above premises, is the following statement true?\nStatement: All students attend lectures regularly.",
+      "pred": "No",
+      "gold": "Yes",
+      "ok": false,
+      "confidence": 0.7,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 39,
+      "idx": [
+        [
+          2,
+          4,
+          9
+        ],
+        [
+          2,
+          7,
+          8,
+          9,
+          10
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, which statement is correct?\nA. At least one student graduates.\nB. Some students actively participate in class discussions but do not submit homework on time.\nC. All students fail the exams.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 39,
+      "idx": [
+        [
+          2,
+          4,
+          9
+        ],
+        [
+          2,
+          7,
+          8,
+          9,
+          10
+        ]
+      ],
+      "question_index": 1,
+      "question": "According to the premises, is the following statement true?\nStatement: If a student is registered for an advanced course, they will achieve success.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.68,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 40,
+      "idx": [
+        [
+          1
+        ],
+        [
+          9,
+          10
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, which statement is correct?\nA. Students who solve math problems correctly must have practiced them.\nB. Some students ask questions in math class even if they do not attend lectures.\nC. All students who practice math problems ask questions in class.",
+      "pred": "A",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "can_solve_math_problems_correctly(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 40,
+      "idx": [
+        [
+          1
+        ],
+        [
+          9,
+          10
+        ]
+      ],
+      "question_index": 1,
+      "question": "According to the premises, is the following statement true?\nStatement: If a student passes the math exam, they will excel in mathematics.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.68,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 41,
+      "idx": [
+        [
+          8
+        ],
+        [
+          9,
+          10
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, which statement is correct?\nA. Anyone with experience in their field must be hardworking.\nB. Some people are responsible but not punctual.\nC. All hardworking people are responsible.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 41,
+      "idx": [
+        [
+          8
+        ],
+        [
+          9,
+          10
+        ]
+      ],
+      "question_index": 1,
+      "question": "According to the premises, is the following statement true?\nStatement: If a person is promoted, they will become a leader in their organization.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.68,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 42,
+      "idx": [
+        [
+          4,
+          5,
+          10
+        ],
+        [
+          4,
+          5,
+          10
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, which statement is correct?\nA. There exists at least one student who is eligible for a scholarship.\nB. Submitting all assignments on time never improves GPA.\nC. All students on the honor roll never have high GPAs.",
+      "pred": "A",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "exists_student_is_eligible_for_scholarship()"
+    },
+    {
+      "task": "logic",
+      "record": 42,
+      "idx": [
+        [
+          4,
+          5,
+          10
+        ],
+        [
+          4,
+          5,
+          10
+        ]
+      ],
+      "question_index": 1,
+      "question": "According to the premises, is the following statement true?\nStatement: There exists at least one student on the honor roll who is eligible for a scholarship.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 43,
+      "idx": [
+        [
+          4,
+          5
+        ],
+        [
+          1,
+          2,
+          6,
+          7,
+          8,
+          9
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, which statement is correct?\nA. Attending lectures leads to performing well in exams.\nB. A student with a scholarship always has high grades.\nC. If a student does not understand the material, they cannot perform well in exams.\nD. More study time guarantees high achievement.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 43,
+      "idx": [
+        [
+          4,
+          5
+        ],
+        [
+          1,
+          2,
+          6,
+          7,
+          8,
+          9
+        ]
+      ],
+      "question_index": 1,
+      "question": "Is the following statement true according to the premises?\nStatement: There exists a positive feedback loop where improved grades lead to scholarship eligibility which leads to more study time and further grade improvement.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 44,
+      "idx": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, which statement is best supported?\nA. Failing to secure an internship prevents improved job prospects.\nB. Attending lectures regularly leads to a high GPA.\nC. Financial benefits imply participation in research projects.\nD. Practical experience guarantees eligibility for academic awards.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 44,
+      "idx": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "question_index": 1,
+      "question": "Does attending lectures initiate a causal chain leading to increased earning potential, according to the premises?",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 45,
+      "idx": [
+        [
+          2,
+          8
+        ],
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which conclusion is most supported?\nA. Students who do not perform well in internships will never receive full-time job offers.\nB. Having industry connections can help a student gain practical experience indirectly.\nC. Building a strong resume directly increases a student’s earning potential.\nD. Students who do not have a mentor cannot make any career decisions.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 45,
+      "idx": [
+        [
+          2,
+          8
+        ],
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "question_index": 1,
+      "question": "Is there a logical chain from applying for internships to increasing one’s earning potential, according to the premises?",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 46,
+      "idx": [
+        [
+          9,
+          10,
+          11
+        ],
+        [
+          2,
+          3,
+          4
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, which of the following is best supported?\nA. Students who attend career workshops are guaranteed to get hired after interviews.\nB. Building a strong resume directly leads to financial stability.\nC. Having a career mentor leads to better long-term career growth.\nD. Gaining relevant work experience prevents the need for strong interview performance.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 46,
+      "idx": [
+        [
+          9,
+          10,
+          11
+        ],
+        [
+          2,
+          3,
+          4
+        ]
+      ],
+      "question_index": 1,
+      "question": "Is there a logical path from attending career workshops to achieving financial stability, according to the premises?",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 47,
+      "idx": [
+        [
+          10
+        ],
+        [
+          1,
+          2,
+          5,
+          12
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, which statement is correct?\nA. If a student manages their time effectively, they receive feedback on assignments.\nB. A student who uses feedback improves their grades.\nC. If a student has high academic performance, they are less likely to get job opportunities.\nD. If a student does not attend lectures, they definitely cannot understand the subject.",
+      "pred": "C",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "has_high_academic_performance(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 47,
+      "idx": [
+        [
+          10
+        ],
+        [
+          1,
+          2,
+          5,
+          12
+        ]
+      ],
+      "question_index": 1,
+      "question": "According to the premises, is the following statement true?\nStatement: There exists a complete pathway from attending lectures regularly to receiving job opportunities.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 48,
+      "idx": [
+        [
+          6,
+          11
+        ],
+        []
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which conclusion is correct?\nA. If a student gains academic recognition, they must have received a research grant.\nB. A student who does not publish research can still receive a research grant.\nC. If a student does not engage in independent study, they will never publish research.\nD. If a student engages in independent study, they are likely to publish research and may gain academic recognition.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 48,
+      "idx": [
+        [
+          6,
+          11
+        ],
+        []
+      ],
+      "question_index": 1,
+      "question": "According to the above premises, is the following statement true?\nStatement: If a student engages in independent study, they have a higher chance of accessing advanced research opportunities.",
+      "pred": "No",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.68,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 49,
+      "idx": [
+        [
+          3,
+          6
+        ],
+        [
+          3,
+          6
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, which statement is correct?\nA. Engaging in research improves a student's chances of gaining academic recognition.\nB. A student who does not win an academic competition can still receive a merit award.\nC. If a student participates in academic competitions, they will receive academic recognition.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 49,
+      "idx": [
+        [
+          3,
+          6
+        ],
+        [
+          3,
+          6
+        ]
+      ],
+      "question_index": 1,
+      "question": "According to the premises, is the following statement true?\nStatement: There exists a complete pathway from engaging in research to receiving academic recognition.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 50,
+      "idx": [
+        [
+          3,
+          10
+        ],
+        [
+          3,
+          10
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, which statement is correct?\nA. If a student maintains a high GPA, they are more likely to receive a scholarship.\nB. A student who does not maintain a high GPA can still qualify for a merit-based scholarship.\nC. If a student does not engage in extracurricular activities, they will never receive a scholarship.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 50,
+      "idx": [
+        [
+          3,
+          10
+        ],
+        [
+          3,
+          10
+        ]
+      ],
+      "question_index": 1,
+      "question": "According to the premises, is the following statement true?\nStatement: There exists a complete pathway from maintaining a high GPA to receiving a scholarship.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 51,
+      "idx": [
+        [
+          8,
+          9,
+          10
+        ],
+        [
+          3,
+          6,
+          7
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises above, which of the following statements can be logically concluded?\nA. If a student applies for financial aid and qualifies, they are more likely to receive support and reduce financial stress.\nB. If a student has less financial stress, they are more likely to perform better academically.\nC. If a student does not qualify for any aid and takes no counseling, they are guaranteed to take on student loans.\nD. If a student receives financial aid, their tuition burden remains the same.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 51,
+      "idx": [
+        [
+          8,
+          9,
+          10
+        ],
+        [
+          3,
+          6,
+          7
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the premises, is the following rule enforced?\nRule: If a student applies for financial aid, and they have a low family income, they increase their chances of receiving support and reducing tuition burden.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.5,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "¬has_low_family_income(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 52,
+      "idx": [
+        [
+          3
+        ],
+        [
+          4,
+          6,
+          7
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be logically inferred?\nA. Practicing Python regularly always results in worse coding skills.\nB. Practicing Python regularly improves coding skills.\nC. Students who do not practice Python regularly become proficient in Python.\nD. Practicing Python has no effect on a student’s coding abilities.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 52,
+      "idx": [
+        [
+          3
+        ],
+        [
+          4,
+          6,
+          7
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the statement true?\nStatement: If a student never practices coding, they will still become proficient in Python.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.68,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 53,
+      "idx": [
+        [
+          13,
+          9
+        ],
+        [
+          13,
+          9
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which conclusion is correct?\nA. If a Python project is not optimized, then it is unlikely to be well-tested.\nB. If all Python projects are well-structured, then all Python projects are optimized.\nC. If a Python project follows PEP 8 standards, then it must be well-tested.\nD. If a Python project is not well-structured, then it might not follow PEP 8 standards.",
+      "pred": "Unknown",
+      "gold": "B",
+      "ok": false,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 53,
+      "idx": [
+        [
+          13,
+          9
+        ],
+        [
+          13,
+          9
+        ]
+      ],
+      "question_index": 1,
+      "question": "According to the above premises, is the following statement true?\nStatement: If all Python projects are well-structured, then all Python projects are optimized.",
+      "pred": "No",
+      "gold": "Yes",
+      "ok": false,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 54,
+      "idx": [
+        [
+          1,
+          4,
+          6,
+          12
+        ],
+        []
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. A cost-effective Raspberry Pi system may fail to support all versatile use-cases if it is not thoroughly tested and well-documented.\nB. Every Raspberry Pi system is necessarily versatile if it is cost-effective.\nC. If a Raspberry Pi system is cost-effective but not thoroughly tested and well-documented, then it is still versatile.\nD. A Raspberry Pi system is necessarily versatile even if it is not cost-effective.",
+      "pred": "B",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "exists_cost_effective_raspberry_pi(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 54,
+      "idx": [
+        [
+          1,
+          4,
+          6,
+          12
+        ],
+        []
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the statement true?\nStatement: If a Raspberry Pi system is cost-effective, then it is necessarily versatile.",
+      "pred": "No",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 55,
+      "idx": [
+        [
+          4,
+          7
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which of the following conclusions can be inferred?\nA. It is not the case that if an EV charging station being not widely available implies that it is not thoroughly maintained then every EV charging station meets safety standards.\nB. If it is true that if an EV charging station being not widely available implies that it is not thoroughly maintained then every EV charging station meets safety standards, then it follows that if an EV charging station being not widely available implies that it is not thoroughly maintained then every EV charging station meets safety standards.\nC. Both that if an EV charging station being not widely available implies that it is not thoroughly maintained then every EV charging station meets safety standards, and that it is not the case that if an EV charging station being not widely available implies that it is not thoroughly maintained then every EV charging station meets safety standards.\nD. If an EV charging station being not widely available implies that it is not thoroughly maintained, then every EV charging station meets safety standards.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 55,
+      "idx": [
+        [
+          4,
+          7
+        ],
+        [
+          4,
+          6
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, answer the following: Is the following statement true?\n\"If an EV charging station being not widely available implies that it is not thoroughly maintained, then every EV charging station that is widely available supports fast charging.\"",
+      "pred": "Yes",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.588,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "exists_at_least_one_widely_available_ev_charging_station()"
+    },
+    {
+      "task": "logic",
+      "record": 56,
+      "idx": [
+        [
+          5,
+          11
+        ],
+        [
+          5
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which of the following conclusions can be inferred?\nA. If it is the case that if a microchip not being functional implies that it does not have a stable power supply then there exists at least one microchip that meets performance standards, then it follows that if a microchip not being functional implies that it does not have a stable power supply then there exists at least one microchip that meets performance standards.\nB. If a microchip not being functional implies that it does not have a stable power supply, then there exists at least one microchip that meets performance standards.\nC. Both the statement that if a microchip not being functional implies that it does not have a stable power supply then there exists at least one microchip that meets performance standards and the statement that it is not the case that if a microchip not being functional implies that it does not have a stable power supply then there exists at least one microchip that meets performance standards are true.\nD. It is not the case that if a microchip not being functional implies that it does not have a stable power supply, then there exists at least one microchip that meets performance standards.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 56,
+      "idx": [
+        [
+          5,
+          11
+        ],
+        [
+          5
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the following statement true?\nStatement: If a microchip is not functional, then it does not have a stable power supply.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 57,
+      "idx": [
+        [
+          7,
+          8
+        ],
+        [
+          13
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. It is false that if every transportation system in the city is safe, then there exists at least one transportation system that is cost-effective.\nB. Both (every transportation system in the city is safe implies there exists at least one cost-effective transportation system) and its negation hold, leading to a contradiction.\nC. If every transportation system in the city is safe implies there exists at least one cost-effective transportation system, then this implication is always true.\nD. If every transportation system in the city is safe, then there exists at least one transportation system that is cost-effective.",
+      "pred": "D",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "exists_cost_effective_transportation_system(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 57,
+      "idx": [
+        [
+          7,
+          8
+        ],
+        [
+          13
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the statement true?\nStatement: If a transportation system is safe, then it is necessarily cost-effective.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 58,
+      "idx": [
+        [
+          5,
+          10
+        ]
+      ],
+      "question_index": 0,
+      "question": "Does it follow that every hardware component is thoroughly validated?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.82,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 59,
+      "idx": [
+        [
+          10,
+          11
+        ],
+        [
+          9,
+          12
+        ]
+      ],
+      "question_index": 0,
+      "question": "Does every drone have a GPS system?",
+      "pred": "Yes",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.55,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "equipped_with_gps_system(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 59,
+      "idx": [
+        [
+          10,
+          11
+        ],
+        [
+          9,
+          12
+        ]
+      ],
+      "question_index": 1,
+      "question": "Are all drones operating safely?",
+      "pred": "Unknown",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.45,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Z3 checked entailment for is_operating_safely(all)."
+      ],
+      "fol": "is_operating_safely(all)"
+    },
+    {
+      "task": "logic",
+      "record": 60,
+      "idx": [
+        [
+          1,
+          6
+        ],
+        [
+          1,
+          6,
+          5,
+          7
+        ]
+      ],
+      "question_index": 0,
+      "question": "Does every IoT device provide accurate data?",
+      "pred": "Unknown",
+      "gold": "Yes",
+      "ok": false,
+      "confidence": 0.25,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 60,
+      "idx": [
+        [
+          1,
+          6
+        ],
+        [
+          1,
+          6,
+          5,
+          7
+        ]
+      ],
+      "question_index": 1,
+      "question": "Are all IoT devices energy-efficient?",
+      "pred": "Unknown",
+      "gold": "Yes",
+      "ok": false,
+      "confidence": 0.25,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 61,
+      "idx": [
+        [
+          6,
+          12
+        ],
+        [
+          8,
+          11
+        ]
+      ],
+      "question_index": 0,
+      "question": "Are all VR games thoroughly tested?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.55,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Premise 12: ForAll(x, Performance(x))",
+        "Premise 6: ForAll(x, Performance(x) → Tested(x))"
+      ],
+      "fol": "tested(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 61,
+      "idx": [
+        [
+          6,
+          12
+        ],
+        [
+          8,
+          11
+        ]
+      ],
+      "question_index": 1,
+      "question": "Is the following statement true? \"If a VR game is not thoroughly tested, then it is not engaging, which means any engaging VR game is stable.\"",
+      "pred": "Unknown",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.55,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "exists_at_least_one_engaging_vr_game(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 62,
+      "idx": [
+        [
+          6,
+          10
+        ],
+        [
+          2,
+          6,
+          4
+        ]
+      ],
+      "question_index": 0,
+      "question": "Are all blockchain networks efficient?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.6,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | Rule: LLM rule => is_efficient(entity)"
+      ],
+      "fol": "is_efficient(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 62,
+      "idx": [
+        [
+          6,
+          10
+        ],
+        [
+          2,
+          6,
+          4
+        ]
+      ],
+      "question_index": 1,
+      "question": "Are all blockchain networks scalable?",
+      "pred": "Unknown",
+      "gold": "Yes",
+      "ok": false,
+      "confidence": 0.25,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 63,
+      "idx": [
+        [
+          1,
+          3,
+          5
+        ],
+        [
+          1,
+          9
+        ]
+      ],
+      "question_index": 0,
+      "question": "Are all autonomous vehicles safe?",
+      "pred": "Yes",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.6,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | Rule: LLM rule => is_reliable(entity) | Rule: LLM rule => is_thoroughly_test(entity) | Rule: LLM rule => is_safe(entity)"
+      ],
+      "fol": "is_safe(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 63,
+      "idx": [
+        [
+          1,
+          3,
+          5
+        ],
+        [
+          1,
+          9
+        ]
+      ],
+      "question_index": 1,
+      "question": "Are all autonomous vehicles market-adopted?",
+      "pred": "Unknown",
+      "gold": "Yes",
+      "ok": false,
+      "confidence": 0.25,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 64,
+      "idx": [
+        [
+          5,
+          9
+        ],
+        [
+          6,
+          1,
+          3
+        ]
+      ],
+      "question_index": 0,
+      "question": "Does every AI application receive notable academic recognition?",
+      "pred": "Yes",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.6,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Premise 9: ForAll(x, WidelyAdoptedInEducation(x))",
+        "Premise 5: ForAll(x, WidelyAdoptedInEducation(x) → ReceivesAcademicRecognition(x))"
+      ],
+      "fol": "receives_academic_recognition(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 64,
+      "idx": [
+        [
+          5,
+          9
+        ],
+        [
+          6,
+          1,
+          3
+        ]
+      ],
+      "question_index": 1,
+      "question": "Are all AI applications rigorously tested?",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.25,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 65,
+      "idx": [
+        [
+          4,
+          9
+        ],
+        [
+          5,
+          10
+        ]
+      ],
+      "question_index": 0,
+      "question": "Are all cloud services reliable?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.6,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "is_reliable(cloud_service)"
+    },
+    {
+      "task": "logic",
+      "record": 65,
+      "idx": [
+        [
+          4,
+          9
+        ],
+        [
+          5,
+          10
+        ]
+      ],
+      "question_index": 1,
+      "question": "Are all cloud services cost-effective?",
+      "pred": "Yes",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.7,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "is_cost_effective(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 66,
+      "idx": [
+        [
+          4,
+          5
+        ],
+        [
+          1,
+          4,
+          5
+        ]
+      ],
+      "question_index": 0,
+      "question": "Are there any energy-efficient smart home devices?",
+      "pred": "Yes",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.493,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "exists_at_least_one_compatible_smart_home_device(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 66,
+      "idx": [
+        [
+          4,
+          5
+        ],
+        [
+          1,
+          4,
+          5
+        ]
+      ],
+      "question_index": 1,
+      "question": "Are all smart home devices user-friendly?",
+      "pred": "Yes",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.683,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Premise 1: Exists(x, UserFriendly(x))"
+      ],
+      "fol": "user_friendly(some_1)"
+    },
+    {
+      "task": "logic",
+      "record": 67,
+      "idx": [
+        [
+          4,
+          5
+        ],
+        [
+          9,
+          1,
+          8
+        ]
+      ],
+      "question_index": 0,
+      "question": "Are all smartphones highly efficient?",
+      "pred": "Yes",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.72,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | Rule: LLM rule => is_highly_efficient(entity)"
+      ],
+      "fol": "is_highly_efficient(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 67,
+      "idx": [
+        [
+          4,
+          5
+        ],
+        [
+          9,
+          1,
+          8
+        ]
+      ],
+      "question_index": 1,
+      "question": "Do all smartphones support advanced camera features?",
+      "pred": "Yes",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.72,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "supports_advanced_camera_feature(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 68,
+      "idx": [
+        [
+          3,
+          2
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "question_index": 0,
+      "question": "Do all courses meet curriculum standards?",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.493,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "¬meets_curriculum_standard(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 68,
+      "idx": [
+        [
+          3,
+          2
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "question_index": 1,
+      "question": "Are there any courses offered online?",
+      "pred": "Unknown",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.25,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as YesNo.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 69,
+      "idx": [
+        [
+          2,
+          5,
+          6
+        ],
+        [
+          7,
+          12
+        ]
+      ],
+      "question_index": 0,
+      "question": "Are all research projects successful?",
+      "pred": "No",
+      "gold": "Yes",
+      "ok": false,
+      "confidence": 0.683,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "¬is_successful(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 69,
+      "idx": [
+        [
+          2,
+          5,
+          6
+        ],
+        [
+          7,
+          12
+        ]
+      ],
+      "question_index": 1,
+      "question": "Are all research projects highly cited?",
+      "pred": "Yes",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.6,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "is_research_project(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 70,
+      "idx": [
+        [
+          7,
+          8
+        ],
+        [
+          12,
+          15
+        ]
+      ],
+      "question_index": 0,
+      "question": "Are all academic works current?",
+      "pred": "Unknown",
+      "gold": "Yes",
+      "ok": false,
+      "confidence": 0.45,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Z3 checked entailment for is_current(all)."
+      ],
+      "fol": "is_current(all)"
+    },
+    {
+      "task": "logic",
+      "record": 70,
+      "idx": [
+        [
+          7,
+          8
+        ],
+        [
+          12,
+          15
+        ]
+      ],
+      "question_index": 1,
+      "question": "Do all academic works meet quality standards?",
+      "pred": "Yes",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.636,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Premise 5: Exists(x, MeetsQualityStandards(x))"
+      ],
+      "fol": "meets_quality_standards(some_5)"
+    },
+    {
+      "task": "logic",
+      "record": 71,
+      "idx": [
+        [
+          5,
+          4
+        ],
+        [
+          1,
+          12
+        ]
+      ],
+      "question_index": 0,
+      "question": "Do all C++ projects adhere to modern C++ standards?",
+      "pred": "Yes",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.7,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Premise 5: ForAll(x, WellDesignedMaintainable(x))",
+        "Premise 4: ForAll(x, WellDesignedMaintainable(x) → ModernCppStandards(x))"
+      ],
+      "fol": "modern_cpp_standards(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 71,
+      "idx": [
+        [
+          5,
+          4
+        ],
+        [
+          1,
+          12
+        ]
+      ],
+      "question_index": 1,
+      "question": "Are all C++ projects portable?",
+      "pred": "Yes",
+      "gold": "Yes",
+      "ok": true,
+      "confidence": 0.7,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Premise 1: ForAll(x, ThoroughlyTested(x))",
+        "Premise 12: ForAll(x, ThoroughlyTested(x) → Portable(x))"
+      ],
+      "fol": "portable(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 72,
+      "idx": [
+        [
+          4,
+          5,
+          6
+        ],
+        []
+      ],
+      "question_index": 0,
+      "question": "Are all biometric systems secure?",
+      "pred": "Yes",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.493,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "exists_biometric_system_cannot_detect_presentation_attack()"
+    },
+    {
+      "task": "logic",
+      "record": 72,
+      "idx": [
+        [
+          4,
+          5,
+          6
+        ],
+        []
+      ],
+      "question_index": 1,
+      "question": "Are all biometric systems portable?",
+      "pred": "Yes",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.493,
+      "question_type": "YesNo",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "exists_biometric_system_cannot_detect_presentation_attack()"
+    },
+    {
+      "task": "logic",
+      "record": 73,
+      "idx": [
+        [
+          2,
+          6
+        ],
+        [
+          2
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. If a student receives a scholarship, they must be excellent.\nB. If a student does not participate in extracurricular activities, then they receive a scholarship.\nC. If a student does not submit their research paper, then they are excellent.\nD. If all enrolled students are excellent, then no student without excellence can receive a scholarship.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 73,
+      "idx": [
+        [
+          2,
+          6
+        ],
+        [
+          2
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the statement true?\nStatement: If a student receives a scholarship, they must be excellent.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.68,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 74,
+      "idx": [
+        [
+          8,
+          13
+        ],
+        [
+          11
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. If a school does not have a principal, then it cannot have students.\nB. If a school has students, then it must also have staff and teachers.\nC. If a school has staff, then it must have a principal.\nD. Every school has both students and teachers.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 74,
+      "idx": [
+        [
+          8,
+          13
+        ],
+        [
+          11
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the statement true?\nStatement: If a school has students, then it has teachers.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 75,
+      "idx": [
+        [
+          3,
+          4,
+          12
+        ],
+        [
+          2
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. If everyone is a student, and if someone not being a student implies they are not a teacher, then everyone is a university staff member.\nB. If there is at least one researcher, then there is no university staff member.\nC. If everyone is a teacher, then there is no researcher.\nD. If someone is not a student, then they are a researcher.",
+      "pred": "B",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "exists_at_least_one_researcher(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 75,
+      "idx": [
+        [
+          3,
+          4,
+          12
+        ],
+        [
+          2
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the statement true?\nStatement: If everyone is a teacher, then there is at least one researcher.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 76,
+      "idx": [
+        [
+          0,
+          8
+        ],
+        [
+          5,
+          13
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. If someone does not fully participate in conduct training, then they are not eligible for graduation.\nB. If someone does not fully participate in social work, then everyone is a student.\nC. If everyone in the university is a student, then there is at least one student eligible for graduation.\nD. If there exists a student eligible for graduation, then no student fully participates in conduct training.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 76,
+      "idx": [
+        [
+          0,
+          8
+        ],
+        [
+          5,
+          13
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the statement true?\nStatement: If someone does not fully participate in social work, then everyone fully participates in conduct training.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 77,
+      "idx": [
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. If a student participates in social work, then they meet academic requirements.\nB. If someone participates in social work, then they meet extracurricular requirements.\nC. If someone meets academic requirements, then they are not a student.\nD. If a student meets academic requirements, they are not eligible for graduation.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 77,
+      "idx": [
+        [
+          0,
+          3
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the statement true?\nStatement: If someone meets academic requirements, then if they fully participate in conduct training, they are eligible for graduation.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 78,
+      "idx": [
+        [
+          5
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. If a student does not attend review sessions, then they do not earn extra credit.\nB. If a student does not participate in study groups, they will fail.\nC. If a student submits assignments on time, they do not achieve good grades.\nD. If a student does not complete fundamental courses, then they did not attend review sessions.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 78,
+      "idx": [
+        [
+          5
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the statement true?\nStatement: If submitting assignments on time implies achieving good grades, then not attending review sessions implies not completing the fundamental courses.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 79,
+      "idx": [
+        [
+          0
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. If a student attends classes, then they receive extra credit.\nB. If a student receives extra credit, then they do not study regularly.\nC. If a student studies regularly, then they do not achieve good grades.\nD. If a student submits assignments on time, then they do not receive extra credit.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 79,
+      "idx": [
+        [
+          0
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the statement true?\nStatement: If achieving good grades implies studying regularly, then not receiving extra credit implies that the student does not submit assignments on time.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 80,
+      "idx": [
+        [
+          2,
+          5
+        ],
+        [
+          5
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. If a student does not complete their assignments, then they do not achieve high scores.\nB. If a student submits homework on time, then they receive bonus points.\nC. If a student does not attend class, they will achieve high scores.\nD. If a student achieves high scores, then they did not study regularly.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 80,
+      "idx": [
+        [
+          2,
+          5
+        ],
+        [
+          5
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the statement true?\nStatement: If a student studies regularly, then they complete their assignments.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 81,
+      "idx": [
+        [
+          6
+        ],
+        [
+          6
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. If a student submits assignments on time, then they receive extra credit.\nB. If a student receives extra credit, then they study regularly.\nC. If a student achieves good grades, then they do not receive extra credit.\nD. If a student does not submit assignments on time, then they study regularly.",
+      "pred": "B",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "receives_extra_credit(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 81,
+      "idx": [
+        [
+          6
+        ],
+        [
+          6
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the statement true?\nStatement: If a student submits assignments on time, then they receive extra credit.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 82,
+      "idx": [
+        [
+          6,
+          2,
+          5
+        ],
+        [
+          5
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. If a student does not achieve good grades, then they do not receive extra credit.\nB. If a student receives extra credit, then they achieve good grades.\nC. If a student does not attend class, they receive extra credit.\nD. If a student submits assignments on time, then they do not receive extra credit.",
+      "pred": "B",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | Rule: LLM rule => receives_extra_credit(entity)"
+      ],
+      "fol": "receives_extra_credit(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 82,
+      "idx": [
+        [
+          6,
+          2,
+          5
+        ],
+        [
+          5
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the statement true?\nStatement: If a student attends classes, then they receive extra credit.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 83,
+      "idx": [
+        [
+          0,
+          6
+        ],
+        [
+          5
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. If every student participates in research, then every student takes advanced courses.\nB. If a student does not participate in research, then they do not win a scholarship.\nC. If a student takes advanced courses, then they participate in research.\nD. If every student wins a scholarship, then no student participates in research.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 83,
+      "idx": [
+        [
+          0,
+          6
+        ],
+        [
+          5
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the statement true?\nStatement: If every student wins a scholarship, then at least one student wins a scholarship.",
+      "pred": "Yes",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.82,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 84,
+      "idx": [
+        [
+          0,
+          1,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. If a student wins a scholarship, then they publish research.\nB. If a student publishes research, then they take advanced courses.\nC. If a student is not a student, then they do not win a scholarship.\nD. If someone does not take advanced courses, then they cannot publish research.",
+      "pred": "A",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact | Rule: LLM rule => takes_advanced_course(entity) | Rule: LLM rule => wins_a_scholarship(entity)"
+      ],
+      "fol": "wins_a_scholarship(entity)"
+    },
+    {
+      "task": "logic",
+      "record": 84,
+      "idx": [
+        [
+          0,
+          1,
+          5
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the statement true?\nStatement: There exists someone who wins a scholarship.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 85,
+      "idx": [
+        [
+          5
+        ],
+        [
+          0,
+          2,
+          5
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. If someone is a researcher, then they are qualified.\nB. If someone is a professor, then they are not qualified.\nC. If someone is qualified, then they are a student.\nD. If someone takes courses, then they are a professor.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 85,
+      "idx": [
+        [
+          5
+        ],
+        [
+          0,
+          2,
+          5
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the statement true?\nStatement: There exists someone who is qualified.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 86,
+      "idx": [
+        [
+          2
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. If someone passes the exam, they are qualified.\nB. If someone takes courses, then they are qualified.\nC. If someone is not a student, they take courses.\nD. If someone understands the lecture, then they are not a student.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 86,
+      "idx": [
+        [
+          2
+        ],
+        [
+          5,
+          6
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the statement true?\nStatement: Everyone is a student.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.7,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 87,
+      "idx": [
+        [
+          5,
+          6
+        ],
+        [
+          1
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. If someone takes the course, then they are a student.\nB. If someone is a student, then they understand the lecture.\nC. If someone is not registered for the course, they pass the exam.\nD. If someone understands the lecture, then they are not a student.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 87,
+      "idx": [
+        [
+          5,
+          6
+        ],
+        [
+          1
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the following statement true?\nStatement: If someone understands the lecture, then they pass the exam.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 88,
+      "idx": [
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          6
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. A person is qualified if and only if they are registered.\nB. A person is qualified only if they are not registered.\nC. A person is registered only if they do not study.\nD. A person is qualified only if they do not train.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 88,
+      "idx": [
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          6
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the following statement true?\nStatement: If someone studies, then they are registered.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 89,
+      "idx": [
+        [
+          2,
+          3
+        ],
+        [
+          0
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. Everyone studies.\nB. Everyone is not registered.\nC. If someone is registered, then they are not an undergraduate.\nD. No one is qualified.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 89,
+      "idx": [
+        [
+          2,
+          3
+        ],
+        [
+          0
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the following statement true?\nStatement: If someone is an undergraduate, then they are registered.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 90,
+      "idx": [
+        [
+          2,
+          9
+        ],
+        [
+          8,
+          10
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. 'If a student does not attend all lectures and does not participate in class discussions, they will fail the final exam and receive a low participation grade.'\nB. 'If a student attends a tutoring session and completes at least 80% of the assignments, they are more likely to improve their grades and pass the course.'\nC. 'Every teacher in the school has at least a doctoral degree in their subject area and provides detailed feedback on assignments.'\nD. 'If a student does not complete at least 80% of the assignments and does not submit their research paper, they will fail the course and be placed on academic probation.'",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 90,
+      "idx": [
+        [
+          2,
+          9
+        ],
+        [
+          8,
+          10
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the statement true?\nStatement: 'If a student does not submit their research paper and fails two or more courses in a semester, they automatically fail the course and are placed on academic probation.'",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.68,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 91,
+      "idx": [
+        [
+          5,
+          13
+        ],
+        [
+          5,
+          13
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which conclusion is correct?\nA. If students who do not complete foundational courses cannot graduate, then all students must complete the foundational courses.\nB. If failing to complete foundational courses leads to ineligibility for graduation, then all students must complete the foundational courses.\nC. If students who do not submit their research papers cannot receive a passing grade, then all students must participate in group projects.\nD. If a student does not participate in extracurricular activities, they will develop leadership skills.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 91,
+      "idx": [
+        [
+          5,
+          13
+        ],
+        [
+          5,
+          13
+        ]
+      ],
+      "question_index": 1,
+      "question": "According to the above premises, is the following statement true?\nStatement: If students who do not complete foundational courses cannot graduate, then all students must complete the foundational courses.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 92,
+      "idx": [
+        [
+          4,
+          9
+        ],
+        [
+          1,
+          11
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. If attending academic conferences leads to gaining knowledge, then maintaining a high GPA leads to eligibility for scholarships.\nB. If attending academic conferences leads to gaining knowledge, then students who do not maintain a high GPA will not be eligible for scholarships.\nC. If attending academic conferences leads to gaining knowledge, then all students must complete their coursework.\nD. If attending academic conferences leads to gaining knowledge, then students who do not receive academic recognition will not be selected for advanced research programs.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 92,
+      "idx": [
+        [
+          4,
+          9
+        ],
+        [
+          1,
+          11
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the statement true?\nStatement: If all students must complete their coursework, then students who do not receive academic recognition will not be selected for advanced research programs.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 93,
+      "idx": [
+        [
+          2,
+          3,
+          13
+        ],
+        [
+          3,
+          4,
+          15
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, which statement can be logically inferred?\nA. If all students must complete assignments and if a student does not attend classes, they will not complete assignments, then students who do not attend classes will not pass the exams.\nB. If all students must complete assignments and if a student does not attend classes, they will not complete assignments, then students who do not attend classes will pass the exams.\nC. If all students must complete assignments and if a student does not attend classes, they will not complete assignments, then all students will not pass the exams.\nD. If all students must complete assignments and if a student does not attend classes, they will not complete assignments, then some students will not pass the exams.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 93,
+      "idx": [
+        [
+          2,
+          3,
+          13
+        ],
+        [
+          3,
+          4,
+          15
+        ]
+      ],
+      "question_index": 1,
+      "question": "According to the premises, is the following statement true?\nStatement: If all students must complete assignments and if a student completes assignments, they will pass the exams, then all students will pass the exams.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 94,
+      "idx": [
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          8
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the premises, which statement can be logically inferred?\nA. If all students pass the test and if a student passing the test implies they have studied, then all students have studied.\nB. If all students pass the test and if a student passing the test implies they have studied, then not all students have studied.\nC. If all students pass the test and if a student passing the test implies they have studied, then some students have not studied.\nD. If all students pass the test and if a student passing the test implies they have studied, then no students have studied.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 94,
+      "idx": [
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          8
+        ]
+      ],
+      "question_index": 1,
+      "question": "According to the premises, is the following statement true?\nStatement: 'If all students pass the test and if a student passing the test implies they have studied, then all students have studied.'",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 95,
+      "idx": [
+        [
+          6,
+          9,
+          10
+        ],
+        [
+          6,
+          9,
+          10
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which of the following statements can be inferred?\nA. If there exists at least one student who submits assignments and if at least one student submits assignments, then this is always true, then the statement 'If at least one student submits assignments, then this is always true' holds.\nB. If there exists at least one student who submits assignments and if at least one student submits assignments, then this is always true, then the statement 'If at least one student submits assignments, then this is always true' does not hold.\nC. If there exists at least one student who submits assignments and if at least one student submits assignments, then this is always true, then the statement 'If at least one student submits assignments, then this is always true' holds in some cases but not all.\nD. If there exists at least one student who submits assignments and if at least one student submits assignments, then this is always true, then the statement 'If at least one student submits assignments, then this is always true' is both true and false at the same time.",
+      "pred": "A",
+      "gold": "Unknown",
+      "ok": false,
+      "confidence": 0.65,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "LLM fact"
+      ],
+      "fol": "exists_at_least_one_student_who_submits_assignment()"
+    },
+    {
+      "task": "logic",
+      "record": 95,
+      "idx": [
+        [
+          6,
+          9,
+          10
+        ],
+        [
+          6,
+          9,
+          10
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the following statement true?\nStatement: If there exists at least one student who submits assignments and if at least one student submits assignments, then this is always true, then the statement 'If at least one student submits assignments, then this is always true' holds.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 96,
+      "idx": [
+        [
+          3,
+          8,
+          9
+        ],
+        [
+          3,
+          8,
+          14
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which of the following statements can be inferred?\nA. If all students qualifying for advanced placement must have high academic performance and if this ensures coursework completion, then students who qualify for advanced placement must have completed their coursework.\nB. If all students qualifying for advanced placement must have high academic performance and if this ensures coursework completion, then students who qualify for advanced placement may not have completed their coursework.\nC. If all students qualifying for advanced placement must have high academic performance and if this ensures coursework completion, then some students who qualify for advanced placement must have completed their coursework.\nD. If all students qualifying for advanced placement must have high academic performance and if this ensures coursework completion, then students who qualify for advanced placement have both completed and not completed their coursework.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 96,
+      "idx": [
+        [
+          3,
+          8,
+          9
+        ],
+        [
+          3,
+          8,
+          14
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the following statement true?\nStatement: If all students have high academic performance and if a student qualifies for an advanced placement class, then they must have completed their coursework.",
+      "pred": "Yes",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.82,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 97,
+      "idx": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. If all students must comply with the university's rules and regulations and students who do not comply with the rules will be subject to disciplinary action, then all students must complete the mandatory courses in the curriculum.\nB. If all students must comply with the university's rules and regulations and students who do not comply with the rules will be subject to disciplinary action, then all students do not need to complete the mandatory courses in the curriculum.\nC. If all students must comply with the university's rules and regulations and students who do not comply with the rules will be subject to disciplinary action, then some students must complete the mandatory courses in the curriculum.\nD. If all students must comply with the university's rules and regulations and students who do not comply with the rules will be subject to disciplinary action, then no students must complete the mandatory courses in the curriculum.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 97,
+      "idx": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the following statement true?\nStatement: If all students must complete the mandatory courses in the curriculum, then students who do not complete the mandatory courses will not be eligible for graduation.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 98,
+      "idx": [
+        [
+          1,
+          7,
+          12
+        ],
+        [
+          1,
+          7,
+          13
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. If at least one student has received a scholarship and if failing to follow academic policies results in no scholarship, then failing to follow academic policies prevents students from receiving scholarships.\nB. If at least one student has received a scholarship and if failing to follow academic policies results in no scholarship, then failing to follow academic policies does not prevent students from receiving scholarships.\nC. If at least one student has received a scholarship and if failing to follow academic policies results in no scholarship, then failing to follow academic policies sometimes prevents students from receiving scholarships.\nD. If at least one student has received a scholarship and if failing to follow academic policies results in no scholarship, then failing to follow academic policies prevents students from receiving scholarships in some cases but not all.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 98,
+      "idx": [
+        [
+          1,
+          7,
+          12
+        ],
+        [
+          1,
+          7,
+          13
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the following statement true?\nStatement: If at least one student has received a scholarship and if failing to follow academic policies results in no scholarship, then at least one student follows the university’s academic policies.",
+      "pred": "Yes",
+      "gold": "No",
+      "ok": false,
+      "confidence": 0.82,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 99,
+      "idx": [
+        [
+          4,
+          5,
+          8,
+          11
+        ],
+        [
+          2,
+          3,
+          9
+        ]
+      ],
+      "question_index": 0,
+      "question": "Based on the above premises, which statement can be inferred?\nA. If at least one student has achieved outstanding academic performance and if having at least one student achieve outstanding academic performance leads to at least one student receiving a scholarship, then all students must comply with the examination regulations.\nB. If at least one student has achieved outstanding academic performance and if having at least one student achieve outstanding academic performance leads to at least one student receiving a scholarship, then not all students must comply with the examination regulations.\nC. If at least one student has achieved outstanding academic performance and if having at least one student achieve outstanding academic performance leads to at least one student receiving a scholarship, then some students must comply with the examination regulations.\nD. If at least one student has achieved outstanding academic performance and if having at least one student achieve outstanding academic performance leads to at least one student receiving a scholarship, then no students must comply with the examination regulations.",
+      "pred": "Unknown",
+      "gold": "Unknown",
+      "ok": true,
+      "confidence": 0.28,
+      "question_type": "MultiChoice",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as MultiChoice.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    },
+    {
+      "task": "logic",
+      "record": 99,
+      "idx": [
+        [
+          4,
+          5,
+          8,
+          11
+        ],
+        [
+          2,
+          3,
+          9
+        ]
+      ],
+      "question_index": 1,
+      "question": "Based on the above premises, is the following statement true?\nStatement: If at least one student has been found violating the examination regulations and if a student violates the examination regulations, they will be subject to disciplinary action, then the university will take disciplinary action.",
+      "pred": "No",
+      "gold": "No",
+      "ok": true,
+      "confidence": 0.72,
+      "question_type": "OpenEnded",
+      "rag_used": false,
+      "rag_fol_used": false,
+      "rag_context": [],
+      "cot": [
+        "Classified logic question as OpenEnded.",
+        "Parsed premises into a Horn-rule knowledge base.",
+        "Ran forward chaining and Z3 entailment checks."
+      ],
+      "fol": null
+    }
+  ]
+}

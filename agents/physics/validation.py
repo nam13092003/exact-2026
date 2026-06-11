@@ -24,6 +24,7 @@ ALLOWED_SYMPY_NAMES = {
     "conjugate",
     "sqrt",
     "acos",
+    "asin",
     "sin",
     "cos",
     "diff",

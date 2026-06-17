@@ -26,7 +26,7 @@ QUANTITY_ALIAS_GROUPS = (
     ("f", "frequency"),
     ("XL", "X_L", "ZL", "Z_L"),
     ("XC", "X_C", "ZC", "Z_C"),
-    ("lambda_", "lambda", "flux_linkage"),
+    ("lambda_", "lambda", "lambd", "flux_linkage"),
     ("ell", "l", "length"),
     ("Q_max", "Qmax", "qmax", "q_max", "maximum_charge"),
     ("side", "side_length", "a", "AB", "triangle_side"),

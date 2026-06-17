@@ -52,6 +52,7 @@ def sanitize_sympy_text(expression: str) -> str:
     }
     for source, replacement in replacements.items():
         text = text.replace(source, replacement)
+    text = re.sub(r"\blambda\b", "lambd", text)
     # Convert scientific notation (e.g. 8.98 * 10**9 or 8.98 * 10^9) to (8.98e9) to ensure correct precedence
     text = re.sub(
         r"(?P<coeff>\b\d+(?:\.\d+)?)\s*[*·×]\s*10\s*(?:\*\*|\^)\s*(?P<exp>[+-]?\d+)",
@@ -138,7 +139,12 @@ def solve_with_sympy_trace(
         return None
 
     try:
-        symbol_names = set(quantities) | {target}
+        safe_quantities = dict(quantities)
+        if "lambda" in safe_quantities:
+            safe_quantities.setdefault("lambd", safe_quantities["lambda"])
+        safe_target = "lambd" if target == "lambda" else target
+
+        symbol_names = set(safe_quantities) | {safe_target}
         for formula in formulas:
             symbol_names.update(re.findall(r"\b[A-Za-z_][A-Za-z0-9_]*\b", formula))
         symbols = {
@@ -185,12 +191,12 @@ def solve_with_sympy_trace(
             if re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", lhs_name):
                 symbolic_definitions[lhs_name] = rhs_source
 
-        target_symbol = symbols.get(target)
+        target_symbol = symbols.get(safe_target)
         if target_symbol is None:
             return None
         substitutions = {
             symbols[name]: _sympify_quantity(value)
-            for name, value in quantities.items()
+            for name, value in safe_quantities.items()
             if name in symbols and value is not None
         }
         target_defined_by_equation = any(
@@ -228,7 +234,7 @@ def solve_with_sympy_trace(
 
         reduced = [equation.subs(substitutions) for equation in equations]
         unknowns = sorted(
-            (symbol for name, symbol in symbols.items() if name not in quantities),
+            (symbol for name, symbol in symbols.items() if name not in safe_quantities),
             key=str,
         )
         solutions = sp.solve(reduced, unknowns, dict=True)

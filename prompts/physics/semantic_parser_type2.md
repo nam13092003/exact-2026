@@ -36,16 +36,16 @@ Required Output Schema:
   "warnings": ["..."]
 }
 
-Allowed Domains: Electric Charges and Fields, Gauss's Law, Electric Potential, Capacitance, Current and Resistance, Direct-Current Circuits, Magnetic Forces and Fields, Sources of Magnetic Fields, Electromagnetic Induction, Inductance, Alternating-Current Circuits, Electromagnetic Waves, Measurement and Uncertainty.
+Allowed Domains: Electric Charges and Fields, Gauss's Law, Electric Potential, Capacitance, Current and Resistance, Direct-Current Circuits, Magnetic Forces and Fields, Sources of Magnetic Fields, Electromagnetic Induction, Inductance, Alternating-Current Circuits, Electromagnetic Waves, Measurement and Uncertainty, Others.
 
 Rules:
 1. Convert numeric givens to SI values/units in `si_value` and `si_unit`. Keep ASCII SymPy-safe symbols.
-2. Normalization: length (cm -> m by 1e-2, mm -> m by 1e-3, etc.), prefixes (u/micro -> 1e-6, n -> 1e-9, p -> 1e-12, etc.).
+2. Normalization: length (cm -> m by 1e-2, mm -> m by 1e-3, etc.), prefixes (μ/micro -> 1e-6, n -> 1e-9, p -> 1e-12, etc.), area (cm^2 -> m^2 by 1e-4, mm^2 -> m^2 by 1e-6, etc.), volume (cm^3 -> m^3 by 1e-6, mm^3 -> m^3 by 1e-9, etc.).
 3. Uncertainty format: {"si_value": dx_in_SI, "si_unit": "...", "kind": "absolute"}.
 4. Normalize symbol names to ASCII equivalents: omega, theta, phi, Phi, lambda_, mu, Ohm.
 5. Capture any explicit algebraic relations, constraints, or equalities between variables (e.g., "q1 = q2 = q", "r1 = 2*r2") directly in the `relations` list.
 6. For target units, preserve the unit string from the question as closely as possible (for example, if the question asks for "turns per meter length" or similar, the target unit should be 'turns/m', NOT '/m' or '1/m').
-
+7. Use domain "Others" for physics outside the listed electricity, magnetism, circuits, waves, and measurement domains, including mechanics, thermal physics, geometric optics, fluids, and general textbook relations.
 
 Few-Shot Examples:
 

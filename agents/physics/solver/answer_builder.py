@@ -6,12 +6,11 @@ import logging
 import re
 from typing import Any
 
-from agents.formatting import convert_si_to_requested, format_number
+from agents.formatting import format_number
 from agents.physics.validation import (
     comparison_tolerance,
     direction_from_components,
     requests_magnitude,
-    unit_scale_consistency_error,
 )
 from agents.workflows.state import WorkflowExecutionError
 from tools.calculator import solve_with_sympy_trace
@@ -41,11 +40,8 @@ class PhysicsAnswerBuilder:
 
         target_is_charge = bool(re.fullmatch(r"q\d*|charge.*", str(target).lower()))
         force_magnitude = answer_type == "numeric" and requests_magnitude(parsed_question) and not target_is_charge
-        si_numeric_value = abs(computation.value) if force_magnitude else computation.value
-        numeric_value = convert_si_to_requested(si_numeric_value, unit) if answer_type == "numeric" else si_numeric_value
-        scale_error = unit_scale_consistency_error(si_numeric_value, numeric_value, unit) if answer_type == "numeric" else None
-        if scale_error:
-            raise WorkflowExecutionError(scale_error)
+        computed_numeric_value = abs(computation.value) if force_magnitude else computation.value
+        numeric_value = computed_numeric_value
 
         public_answer = format_number(numeric_value)
         final_value: Any = numeric_value
@@ -64,7 +60,7 @@ class PhysicsAnswerBuilder:
                     component_value = component_computation.value if component_computation is not None else None
                 if component_value is None:
                     raise WorkflowExecutionError(f"Physics vector verification failed: {component_symbol} was not computed.")
-                component_values.append(convert_si_to_requested(component_value, unit))
+                component_values.append(component_value)
             direction = direction_from_components(component_values, vector_spec)
             vector_result = {
                 "component_symbols": component_symbols,
@@ -93,7 +89,7 @@ class PhysicsAnswerBuilder:
                 target,
                 unit,
                 numeric_value,
-                si_numeric_value,
+                computed_numeric_value,
                 computation,
                 public_answer,
                 append_unit,
@@ -171,7 +167,7 @@ class PhysicsAnswerBuilder:
         target: str,
         unit: str,
         numeric_value: float,
-        si_numeric_value: float,
+        computed_numeric_value: float,
         computation: Any,
         public_answer: str,
         append_unit: bool,
@@ -187,7 +183,7 @@ class PhysicsAnswerBuilder:
         if wants_both_errors:
             absolute_value = computation.values.get("absolute_error")
             if absolute_value is None and target == "absolute_error":
-                absolute_value = si_numeric_value
+                absolute_value = computed_numeric_value
             percentage_value = computation.values.get("percentage_relative_error")
             relative_value = computation.values.get("relative_error")
             wants_percentage_error = "%" in str(unit) or "percentage relative error" in question_text
@@ -222,8 +218,8 @@ class PhysicsAnswerBuilder:
             electric_value = computation.values.get("W_C")
             magnetic_value = computation.values.get("W_L")
             if electric_value is not None and magnetic_value is not None:
-                electric_public = convert_si_to_requested(electric_value, unit)
-                magnetic_public = convert_si_to_requested(magnetic_value, unit)
+                electric_public = electric_value
+                magnetic_public = magnetic_value
                 public_answer = f"electric_energy = {format_number(electric_public)} {unit}; magnetic_energy = {format_number(magnetic_public)} {unit}".strip()
                 append_unit = False
                 final_value = {"electric_energy": electric_public, "magnetic_energy": magnetic_public}

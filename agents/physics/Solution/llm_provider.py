@@ -36,6 +36,9 @@ DOMAIN_PROMPT_FILES = {
     "Alternating Current Circuits": "alternating_current_circuits.md",
     "Electromagnetic Waves": "electromagnetic_waves.md",
     "Measurement and Uncertainty": "measurement_and_uncertainty.md",
+    "Others": "others.md",
+    "Other": "others.md",
+    "General Physics": "others.md",
 }
 
 

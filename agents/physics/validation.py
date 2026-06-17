@@ -320,8 +320,13 @@ def validated_context(
     equation_text = " ".join(equations)
     for symbol, value in PHYSICAL_CONSTANTS.items():
         if re.search(rf"\b{re.escape(symbol)}\b", equation_text):
-            if symbol in quantities and not math.isclose(quantities[symbol], value, rel_tol=1e-9, abs_tol=1e-12):
-                raise ValueError(f"Parsed value for fixed physical constant {symbol} is invalid.")
+            if symbol in quantities:
+                logger.debug(
+                    "physics.physical_constant_symbol_overridden_by_parsed_quantity symbol=%s value=%s",
+                    symbol,
+                    quantities[symbol],
+                )
+                continue
             quantities[symbol] = value
 
     trusted_quantities = dict(quantities)

@@ -87,14 +87,13 @@ Prefix and unit conversion:
 
 Important unit examples:
 
-* 1 μF -> 1e-6 F
+* 1 μF -> 0.000001 F
 * 1 mC -> 0.001 C
-* 1 nC -> 1e-9 C
+* 1 nC -> 0.000000001 C
 * 1 cm -> 0.01 m
-* 1 mm^2 -> 1e-6 m^2
-* 1 ohm*mm^2/m -> 1e-6 ohm*m
+* 1 mm^2 -> 0.000001 m^2
+* 1 ohm*mm^2/m -> 0.000001 ohm*m
 * 1 minute -> 60 s
-* 1 m^3 -> 1 m^3
 
 Symbol rules:
 

@@ -336,6 +336,14 @@ def validated_context(
         if sym in quants:
             return sym
         canon_sym = canonical_quantity_symbol(sym)
+
+    trusted_quantities = dict(quantities)
+    derived_candidates: dict[str, float] = {}
+
+    def find_matching_quantity_key(sym: str, quants: dict[str, float]) -> str | None:
+        if sym in quants:
+            return sym
+        canon_sym = canonical_quantity_symbol(sym)
         for q_key in quants:
             if canonical_quantity_symbol(q_key) == canon_sym:
                 return q_key
@@ -371,11 +379,11 @@ def validated_context(
         
         matching_key = find_matching_quantity_key(symbol, quantities)
         if matching_key is not None:
-            quantities[symbol] = quantities[matching_key]
-            trusted_quantities[symbol] = quantities[matching_key]
+            quantities[symbol] = numeric
+            trusted_quantities[symbol] = numeric
             if not math.isclose(quantities[matching_key], numeric, rel_tol=1e-9, abs_tol=1e-12):
                 logger.warning(
-                    "physics.known_value_conflict symbol=%s matching_key=%s parser=%s solution=%s - using parser value",
+                    "physics.known_value_conflict symbol=%s matching_key=%s parser=%s solution=%s - using solution value",
                     symbol, matching_key, quantities[matching_key], numeric,
                 )
         elif symbol in PHYSICAL_CONSTANTS:
@@ -390,7 +398,6 @@ def validated_context(
                 trusted_quantities[symbol] = numeric
             else:
                 derived_candidates[str(symbol)] = numeric
-
 
     for symbol, numeric in derived_candidates.items():
         defining_equation = any(equation.split("=", 1)[0].strip() == symbol for equation in equations if "=" in equation)

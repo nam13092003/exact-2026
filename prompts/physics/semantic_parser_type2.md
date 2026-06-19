@@ -68,17 +68,18 @@ Quantity rules:
 * If the answer asks for magnitude, keep signed givens but set requested_form = "magnitude".
 * If a value already uses SI units, keep the numeric value unchanged except insignificant trailing zeros.
 * Do not convert m, m^2, or m^3 again. They are already SI.
-* Convert non-SI length, area, volume, time, and prefixed units to SI.
+* Convert non-SI length, area, volume, time, and prefixed units to SI. You MUST explicitly multiply the numeric value by the prefix factor and write the scaled value in `si_value`. You may use ordinary decimals (e.g. 0.0024 or 0.2) or scientific notation (e.g. 3e-6, -5e-6, 9e9).
+* Do NOT place powers of ten, prefixes, or scale factors inside `si_unit` (e.g. for 2.4 mC, write `si_value`: 0.0024 or 2.4e-3 and `si_unit`: "C". NEVER write `si_value`: 2.4 and `si_unit`: "e-3 C" or "10^-3 C").
 * Do not rescale any value twice.
 
 Prefix and unit conversion:
 
-* micro, μ, u -> 1e-6.
-* milli -> 1e-3.
-* nano -> 1e-9.
-* pico -> 1e-12.
-* kilo -> 1e3.
-* mega -> 1e6.
+* micro, μ, u -> 10^-6 (e.g., 3e-6).
+* milli -> 10^-3 (e.g., 2.4e-3 or 0.0024).
+* nano -> 10^-9 (e.g., 4e-9).
+* pico -> 10^-12 (e.g., 1e-12).
+* kilo -> 10^3 (1000).
+* mega -> 10^6 (1000000).
 * The letter "m" is milli only when attached to a unit like mC, mA, mV, mF, or mJ.
 * The unit "m" alone means meter and is already SI.
 * Convert squared/cubed units using squared/cubed factors.
@@ -87,12 +88,12 @@ Prefix and unit conversion:
 
 Important unit examples:
 
-* 1 μF -> 0.000001 F
-* 1 mC -> 0.001 C
-* 1 nC -> 0.000000001 C
+* 1 μF -> 1e-6 F (or 0.000001 F)
+* 1 mC -> 1e-3 C (or 0.001 C)
+* 1 nC -> 1e-9 C (or 0.000000001 C)
 * 1 cm -> 0.01 m
-* 1 mm^2 -> 0.000001 m^2
-* 1 ohm*mm^2/m -> 0.000001 ohm*m
+* 1 mm^2 -> 1e-6 m^2 (or 0.000001 m^2)
+* 1 ohm*mm^2/m -> 1e-6 ohm*m
 * 1 minute -> 60 s
 
 Symbol rules:
@@ -181,7 +182,7 @@ Final self-check:
 * Every physical number is included.
 * Explicit constants are included.
 * Already-SI values kept the same numeric scale.
-* Prefix and compound units converted correctly.
+* Prefix and compound units converted correctly (CRITICAL: verify that prefix multipliers are written in `si_value` as decimal or scientific notation e.g. 3e-6, and NEVER in `si_unit` as e-6 or similar. Do not confuse micro 10^-6 and nano 10^-9).
 * Rest/stopping conditions became zero-velocity givens.
 * Geometry distances distinguish full separation from target distance.
 * Halfway/midpoint geometry produced half-distance derived values.

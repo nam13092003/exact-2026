@@ -155,15 +155,17 @@ class PhysicsRescueSolver:
         answer_builder: PhysicsAnswerBuilder | None = None,
         direct_handler: DirectAnswerHandler | None = None,
         vector_engine: ElectrostaticVectorEngine | None = None,
+        llm: Any = None,
     ) -> None:
         self.validator = validator or PhysicsSolutionValidator()
         self.executor = executor or SympyExecutor()
         self.answer_builder = answer_builder or PhysicsAnswerBuilder()
         self.direct_handler = direct_handler or DirectAnswerHandler()
         self.vector_engine = vector_engine or ElectrostaticVectorEngine()
+        self.llm = llm
 
     def rescue(self, state: dict[str, Any], reason: str) -> dict[str, Any]:
-        """Try deterministic/vector rescue; otherwise raise the original failure."""
+        """Try deterministic/vector rescue, then direct LLM; otherwise raise the original failure."""
         parsed_question = state.get("parsed_question") if isinstance(state.get("parsed_question"), dict) else {}
         raw_question = str(state.get("question") or parsed_question.get("question") or "")
 
@@ -175,7 +177,48 @@ class PhysicsRescueSolver:
         if deterministic_result is not None:
             return deterministic_result
 
+        llm_direct_result = self._try_llm_direct(parsed_question, raw_question)
+        if llm_direct_result is not None:
+            return llm_direct_result
+
         raise WorkflowExecutionError(str(reason or "Physics computation failed."))
+
+    def _try_llm_direct(self, parsed_question: dict[str, Any], raw_question: str) -> dict[str, Any] | None:
+        if self.llm is None or not getattr(self.llm, "enabled", True):
+            return None
+        try:
+            prompt = (
+                "Solve this physics question directly. Calculate the final numeric value and output the result. "
+                "Output exactly one JSON object matching this schema:\n"
+                "{\n"
+                '  "answer": "numeric value or choice option only, e.g. 0.0036",\n'
+                '  "unit": "SI unit, e.g. N",\n'
+                '  "explanation": "short step-by-step reasoning"\n'
+                "}\n\n"
+                f"Question:\n{raw_question}\n\n"
+                "JSON:"
+            )
+            response = self.llm.chat(
+                [{"role": "user", "content": prompt}],
+                temperature=0.0,
+                max_tokens=512,
+                response_format={"type": "json_object"},
+                stage="physics.direct_llm_solver",
+            )
+            from agents.formatting import extract_json
+            parsed = extract_json(response)
+            if isinstance(parsed, dict) and "answer" in parsed:
+                return {
+                    "result": {
+                        "answer": str(parsed.get("answer")),
+                        "unit": str(parsed.get("unit") or parsed_question.get("target", {}).get("unit") or ""),
+                        "explanation": str(parsed.get("explanation") or ""),
+                        "cot": [str(parsed.get("explanation") or "Solved directly by LLM.")],
+                    }
+                }
+        except Exception as exc:
+            logger.debug("physics.direct_llm_solver_failed=%s", exc)
+        return None
 
     def _try_deterministic(self, parsed_question: dict[str, Any]) -> dict[str, Any] | None:
         if not parsed_question:

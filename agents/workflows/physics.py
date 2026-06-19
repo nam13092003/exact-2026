@@ -60,6 +60,7 @@ class PhysicsWorkflow:
             executor=self.executor,
             answer_builder=self.answer_builder,
             direct_handler=self.direct_answer_handler,
+            llm=self.llm,
         )
         self.graph = self._build_graph()
 

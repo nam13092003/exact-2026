@@ -5,7 +5,7 @@ from __future__ import annotations
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-
+import requests
 load_dotenv()
 
 from agents.llm import HFClient, OpenRouterClient, VLLMClient
@@ -99,8 +99,7 @@ def info() -> dict[str, Any]:
 
 @app.post("/predict")
 def predict(
-    payload: QueryPayload,
-    workflow: ExactGraph = Depends(get_graph),
+    payload: QueryPayload,workflow: ExactGraph = Depends(get_graph),
 ) -> list[dict[str, Any]]:
     """Route one competition query and return the required one-item result list."""
     data = payload.model_dump(exclude_none=True)
@@ -116,7 +115,32 @@ def predict(
         raise HTTPException(status_code=422, detail=str(exc)) from exc
     except Exception as exc:
         raise HTTPException(status_code=500, detail="Prediction failed.") from exc
-
+@app.get("/v1/models")
+def models() -> dict[str, Any]:
+    """Expose the configured OpenAI-compatible model server's model list."""
+    try:
+        response = requests.get(
+            f"{llm.base_url.rstrip('/')}/models",
+            headers=llm._headers(),
+            timeout=10,
+        )
+        response.raise_for_status()
+        data = response.json()
+    except requests.RequestException as exc:
+        raise HTTPException(status_code=502, detail=f"Model server is unreachable: {exc}") from exc
+    except ValueError as exc:
+        raise HTTPException(status_code=502, detail="Model server returned non-JSON response.") from exc
+    if not isinstance(data, dict):
+        raise HTTPException(status_code=502, detail="Model server returned an invalid model list.")
+    models_data = data.get("data")
+    if isinstance(models_data, list):
+        selected_models = [
+            item for item in models_data if isinstance(item, dict) and item.get("id") == llm.model
+        ]
+        if selected_models:
+            return {**data, "data": selected_models}
+        raise HTTPException(status_code=502, detail=f"Configured model {llm.model!r} was not found.")
+    return data
 
 if __name__ == "__main__":
     uvicorn.run("api:app", host="127.0.0.1", port=8000)

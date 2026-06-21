@@ -6,7 +6,7 @@ import logging
 import re
 from typing import Any
 
-from agents.formatting import format_number
+from agents.formatting import convert_si_to_requested, format_number
 from agents.physics.validation import (
     comparison_tolerance,
     direction_from_components,
@@ -41,7 +41,7 @@ class PhysicsAnswerBuilder:
         target_is_charge = bool(re.fullmatch(r"q\d*|charge.*", str(target).lower()))
         force_magnitude = answer_type == "numeric" and requests_magnitude(parsed_question) and not target_is_charge
         computed_numeric_value = abs(computation.value) if force_magnitude else computation.value
-        numeric_value = computed_numeric_value
+        numeric_value = convert_si_to_requested(computed_numeric_value, unit) if answer_type == "numeric" else computed_numeric_value
 
         public_answer = format_number(numeric_value)
         final_value: Any = numeric_value
@@ -60,7 +60,7 @@ class PhysicsAnswerBuilder:
                     component_value = component_computation.value if component_computation is not None else None
                 if component_value is None:
                     raise WorkflowExecutionError(f"Physics vector verification failed: {component_symbol} was not computed.")
-                component_values.append(component_value)
+                component_values.append(convert_si_to_requested(component_value, unit))
             direction = direction_from_components(component_values, vector_spec)
             vector_result = {
                 "component_symbols": component_symbols,

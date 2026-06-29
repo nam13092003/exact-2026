@@ -3297,13 +3297,6 @@
     "options": []
   },
   {
-    "query_id": "LD303",
-    "type": "type2",
-    "query": "Three identical charges, q = 1.2 \\u00d7 10^-6 C, are placed at the three vertices of an isosceles right triangle with legs of length 5.2 cm. Calculate the net electric field at the right-angle vertex. Give your answer two decimal places.",
-    "premises": [],
-    "options": []
-  },
-  {
     "query_id": "LD304",
     "type": "type2",
     "query": "Two charges, q1 = +3.5 \\u00d7 10^-6 C and q2 = -3.5 \\u00d7 10^-6 C, are placed at points A and B, separated by 8.1 cm. Point M is the midpoint of AB. Calculate the resultant electric field at M. Give your answer two decimal places.",
@@ -3612,23 +3605,9 @@
     "options": []
   },
   {
-    "query_id": "LD348",
-    "type": "type2",
-    "query": "Two charges q1 = 3.6 \\u00d7 10^-6 C and q2 = -1.2 \\u00d7 10^-6 C are separated by 9.2 cm. Point M is located 4.6 cm equidistant from A and B along a direction perpendicular to AB, and is offset 2.0 cm from the midpoint of AB. Calculate the resultant electric field strength at M. Give your answer rounded two decimal places.",
-    "premises": [],
-    "options": []
-  },
-  {
     "query_id": "LD349",
     "type": "type2",
     "query": "Two electric charges, q1 = 3.6 \\u00d7 10^-6 C and q2 = -3.0 \\u00d7 10^-6 C, are placed at two points equidistant from point M. Each point is 5.0 cm away from M, and the angle between the lines connecting these two points to M is 60\\u00b0. Calculate the net electric field strength at M. Give your answer rounded one decimal places.",
-    "premises": [],
-    "options": []
-  },
-  {
-    "query_id": "LD350",
-    "type": "type2",
-    "query": "Two charges q1 = -4.2 \\u00d7 10^-6 C and q2 = -4.8 \\u00d7 10^-6 C are separated by 8.0 cm. Point M is equidistant from A and B at 4.0 cm, located along a line perpendicular to AB and 4.4 cm from the midpoint of AB. Calculate the resultant electric field at M. Give your answer rounded one decimal places.",
     "premises": [],
     "options": []
   },
@@ -3748,13 +3727,6 @@
     "query_id": "LD367",
     "type": "type2",
     "query": "Two electric charges, q1 = 4.10 \\u00d7 10^-6 C and q2 = 3.68 \\u00d7 10^-6 C, are located 3.47 cm from point M. The electric fields they produce at M form an angle of 60\\u00b0 with each other. Calculate the magnitude of the total electric field at M. Give your answer rounded two decimal places.",
-    "premises": [],
-    "options": []
-  },
-  {
-    "query_id": "LD368",
-    "type": "type2",
-    "query": "Two electric charges, q1 = 4.59 \\u00d7 10^-6 C and q2 = 2.85 \\u00d7 10^-6 C, are each located 5.60 cm from point M. The electric fields they produce at M are perpendicular to each other (form a 90\\u00b0 angle). Calculate the magnitude of the total electric field at M. Give your answer rounded two decimal places.",
     "premises": [],
     "options": []
   },
